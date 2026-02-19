@@ -1,1 +1,40 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Bebas+Neue&display=swap');
+
+:root {
+  --navy:        #1B2A6B;
+  --navy-dark:   #111d50;
+  --navy-light:  #253580;
+  --red:         #C8102E;
+  --red-dark:    #a00020;
+  --yellow:      #F5C800;
+  --green:       #1E5631;
+  --white:       #FFFFFF;
+  --cream:       #FDF6E3;
+  --text:        #1a1a2e;
+  --gray-light:  #f0f0f0;
+  --wa:          #25D366;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--white);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--navy-dark); }
+::-webkit-scrollbar-thumb { background: var(--yellow); border-radius: 10px; }
+
+.rise {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.rise.on { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: 0.1s; }
+.d2 { transition-delay: 0.2s; }
+.d3 { transition-delay: 0.3s; }
+.d4 { transition-delay: 0.4s; }
