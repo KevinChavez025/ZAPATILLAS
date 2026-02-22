@@ -403,6 +403,8 @@
   justify-content: center;
   background: var(--navy-light);
   overflow: hidden;
+  min-height: 420px; 
+  padding: 2rem;     
 }
 .about-glow {
   position: absolute;
@@ -411,7 +413,9 @@
   border-radius: 50%;
 }
 .big-chick {
-  width: 200px; height: 200px;
+  width: 250px;      
+  max-width: 90%;    
+  height: auto;
   position: relative;
   z-index: 2;
   animation: floatY 4s ease-in-out infinite;
