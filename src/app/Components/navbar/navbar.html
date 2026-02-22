@@ -7,26 +7,75 @@
 <!-- NAV -->
 <nav [class.scrolled]="isScrolled">
   <a routerLink="/" class="nav-logo">
-    <!-- Pollito SVG -->
-    <svg class="chick" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="24" cy="26" r="14" fill="#F5C800"/>
-      <circle cx="24" cy="15" r="10" fill="#F5C800"/>
-      <circle cx="20" cy="12.5" r="2.8" fill="white"/>
-      <circle cx="28" cy="12.5" r="2.8" fill="white"/>
-      <circle cx="21" cy="13" r="1.3" fill="#1a1a2e"/>
-      <circle cx="29" cy="13" r="1.3" fill="#1a1a2e"/>
-      <ellipse cx="24" cy="18" rx="3.5" ry="2.2" fill="#E86010"/>
-      <ellipse cx="18" cy="36" rx="4.5" ry="3.2" fill="#E8A800"/>
-      <ellipse cx="30" cy="36" rx="4.5" ry="3.2" fill="#E8A800"/>
-      <circle cx="33" cy="6" r="2.5" fill="#C8102E"/>
+    <!-- Logo oficial Piolito: dos patitos + banderín -->
+    <svg class="piolito-logo" viewBox="0 0 220 80" xmlns="http://www.w3.org/2000/svg">
+      <!-- ── PATITA (niña, flor roja) ── -->
+      <!-- cuerpo -->
+      <ellipse cx="26" cy="52" rx="13" ry="15" fill="#F5D848" stroke="#E8960A" stroke-width="1.2"/>
+      <!-- cabeza -->
+      <circle cx="26" cy="30" r="11" fill="#F5D848" stroke="#E8960A" stroke-width="1.2"/>
+      <!-- pelitos/picos arriba -->
+      <path d="M20 21 Q22 14 26 19 Q28 12 32 20" fill="#F5D848" stroke="#E8960A" stroke-width="1"/>
+      <!-- ojos -->
+      <ellipse cx="23" cy="28" rx="1.8" ry="2" fill="#E8960A"/>
+      <ellipse cx="29" cy="28" rx="1.8" ry="2" fill="#E8960A"/>
+      <!-- sonrisa -->
+      <path d="M23 33 Q26 36 29 33" fill="none" stroke="#E8960A" stroke-width="1" stroke-linecap="round"/>
+      <!-- alitas -->
+      <path d="M13 48 Q7 50 10 58 Q14 55 16 50" fill="#F5D848" stroke="#E8960A" stroke-width="1"/>
+      <!-- patitas -->
+      <ellipse cx="21" cy="67" rx="5" ry="3" fill="#F5D848" stroke="#E8960A" stroke-width="1"/>
+      <ellipse cx="31" cy="67" rx="5" ry="3" fill="#F5D848" stroke="#E8960A" stroke-width="1"/>
+      <!-- flor (niña) -->
+      <circle cx="33" cy="18" r="4" fill="#8B0000"/>
+      <circle cx="33" cy="18" r="1.8" fill="#ECC238"/>
+
+      <!-- ── PATITO (niño) ── -->
+      <!-- cuerpo -->
+      <ellipse cx="46" cy="53" rx="13" ry="15" fill="#F5D848" stroke="#E8960A" stroke-width="1.2"/>
+      <!-- cabeza -->
+      <circle cx="46" cy="31" r="11" fill="#F5D848" stroke="#E8960A" stroke-width="1.2"/>
+      <!-- pelitos -->
+      <path d="M40 22 Q42 15 46 20 Q48 13 52 21" fill="#F5D848" stroke="#E8960A" stroke-width="1"/>
+      <!-- ojos -->
+      <ellipse cx="43" cy="29" rx="1.8" ry="2" fill="#E8960A"/>
+      <ellipse cx="49" cy="29" rx="1.8" ry="2" fill="#E8960A"/>
+      <!-- sonrisa -->
+      <path d="M43 34 Q46 37 49 34" fill="none" stroke="#E8960A" stroke-width="1" stroke-linecap="round"/>
+      <!-- alitas -->
+      <path d="M59 49 Q65 51 62 59 Q58 56 56 51" fill="#F5D848" stroke="#E8960A" stroke-width="1"/>
+      <!-- patitas -->
+      <ellipse cx="41" cy="68" rx="5" ry="3" fill="#F5D848" stroke="#E8960A" stroke-width="1"/>
+      <ellipse cx="51" cy="68" rx="5" ry="3" fill="#F5D848" stroke="#E8960A" stroke-width="1"/>
+
+      <!-- ── BANDERÍN TRIANGULAR ── -->
+      <polygon points="62,18 215,38 62,58" fill="white" stroke="#C22D31" stroke-width="2" stroke-linejoin="round"/>
+
+      <!-- ── TEXTO "Piolito" multicolor ── -->
+      <!-- P rojo -->
+      <text x="72" y="47" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="22" font-weight="900" fill="#C22D31">P</text>
+      <!-- i amarillo -->
+      <text x="87" y="47" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="22" font-weight="900" fill="#ECC238">i</text>
+      <!-- o azul -->
+      <text x="94" y="47" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="22" font-weight="900" fill="#343594">o</text>
+      <!-- 1 verde -->
+      <text x="108" y="47" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="22" font-weight="900" fill="#089347">1</text>
+      <!-- i rojo -->
+      <text x="118" y="47" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="22" font-weight="900" fill="#C22D31">i</text>
+      <!-- t amarillo -->
+      <text x="125" y="47" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="22" font-weight="900" fill="#ECC238">t</text>
+      <!-- o azul -->
+      <text x="134" y="47" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="22" font-weight="900" fill="#343594">o</text>
+      <!-- ® -->
+      <text x="150" y="34" font-family="Arial, sans-serif" font-size="8" fill="#C22D31">®</text>
     </svg>
-    <span class="logo-text">Piol<span>ito</span></span>
   </a>
 
   <ul class="nav-links" [class.open]="menuOpen">
     <li><a routerLink="/" routerLinkActive="active" (click)="closeMenu()">Inicio</a></li>
     <li><a href="#destacados" (click)="closeMenu()">Novedades</a></li>
     <li><a routerLink="/productos" routerLinkActive="active" (click)="closeMenu()">Productos</a></li>
+    <li><a routerLink="/guia-tallas" routerLinkActive="active" (click)="closeMenu()">Guía de Tallas</a></li>
     <li><a routerLink="/tiendas" routerLinkActive="active" (click)="closeMenu()">Tiendas</a></li>
     <li><a href="#contacto" (click)="closeMenu()">Contacto</a></li>
   </ul>

@@ -1,24 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* Nota: La fuente Garet no está en Google Fonts.
+   Para producción, carga Garet desde el servidor y actualiza --font-title. */
 
 :root {
-  --navy:        #1B2A6B;
-  --navy-dark:   #111d50;
-  --navy-light:  #253580;
-  --red:         #C8102E;
-  --red-dark:    #a00020;
-  --yellow:      #F5C800;
-  --green:       #1E5631;
+  /* ── Paleta oficial Manual de Marca Piolito ── */
+  --navy:        #343594;
+  --navy-dark:   #27287a;
+  --navy-light:  #4344aa;
+  --red:         #C22D31;
+  --red-dark:    #9e2428;
+  --yellow:      #ECC238;
+  --green:       #089347;
   --white:       #FFFFFF;
-  --cream:       #FDF6E3;
+  --cream:       #FFFEF1;
   --text:        #1a1a2e;
-  --gray-light:  #f0f0f0;
+  --gray-light:  #f5f5f0;
   --wa:          #25D366;
+
+  /* ── Tipografías ── */
+  --font-title:  'Poppins', sans-serif; /* Reemplazar por 'Garet' cuando esté disponible */
+  --font-body:   'Poppins', sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   background: var(--white);
   color: var(--text);
   overflow-x: hidden;
