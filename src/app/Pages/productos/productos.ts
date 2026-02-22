@@ -29,11 +29,11 @@ export class Productos {
 
   // ─── CONFIG LÍNEAS ───
   readonly lineas = [
-    { key: 'todos',        label: 'Todos',        color: '#1B2A6B' },
-    { key: 'baby-piolito', label: 'Baby Piolito', color: '#C8102E' },
-    { key: 'tilin',        label: 'Tilin',        color: '#1B2A6B' },
-    { key: 'piolito',      label: 'Piolito',      color: '#F5C800' },
-    { key: 'tobago',       label: 'Tobago',       color: '#1E5631' },
+    { key: 'todos',        label: 'Todos',        color: '#343594' },
+    { key: 'baby-piolito', label: 'Baby Piolito', color: '#C22D31' },
+    { key: 'tilin',        label: 'Tilin',        color: '#343594' },
+    { key: 'piolito',      label: 'Piolito',      color: '#ECC238' },
+    { key: 'tobago',       label: 'Tobago',       color: '#089347' },
   ];
 
   readonly etapas: Record<string, string[]> = {
@@ -58,7 +58,7 @@ export class Productos {
     // ── BABY PIOLITO ──
     { id: 1, codigo: 'BP-001', linea: 'baby-piolito', genero: 'nino',  etapa: 'Recién Nacidos (15-19)', tallas: '15-19', tallasArray: [15,16,17,18,19], colores: ['#8B4513','#F5F5DC'],        imagen: 'assets/productos/bp-001.jpg',   descripcion: 'Cuero floter marrón · Forro badana ovino · Planta caucho', nuevo: true,  temporada: 'Otoño/Invierno' },
     { id: 2, codigo: 'BP-002', linea: 'baby-piolito', genero: 'nina',  etapa: 'Recién Nacidos (15-19)', tallas: '15-19', tallasArray: [15,16,17,18,19], colores: ['#FFB6C1','#FFFFFF'],        imagen: 'assets/productos/bp-002.jpg',   descripcion: 'Cuero liso blanco · Forro badana ovino · Planta caucho natural', nuevo: true },
-    { id: 3, codigo: 'BP-003', linea: 'baby-piolito', genero: 'ambos', etapa: 'Recién Nacidos (15-19)', tallas: '15-19', tallasArray: [15,16,17,18,19], colores: ['#F5C800','#1B2A6B'],        imagen: 'assets/productos/bp-003.jpg',   descripcion: 'Cuero anapado azul · Forro badana ovino · Planta driver natural' },
+    { id: 3, codigo: 'BP-003', linea: 'baby-piolito', genero: 'ambos', etapa: 'Recién Nacidos (15-19)', tallas: '15-19', tallasArray: [15,16,17,18,19], colores: ['#ECC238','#343594'],        imagen: 'assets/productos/bp-003.jpg',   descripcion: 'Cuero anapado azul · Forro badana ovino · Planta driver natural' },
 
     // ── TILIN ──
     { id: 4, codigo: 'TL-001', linea: 'tilin', genero: 'nino',  etapa: 'Primeros Pasos (18-21)', tallas: '18-21', tallasArray: [18,19,20,21], colores: ['#8B4513','#F5F5DC'],                  imagen: 'assets/productos/tl-001.jpg',   descripcion: 'Cuero floter marrón · Forro badana · Planta caucho antideslizante', nuevo: true },
@@ -77,14 +77,14 @@ export class Productos {
     // ── PIOLITO - NIÑA ──
     { id: 14, codigo: 'AM01-V6',linea: 'piolito', genero: 'nina',  etapa: 'Todo Camina (22-26)', tallas: '22-26', tallasArray: [22,23,24,25,26], colores: ['#CFB53B','#D4AF37'],               imagen: 'assets/productos/am01-v6.jpg',  descripcion: 'Cuero grabado dorado mate · Forro badana ovino · Planta huella caucho con cerco de yute', nuevo: true },
     { id: 15, codigo: 'PBB57',  linea: 'piolito', genero: 'nina',  etapa: 'Kids (27-32)',        tallas: '27-32', tallasArray: [27,28,29,30,31,32], colores: ['#F5F5DC'],                      imagen: 'assets/productos/pbb57.jpg',    descripcion: 'Cuero liso natural · Forro badana ovino · Planta huella caucho natural con cerco suela' },
-    { id: 16, codigo: 'PBB105', linea: 'piolito', genero: 'nina',  etapa: 'Kids (27-32)',        tallas: '27-32', tallasArray: [27,28,29,30,31,32], colores: ['#1B2A6B'],                      imagen: 'assets/productos/pbb105.jpg',   descripcion: 'Cuero anapado azul · Forro badana ovino color manteca · Planta driver natural' },
+    { id: 16, codigo: 'PBB105', linea: 'piolito', genero: 'nina',  etapa: 'Kids (27-32)',        tallas: '27-32', tallasArray: [27,28,29,30,31,32], colores: ['#343594'],                      imagen: 'assets/productos/pbb105.jpg',   descripcion: 'Cuero anapado azul · Forro badana ovino color manteca · Planta driver natural' },
     { id: 17, codigo: '814',    linea: 'piolito', genero: 'nina',  etapa: 'Juvenil (33-38)',     tallas: '33-38', tallasArray: [33,34,35,36,37,38], colores: ['#1a1a1a'],                      imagen: 'assets/productos/814.jpg',      descripcion: 'Cuero charol negro con flor pompom en gamuza · Forro badana · Planta caucho negro', nuevo: true },
     { id: 18, codigo: 'CH02-V5',linea: 'piolito', genero: 'nina',  etapa: 'Juvenil (33-38)',     tallas: '33-38', tallasArray: [33,34,35,36,37,38], colores: ['#FFFFFF'],                      imagen: 'assets/productos/ch02-v5.jpg',  descripcion: 'Cuero anapado blanco · Forro badana ovino · Planta huella caucho natural con cerco suela' },
 
     // ── TOBAGO - NIÑO ──
-    { id: 19, codigo: 'TB-101', linea: 'tobago', genero: 'nino',  etapa: 'Kids (27-32)',    tallas: '27-32', tallasArray: [27,28,29,30,31,32], colores: ['#1a1a1a','#C8102E'],                 imagen: 'assets/productos/tb-101.jpg',   descripcion: 'Comfort flex PU · Diseño deportivo · Planta agresiva poliuretano', nuevo: true },
-    { id: 20, codigo: 'TB-102', linea: 'tobago', genero: 'nino',  etapa: 'Escolar (27-38)', tallas: '27-38', tallasArray: [27,28,29,30,31,32,33,34,35,36,37,38], colores: ['#1B2A6B','#FFFFFF'], imagen: 'assets/productos/tb-102.jpg',   descripcion: 'Comfort flex PU · Estilo escolar · Planta poliuretano resistente' },
-    { id: 21, codigo: 'TB-103', linea: 'tobago', genero: 'nino',  etapa: 'Juvenil (33-38)', tallas: '33-38', tallasArray: [33,34,35,36,37,38], colores: ['#2F2F2F','#F5C800'],                 imagen: 'assets/productos/tb-103.jpg',   descripcion: 'Comfort flex PU · Tendencia juvenil · Planta agresiva bicolor' },
+    { id: 19, codigo: 'TB-101', linea: 'tobago', genero: 'nino',  etapa: 'Kids (27-32)',    tallas: '27-32', tallasArray: [27,28,29,30,31,32], colores: ['#1a1a1a','#C22D31'],                 imagen: 'assets/productos/tb-101.jpg',   descripcion: 'Comfort flex PU · Diseño deportivo · Planta agresiva poliuretano', nuevo: true },
+    { id: 20, codigo: 'TB-102', linea: 'tobago', genero: 'nino',  etapa: 'Escolar (27-38)', tallas: '27-38', tallasArray: [27,28,29,30,31,32,33,34,35,36,37,38], colores: ['#343594','#FFFFFF'], imagen: 'assets/productos/tb-102.jpg',   descripcion: 'Comfort flex PU · Estilo escolar · Planta poliuretano resistente' },
+    { id: 21, codigo: 'TB-103', linea: 'tobago', genero: 'nino',  etapa: 'Juvenil (33-38)', tallas: '33-38', tallasArray: [33,34,35,36,37,38], colores: ['#2F2F2F','#ECC238'],                 imagen: 'assets/productos/tb-103.jpg',   descripcion: 'Comfort flex PU · Tendencia juvenil · Planta agresiva bicolor' },
 
     // ── TOBAGO - NIÑA ──
     { id: 22, codigo: 'TB-201', linea: 'tobago', genero: 'nina',  etapa: 'Kids (27-32)',    tallas: '27-32', tallasArray: [27,28,29,30,31,32], colores: ['#FF69B4','#FFFFFF'],                 imagen: 'assets/productos/tb-201.jpg',   descripcion: 'Comfort flex PU · Sandalia juvenil · Planta poliuretano' },
@@ -136,12 +136,12 @@ export class Productos {
   // ─── HELPERS de color por línea ───
   lineaColor(linea: string): string {
     const map: Record<string, string> = {
-      'baby-piolito': '#C8102E',
-      'tilin':        '#1B2A6B',
+      'baby-piolito': '#C22D31',
+      'tilin':        '#343594',
       'piolito':      '#d4a800',
-      'tobago':       '#1E5631',
+      'tobago':       '#089347',
     };
-    return map[linea] ?? '#1B2A6B';
+    return map[linea] ?? '#343594';
   }
 
   lineaLabel(linea: string): string {

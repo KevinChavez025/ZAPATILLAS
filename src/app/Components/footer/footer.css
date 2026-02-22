@@ -12,12 +12,12 @@ footer {
 .s-yellow { background: var(--yellow); }
 .s-green  { background: var(--green); }
 
-.foot-inner { padding: 72px 52px 32px; }
+.foot-inner { padding: 52px 52px 28px; }
 
 .foot-top {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 48px;
+  gap: 40px;
   padding-bottom: 52px;
   border-bottom: 1px solid rgba(255,255,255,.08);
 }
@@ -25,17 +25,14 @@ footer {
 .foot-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
   text-decoration: none;
   margin-bottom: 6px;
 }
-.foot-brand-name {
-  font-family: 'Nunito', sans-serif;
-  font-size: 1.8rem;
-  font-weight: 900;
-  color: var(--white);
+.piolito-logo-footer {
+  height: 56px;
+  width: auto;
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,.3));
 }
-.foot-brand-name span { color: var(--yellow); }
 
 .foot-tagline {
   font-size: .75rem;
@@ -71,7 +68,7 @@ footer {
 .foot-wa svg { width: 16px; height: 16px; fill: white; flex-shrink: 0; }
 
 .foot-col h4 {
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-title);
   font-size: .9rem;
   font-weight: 900;
   color: var(--white);
