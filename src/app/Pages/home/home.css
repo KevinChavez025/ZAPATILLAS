@@ -128,7 +128,7 @@
 .hero-right {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   overflow: hidden;
   background: var(--navy-light);
@@ -139,7 +139,6 @@
   inset: 0;
   background: linear-gradient(160deg, var(--navy-light) 0%, var(--navy) 100%);
 }
-/* Patron de zapatos del manual */
 .ghost-text {
   font-family: var(--font-title), sans-serif;
   font-size: 9rem;
@@ -152,35 +151,34 @@
   white-space: nowrap;
   letter-spacing: .08em;
 }
-.shoe-wrap {
+
+/* ── HERO IMAGE (reemplaza shoe-wrap) ── */
+.hero-img-wrap {
   position: relative;
   z-index: 2;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
-.shoe-svg {
-  width: 320px;
-  filter: drop-shadow(0 20px 40px rgba(0,0,0,.45));
-  animation: floatY 5s ease-in-out infinite;
-}
-@keyframes floatY {
-  0%,100% { transform: translateY(0) rotate(-2deg); }
-  50% { transform: translateY(-18px) rotate(-2deg); }
-}
-.color-dots {
-  display: flex;
-  gap: 10px;
+  align-items: flex-end;
   justify-content: center;
+  height: 100%;
+  width: 100%;
+  padding-bottom: 0;
 }
-.dot {
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: transform .2s;
+
+.hero-kid-img {
+  height: 88%;
+  max-height: 560px;
+  width: auto;
+  object-fit: contain;
+  object-position: bottom center;
+  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.45));
+  animation: floatKid 4.5s ease-in-out infinite;
+  transform-origin: bottom center;
 }
-.dot:hover { transform: scale(1.5); }
+
+@keyframes floatKid {
+  0%,  100% { transform: translateY(0px);   }
+  50%        { transform: translateY(-16px); }
+}
 
 .hero-badge {
   position: absolute;
@@ -270,7 +268,6 @@
   position: relative;
   overflow: hidden;
 }
-/* Watermark "PIOLITO" del manual de marca */
 .cats-section::before {
   content: 'PIOLITO';
   position: absolute;
@@ -298,28 +295,60 @@
   grid-template-columns: repeat(4,1fr);
   gap: 16px;
 }
+
 .cat {
   border-radius: 20px;
   overflow: hidden;
   position: relative;
   aspect-ratio: 3/4;
   cursor: pointer;
-  transition: transform .3s, box-shadow .3s;
+  outline: none;
+  transition:
+    transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease;
+  will-change: transform;
 }
-.cat:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,.18); }
-
+.cat:focus-visible {
+  box-shadow: 0 0 0 3px #fff, 0 0 0 5px rgba(255,255,255,0.6);
+}
+.cat:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 28px 60px rgba(0,0,0,.28), 0 8px 20px rgba(0,0,0,.12);
+}
+.cat:active {
+  transform: translateY(-4px) scale(0.985);
+  transition-duration: 0.12s;
+}
 .cat-bg {
   position: absolute;
   inset: 0;
-  transition: transform .5s;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.cat:hover .cat-bg { transform: scale(1.05); }
-
+.cat:hover .cat-bg { transform: scale(1.08); }
+.cat-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(255,255,255,0.13) 50%,
+    transparent 80%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.0s;
+  pointer-events: none;
+  z-index: 2;
+}
+.cat:hover .cat-shimmer {
+  transform: translateX(100%);
+  transition: transform 0.65s ease;
+}
 .cat-dots-overlay {
   position: absolute;
   inset: 0;
   background-image: radial-gradient(circle, rgba(255,255,255,.12) 1px, transparent 1px);
   background-size: 18px 18px;
+  z-index: 1;
 }
 .cat-age {
   position: absolute;
@@ -332,61 +361,93 @@
   text-transform: uppercase;
   padding: 4px 10px;
   border-radius: 50px;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
+  z-index: 3;
+  transition: background 0.3s;
 }
+.cat:hover .cat-age { background: rgba(0,0,0,.5); }
 .cat-icon {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -60%);
   font-size: 5rem;
-  opacity: .25;
+  opacity: .22;
   user-select: none;
-  transition: opacity .3s, transform .3s;
+  transition:
+    opacity 0.4s ease,
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 1;
 }
 .cat:hover .cat-icon {
-  opacity: .4;
-  transform: translate(-50%, -55%) scale(1.1);
+  opacity: .45;
+  transform: translate(-50%, -68%) scale(1.18) rotate(-6deg);
 }
 .cat-bottom {
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  padding: 20px 18px;
-  background: linear-gradient(to top, rgba(0,0,0,.8) 0%, transparent 100%);
+  padding: 28px 20px 20px;
+  background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.4) 60%, transparent 100%);
   border-radius: 0 0 20px 20px;
+  z-index: 3;
+  transform: translateY(0);
+  transition: padding 0.35s ease;
 }
+.cat:hover .cat-bottom { padding-bottom: 24px; }
 .cat-name {
   font-family: var(--font-title);
-  font-size: 1.4rem;
+  font-size: 1.45rem;
   font-weight: 900;
   color: var(--white);
   display: block;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
+  transition: transform 0.3s ease;
 }
+.cat:hover .cat-name { transform: translateY(-2px); }
 .cat-sub {
   font-size: .68rem;
   font-weight: 700;
   color: rgba(255,255,255,.65);
   letter-spacing: .08em;
   text-transform: uppercase;
+  display: block;
+  transition: color 0.3s;
 }
-.cat-wa {
+.cat:hover .cat-sub { color: rgba(255,255,255,.85); }
+.cat-cta {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   margin-top: 10px;
-  background: var(--wa);
   color: var(--white);
-  font-size: .7rem;
+  font-size: .72rem;
   font-weight: 800;
-  padding: 5px 12px;
-  border-radius: 50px;
-  text-decoration: none;
+  letter-spacing: .06em;
+  text-transform: uppercase;
   opacity: 0;
-  transform: translateY(6px);
-  transition: opacity .3s, transform .3s;
+  transform: translateY(8px);
+  transition:
+    opacity 0.3s ease 0.05s,
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) 0.05s;
 }
-.cat:hover .cat-wa { opacity: 1; transform: translateY(0); }
-.cat-wa svg { width: 14px; height: 14px; fill: white; flex-shrink: 0; }
+.cat-cta svg { width: 16px; height: 16px; transition: transform 0.3s ease; }
+.cat:hover .cat-cta { opacity: 1; transform: translateY(0); }
+.cat:hover .cat-cta svg { transform: translateX(3px); }
+.cat-ripple {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 4;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.25) 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.15s, transform 0.15s;
+}
+.cat:active .cat-ripple {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.08s, transform 0.08s;
+}
 
 /* ─── ABOUT ─── */
 .about-band {
@@ -403,8 +464,8 @@
   justify-content: center;
   background: var(--navy-light);
   overflow: hidden;
-  min-height: 420px; 
-  padding: 2rem;     
+  min-height: 420px;
+  padding: 2rem;
 }
 .about-glow {
   position: absolute;
@@ -413,12 +474,16 @@
   border-radius: 50%;
 }
 .big-chick {
-  width: 250px;      
-  max-width: 90%;    
+  width: 250px;
+  max-width: 90%;
   height: auto;
   position: relative;
   z-index: 2;
   animation: floatY 4s ease-in-out infinite;
+}
+@keyframes floatY {
+  0%,100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-18px) rotate(-2deg); }
 }
 .about-text {
   padding: 52px 60px;
@@ -441,7 +506,6 @@
   position: relative;
   overflow: hidden;
 }
-/* Banda de gradiente del manual — amarillo → azul → naranja/rojo */
 .features-section::before {
   content: '';
   position: absolute;
@@ -490,7 +554,6 @@
   position: relative;
   overflow: hidden;
 }
-/* Stripe 4 colores del manual en la parte superior */
 .contact-section::before {
   content: '';
   position: absolute;
@@ -500,7 +563,6 @@
     var(--red) 25%, var(--yellow) 25% 50%,
     var(--green) 50% 75%, var(--navy-light) 75%);
 }
-/* Watermark PIOLITO del manual */
 .contact-section::after {
   content: 'PIOLITO';
   position: absolute;
@@ -621,11 +683,7 @@
   justify-content: center;
   gap: 24px;
 }
-.store-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-}
+.store-row { display: flex; align-items: flex-start; gap: 14px; }
 .store-icon {
   width: 36px; height: 36px;
   border-radius: 50%;
@@ -645,13 +703,7 @@
   color: var(--navy);
   margin-bottom: 2px;
 }
-.store-val {
-  display: block;
-  font-size: .88rem;
-  color: #555;
-  font-weight: 600;
-  line-height: 1.5;
-}
+.store-val { display: block; font-size: .88rem; color: #555; font-weight: 600; line-height: 1.5; }
 
 /* ─── WA FLOAT ─── */
 .wa-float {
@@ -680,7 +732,8 @@
 @media (max-width: 960px) {
   .hero { grid-template-columns: 1fr; min-height: auto; }
   .hero-left { padding: 60px 28px; }
-  .hero-right { min-height: 320px; }
+  .hero-right { min-height: 380px; align-items: flex-end; }
+  .hero-kid-img { height: 340px; max-height: 100%; }
   .section { padding: 44px 24px; }
   .cats-grid { grid-template-columns: 1fr 1fr; }
   .about-band { grid-template-columns: 1fr; }
@@ -695,18 +748,17 @@
   .features-grid { grid-template-columns: 1fr 1fr; }
   .hero-stats { gap: 24px; }
   .store-left { padding: 40px 28px; }
+  .hero-kid-img { height: 260px; }
 }
 
 /* ═══════════════════════════ PRODUCTOS DESTACADOS ═══════════════════════════ */
 .destacados-section { background: var(--white); }
-
 .destacados-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   margin-top: 8px;
 }
-
 .dest-card {
   background: var(--white);
   border-radius: 18px;
@@ -718,7 +770,6 @@
 }
 .dest-card:hover { transform: translateY(-7px); box-shadow: 0 18px 44px rgba(0,0,0,.14); }
 .dest-card:hover .dest-overlay { opacity: 1; }
-
 .dest-img {
   position: relative;
   aspect-ratio: 4/3;
@@ -730,10 +781,7 @@
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
 }
-.dest-img-inner {
-  display: flex; flex-direction: column;
-  align-items: center; gap: 10px;
-}
+.dest-img-inner { display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .dest-img-code {
   font-family: var(--font-title), sans-serif;
   font-size: 1.6rem;
@@ -748,7 +796,6 @@
   border: 2.5px solid rgba(255,255,255,.8);
   box-shadow: 0 1px 4px rgba(0,0,0,.15);
 }
-
 .dest-badge {
   position: absolute;
   top: 12px; left: 12px;
@@ -758,7 +805,6 @@
   letter-spacing: .1em; text-transform: uppercase;
   padding: 4px 10px; border-radius: 50px;
 }
-
 .dest-overlay {
   position: absolute; inset: 0;
   background: rgba(27,42,107,.65);
@@ -777,7 +823,6 @@
   transition: transform .2s;
 }
 .dest-overlay-btn:hover { transform: scale(1.05); }
-
 .dest-info { padding: 16px 18px; }
 .dest-linea {
   font-size: .65rem; font-weight: 900;
@@ -789,13 +834,8 @@
   font-size: 1.5rem; letter-spacing: .05em;
   color: var(--text); margin-bottom: 2px;
 }
-.dest-etapa {
-  font-size: .72rem; color: #999; font-weight: 600; margin-bottom: 12px;
-}
-.dest-footer {
-  display: flex; align-items: center;
-  justify-content: space-between;
-}
+.dest-etapa { font-size: .72rem; color: #999; font-weight: 600; margin-bottom: 12px; }
+.dest-footer { display: flex; align-items: center; justify-content: space-between; }
 .dest-tallas {
   font-size: .76rem; color: var(--navy); font-weight: 800;
   background: var(--cream, #fdf6e3);
@@ -826,7 +866,6 @@
   border-radius: 50%;
   pointer-events: none;
 }
-
 .ubic-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -834,7 +873,6 @@
   position: relative;
   z-index: 2;
 }
-
 .ubic-left {
   padding: 80px 60px 80px 52px;
   display: flex; flex-direction: column;
@@ -845,11 +883,7 @@
   font-size: .9rem; font-weight: 600;
   line-height: 1.8; max-width: 400px;
 }
-
-.ubic-ciudades {
-  display: flex; flex-direction: column; gap: 10px;
-  margin: 4px 0;
-}
+.ubic-ciudades { display: flex; flex-direction: column; gap: 10px; margin: 4px 0; }
 .ciudad-pill {
   display: flex; align-items: center; gap: 10px;
   background: rgba(255,255,255,.06);
@@ -863,7 +897,6 @@
 .ciudad-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 .ciudad-nombre { color: var(--white); font-size: .82rem; font-weight: 800; }
 .ciudad-count  { color: rgba(255,255,255,.4); font-size: .72rem; font-weight: 600; margin-left: 4px; }
-
 .ubic-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
 .btn-tiendas {
   display: inline-block;
@@ -877,8 +910,6 @@
   transition: all .2s;
 }
 .btn-tiendas:hover { border-color: var(--white); background: rgba(255,255,255,.1); }
-
-/* Mapa SVG ilustrado */
 .ubic-right {
   display: flex; align-items: center; justify-content: center;
   padding: 48px;
@@ -906,7 +937,6 @@
   stroke: rgba(255,255,255,.25);
   stroke-width: 1.5;
 }
-
 .mapa-leyenda {
   display: flex; gap: 16px; flex-wrap: wrap;
   background: rgba(255,255,255,.07);
@@ -935,4 +965,230 @@
 }
 @media (max-width: 600px) {
   .destacados-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+}
+/* ═══════════════════════════════════════════════════════════════
+   PIOLITO — ANIMACIONES ADICIONALES
+   Basado en Manual de Marca Piolito
+   Agregar al final de home.css (o importar en styles.css)
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ─────────────────────────────────────────────────────────────
+   1. ENTRADA HERO — eyebrow → título → sub → botones → stats
+   Suave, escalonada, coherente con tono "cercano y humano"
+   ───────────────────────────────────────────────────────────── */
+
+@keyframes heroFadeUp {
+  0%   { opacity: 0; transform: translateY(32px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.eyebrow {
+  opacity: 0;
+  animation: heroFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+}
+
+.hero-title {
+  opacity: 0;
+  animation: heroFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
+}
+
+.hero-sub {
+  opacity: 0;
+  animation: heroFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+}
+
+.hero-btns {
+  opacity: 0;
+  animation: heroFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.55s forwards;
+}
+
+.hero-stats {
+  opacity: 0;
+  animation: heroFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.7s forwards;
+}
+
+/* hero-right entra desde la derecha */
+@keyframes heroSlideLeft {
+  0%   { opacity: 0; transform: translateX(40px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+.hero-right {
+  animation: heroSlideLeft 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+/* badge flota desde abajo */
+.hero-badge {
+  opacity: 0;
+  animation: heroFadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   2. CONTADOR ANIMADO — stats del hero (20+, 4, 100%)
+   Se activa con JS — agrega clase .counting al .stat-n
+   ───────────────────────────────────────────────────────────── */
+
+.stat-n {
+  display: block;
+  transition: opacity 0.3s ease;
+}
+
+/* Clase que activa el contador — JS la añade */
+.stat-n.counting {
+  animation: countPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes countPop {
+  0%   { transform: scale(0.8); opacity: 0.5; }
+  60%  { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   3. WIGGLE DEL PATITO — basado en poses del manual
+   Balanceo lateral suave además del float vertical existente
+   ───────────────────────────────────────────────────────────── */
+
+@keyframes floatY {
+  0%,  100% { transform: translateY(0) rotate(-2deg); }
+  50%        { transform: translateY(-18px) rotate(-2deg); }
+}
+
+@keyframes chickWiggle {
+  0%,  100% { transform: translateY(0px)   rotate(-3deg); }
+  20%        { transform: translateY(-6px)  rotate(3deg); }
+  40%        { transform: translateY(-14px) rotate(-2deg); }
+  60%        { transform: translateY(-8px)  rotate(2deg); }
+  80%        { transform: translateY(-16px) rotate(-3deg); }
+}
+
+.big-chick {
+  animation: chickWiggle 5s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+/* Pausa al hacer hover — se ve más vivo */
+.big-chick:hover {
+  animation-play-state: paused;
+  filter: drop-shadow(0 8px 20px rgba(236,194,56,.4));
+  transition: filter 0.3s ease;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   4. PATRÓN DE ZAPATOS ANIMADO — del manual de marca (pág. 25)
+   Fondo con zapatos moviéndose lentamente
+   Aplicar la clase .shoe-pattern al elemento que quieras
+   ───────────────────────────────────────────────────────────── */
+
+@keyframes patternScroll {
+  0%   { background-position: 0 0; }
+  100% { background-position: 80px 80px; }
+}
+
+.shoe-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg opacity='0.12' fill='none' stroke='%23ECC238' stroke-width='1.5'%3E%3Cpath d='M10 55 Q14 48 22 46 Q30 44 36 47 Q42 50 44 55 L43 58 Q38 60 24 60 Q13 60 10 58 Z'/%3E%3Cpath d='M10 58 Q9 55 12 52 Q10 54 9 57 Z'/%3E%3Cpath d='M22 46 Q28 42 34 43 L33 46 Q27 45 22 48 Z'/%3E%3Cellipse cx='27' cy='48' rx='8' ry='3' opacity='0.5'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 80px 80px;
+  animation: patternScroll 12s linear infinite;
+}
+
+/* Ejemplo de uso en la sección de features */
+.features-section {
+  position: relative;
+}
+.features-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg opacity='0.06' fill='none' stroke='%23343594' stroke-width='1.5'%3E%3Cpath d='M10 55 Q14 48 22 46 Q30 44 36 47 Q42 50 44 55 L43 58 Q38 60 24 60 Q13 60 10 58 Z'/%3E%3Cpath d='M10 58 Q9 55 12 52 Q10 54 9 57 Z'/%3E%3Cpath d='M22 46 Q28 42 34 43 L33 46 Q27 45 22 48 Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 80px 80px;
+  animation: patternScroll 18s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+.features-section > * { position: relative; z-index: 1; }
+
+
+/* ─────────────────────────────────────────────────────────────
+   5. STRIPE SHIMMER — la barra de 4 colores más viva
+   ───────────────────────────────────────────────────────────── */
+
+@keyframes stripeShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.colour-stripe {
+  position: relative;
+  overflow: hidden;
+}
+.colour-stripe::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.35) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: stripeShimmer 3s ease-in-out infinite;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   6. HOVER EN FEAT CARDS — borde con color de acento animado
+   ───────────────────────────────────────────────────────────── */
+
+@keyframes borderGlow {
+  0%,100% { box-shadow: 0 0 0 0 transparent; }
+  50%      { box-shadow: 0 0 16px 2px rgba(236,194,56,.25); }
+}
+
+.feat:hover {
+  border-color: var(--accent, var(--navy));
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,.1);
+  animation: borderGlow 1.5s ease-in-out infinite;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   7. DELAYS EXTENDIDOS para .rise (d5–d8)
+   ───────────────────────────────────────────────────────────── */
+
+.d5 { transition-delay: 0.5s; }
+.d6 { transition-delay: 0.6s; }
+.d7 { transition-delay: 0.7s; }
+.d8 { transition-delay: 0.8s; }
+
+
+/* ─────────────────────────────────────────────────────────────
+   8. ACCESIBILIDAD — respeta prefers-reduced-motion
+   ───────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .eyebrow,
+  .hero-title,
+  .hero-sub,
+  .hero-btns,
+  .hero-stats,
+  .hero-right,
+  .hero-badge {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
 }

@@ -17,7 +17,7 @@
 
     <div class="hero-btns">
       <a [href]="waBase + 'Hola!%20Quiero%20ver%20el%20catálogo%20de%20Piolito'"
-         class="btn-wa" target="_blank" rel="noopener">
+        class="btn-wa" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
         Cotizar por WhatsApp
       </a>
@@ -44,30 +44,13 @@
     <div class="hero-bg-blob"></div>
     <span class="ghost-text">PIOLITO</span>
 
-    <div class="shoe-wrap">
-      <!-- Zapato ilustrado con colores de marca -->
-      <svg class="shoe-svg" viewBox="0 0 420 270" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="210" cy="248" rx="158" ry="16" fill="rgba(0,0,0,.4)"/>
-        <path d="M58 215 Q85 232 210 232 Q335 232 362 215 L357 200 Q330 216 210 216 Q90 216 63 200 Z" fill="#0d0d0d"/>
-        <path d="M63 200 Q68 150 120 130 Q165 112 210 113 Q260 114 298 136 Q332 158 357 200 Q330 216 210 216 Q90 216 63 200 Z" fill="#343594"/>
-        <path d="M63 200 Q60 178 78 158 Q96 140 120 130 Q88 155 73 185 Z" fill="#C22D31"/>
-        <path d="M120 130 Q165 112 210 113 L207 136 Q164 134 122 152 Z" fill="#C22D31" opacity=".8"/>
-        <path d="M145 122 Q185 114 228 117 L225 130 Q183 127 143 136 Z" fill="#ECC238"/>
-        <path d="M63 200 Q60 180 80 160 Q72 178 66 198 Z" fill="#089347" opacity=".7"/>
-        <rect x="328" y="170" width="18" height="30" rx="3" fill="#27287a" opacity=".9"/>
-        <ellipse cx="234" cy="138" rx="56" ry="20" fill="#27287a" opacity=".35"/>
-        <line x1="186" y1="125" x2="278" y2="126" stroke="white" stroke-width="2.5" opacity=".7"/>
-        <line x1="184" y1="134" x2="276" y2="135" stroke="white" stroke-width="2" opacity=".5"/>
-        <line x1="182" y1="143" x2="272" y2="144" stroke="white" stroke-width="1.5" opacity=".35"/>
-        <text x="112" y="192" font-family="Poppins,sans-serif" font-size="13" font-weight="900" fill="white" opacity=".85" letter-spacing="1.5">PIOLITO</text>
-        <circle cx="103" cy="186" r="3.5" fill="#ECC238" opacity=".9"/>
-      </svg>
-
-      <div class="color-dots">
-        @for (dot of colorDots; track dot.label) {
-          <span class="dot" [style.background]="dot.color" [title]="dot.label"></span>
-        }
-      </div>
+    <!-- ✅ IMAGEN HERO - reemplaza el SVG del zapato -->
+    <div class="hero-img-wrap">
+      <img
+        src="/hero.webp"
+        alt="Niño con calzado Piolito"
+        class="hero-kid-img"
+      />
     </div>
 
     <div class="hero-badge">
@@ -99,15 +82,32 @@
 
   <div class="cats-grid">
     @for (cat of categorias; track cat.nombre; let i = $index) {
-      <div class="cat rise" [class]="'d' + (i+1)">
+      <div
+        class="cat rise"
+        [class]="'d' + (i+1)"
+        (click)="irAColeccion(cat.linea)"
+        role="button"
+        [attr.aria-label]="'Ver colección ' + cat.nombre"
+        tabindex="0"
+        (keydown.enter)="irAColeccion(cat.linea)"
+        (keydown.space)="irAColeccion(cat.linea)"
+      >
         <div class="cat-bg" [style.background]="cat.gradient"></div>
+        <div class="cat-shimmer"></div>
         <div class="cat-dots-overlay"></div>
         <span class="cat-age">{{ cat.edad }}</span>
         <span class="cat-icon">{{ cat.icon }}</span>
         <div class="cat-bottom">
           <span class="cat-name">{{ cat.nombre }}</span>
           <span class="cat-sub">Tallas {{ cat.tallas }}</span>
+          <span class="cat-cta">
+            Ver colección
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 10h12M10 4l6 6-6 6"/>
+            </svg>
+          </span>
         </div>
+        <div class="cat-ripple"></div>
       </div>
     }
   </div>
@@ -131,7 +131,7 @@
     </h2>
     <p>Cada par de zapatos Piolito está elaborado con cuero legítimo de primera calidad y forro de badana natural. Diseñados con arco semi-ortopédico, contrafuerte y cuello acojinado para el sano desarrollo del pie de tu hijo.</p>
     <a [href]="waBase + 'Hola!%20Quisiera%20saber%20más%20sobre%20Piolito'"
-       class="btn-wa" target="_blank" rel="noopener">
+      class="btn-wa" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
       Escríbenos
     </a>
@@ -195,7 +195,7 @@
           <div class="dest-footer">
             <span class="dest-tallas">Tallas {{ p.tallas }}</span>
             <a [href]="'https://wa.me/51987654321?text=' + encodeWA(p)"
-               class="dest-wa" target="_blank" rel="noopener">
+              class="dest-wa" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
             </a>
           </div>
@@ -229,7 +229,7 @@
       <div class="ubic-btns">
         <a routerLink="/tiendas" class="btn-tiendas">Ver todas las tiendas →</a>
         <a href="https://wa.me/51987654321?text=Hola!%20%C2%BFCu%C3%A1l%20es%20la%20tienda%20Piolito%20m%C3%A1s%20cercana%20a%20m%C3%AD%3F"
-           class="btn-wa" target="_blank" rel="noopener">
+          class="btn-wa" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
           Tienda más cercana
         </a>
@@ -239,28 +239,52 @@
     <div class="ubic-right rise d2">
       <div class="mapa-ilustrado">
         <div class="mapa-glow"></div>
+
         <svg class="peru-map" viewBox="0 0 220 340" xmlns="http://www.w3.org/2000/svg">
-          <path class="peru-shape" d="
-            M 62 12 L 75 8 L 95 10 L 115 6 L 130 14 L 145 8 L 158 18 L 165 30 L 170 45
-            L 175 58 L 178 72 L 180 88 L 176 102 L 172 115 L 170 130 L 168 145
-            L 165 158 L 162 172 L 158 186 L 154 198 L 148 210 L 140 222 L 130 234
-            L 118 244 L 106 252 L 94 258 L 82 262 L 70 264 L 60 260 L 52 252
-            L 46 242 L 42 230 L 38 218 L 36 204 L 34 190 L 32 174 L 30 158
-            L 28 142 L 28 126 L 32 110 L 36 94 L 40 78 L 44 64 L 50 50 L 56 36 Z
-          "/>
-          <circle cx="52" cy="158" r="10" fill="#C22D31" opacity=".9"/>
-          <circle cx="52" cy="158" r="15" fill="#C22D31" opacity=".15"/>
-          <text x="66" y="162" font-family="Poppins,sans-serif" font-size="10" font-weight="800" fill="white">Lima</text>
-          <circle cx="62" cy="108" r="7" fill="#ECC238" opacity=".9"/>
-          <circle cx="62" cy="108" r="12" fill="#ECC238" opacity=".15"/>
-          <text x="74" y="112" font-family="Poppins,sans-serif" font-size="9" font-weight="700" fill="rgba(255,255,255,.8)">Trujillo</text>
-          <circle cx="110" cy="210" r="7" fill="#089347" opacity=".9"/>
-          <circle cx="110" cy="210" r="12" fill="#089347" opacity=".15"/>
-          <text x="122" y="214" font-family="Poppins,sans-serif" font-size="9" font-weight="700" fill="rgba(255,255,255,.8)">Cusco</text>
-          <circle cx="84" cy="232" r="6" fill="#ECC238" opacity=".8"/>
-          <text x="94" y="236" font-family="Poppins,sans-serif" font-size="8" font-weight="700" fill="rgba(255,255,255,.7)">Arequipa</text>
-          <circle cx="54" cy="62" r="6" fill="#ECC238" opacity=".8"/>
-          <text x="64" y="66" font-family="Poppins,sans-serif" font-size="8" font-weight="700" fill="rgba(255,255,255,.7)">Piura</text>
+          <defs>
+            <filter id="pm-pin" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2.5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="pm-lima" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <path class="peru-shape" d="M 100.6,29.0 L 106.0,35.0 L 107.0,41.9 L 103.5,41.9 L 101.6,50.9 L 84.7,66.7 L 65.8,73.2 L 60.9,81.1 L 58.9,79.2 L 53.4,97.5 L 48.9,103.0 L 44.5,103.5 L 40.5,96.5 L 31.6,93.1 L 26.1,95.5 L 27.6,91.6 L 25.1,89.1 L 30.6,86.6 L 29.1,79.7 L 20.6,85.1 L 13.2,96.0 L 16.7,103.0 L 15.2,107.0 L 20.1,112.4 L 15.7,119.4 L 31.6,128.3 L 48.9,152.6 L 69.3,194.8 L 69.3,199.8 L 76.7,206.2 L 77.7,212.7 L 91.6,232.5 L 89.2,241.0 L 96.1,252.9 L 109.0,265.3 L 149.2,285.2 L 163.6,294.6 L 166.1,301.1 L 177.5,309.5 L 185.0,311.0 L 189.4,307.0 L 188.4,301.5 L 193.9,298.6 L 191.9,293.6 L 204.3,279.2 L 198.4,276.7 L 195.4,267.8 L 199.4,262.3 L 195.9,255.9 L 203.8,246.0 L 200.3,237.5 L 201.8,225.6 L 206.3,218.6 L 193.4,195.8 L 177.0,196.3 L 178.5,172.0 L 165.6,180.9 L 152.7,180.4 L 151.2,173.5 L 137.8,172.0 L 140.8,164.5 L 124.9,142.7 L 125.9,139.2 L 129.4,139.2 L 128.9,132.3 L 138.3,126.3 L 136.8,119.9 L 142.3,105.0 L 157.2,96.0 L 177.0,90.1 L 186.9,92.6 L 181.0,85.6 L 175.5,84.1 L 185.5,68.7 L 172.5,61.3 L 141.3,64.3 L 137.8,62.3 L 137.3,54.3 L 132.3,52.8 L 130.4,46.4 L 121.9,42.9 L 117.9,35.0 L 107.5,28.0 Z"/>
+
+          <!-- PIURA -->
+          <circle cx="38.0" cy="74.0" r="12" fill="#ECC238" opacity=".09"/>
+          <circle cx="38.0" cy="74.0" r="6.5" fill="#ECC238" opacity=".93" filter="url(#pm-pin)"/>
+          <circle cx="38.0" cy="74.0" r="2.8" fill="white" opacity=".95"/>
+          <text x="48" y="71" font-family="Poppins,sans-serif" font-size="8" font-weight="800" fill="rgba(255,255,255,.92)">Piura</text>
+
+          <!-- TRUJILLO -->
+          <circle cx="32.1" cy="109.3" r="12" fill="#ECC238" opacity=".09"/>
+          <circle cx="32.1" cy="109.3" r="6.5" fill="#ECC238" opacity=".93" filter="url(#pm-pin)"/>
+          <circle cx="32.1" cy="109.3" r="2.8" fill="white" opacity=".95"/>
+          <text x="42" y="106" font-family="Poppins,sans-serif" font-size="8" font-weight="800" fill="rgba(255,255,255,.92)">Trujillo</text>
+
+          <!-- LIMA -->
+          <circle cx="27.0" cy="136.7" r="18" fill="#C22D31" opacity=".07"/>
+          <circle cx="27.0" cy="136.7" r="12" fill="#C22D31" opacity=".14"/>
+          <circle cx="27.0" cy="136.7" r="8"  fill="#C22D31" opacity=".96" filter="url(#pm-lima)"/>
+          <circle cx="27.0" cy="136.7" r="3.5" fill="white" opacity=".98"/>
+          <text x="39" y="133" font-family="Poppins,sans-serif" font-size="9.5" font-weight="900" fill="white">Lima</text>
+          <text x="39" y="143" font-family="Poppins,sans-serif" font-size="5" font-weight="700" fill="rgba(255,255,255,.5)" letter-spacing="0.6">SEDE PRINCIPAL</text>
+
+          <!-- CUSCO -->
+          <circle cx="90.9" cy="156.2" r="12" fill="#089347" opacity=".09"/>
+          <circle cx="90.9" cy="156.2" r="6.5" fill="#089347" opacity=".93" filter="url(#pm-pin)"/>
+          <circle cx="90.9" cy="156.2" r="2.8" fill="white" opacity=".95"/>
+          <text x="73" y="153" font-family="Poppins,sans-serif" font-size="8" font-weight="800" fill="rgba(255,255,255,.92)">Cusco</text>
+
+          <!-- AREQUIPA -->
+          <circle cx="63.0" cy="180.5" r="12" fill="#ECC238" opacity=".09"/>
+          <circle cx="63.0" cy="180.5" r="6.5" fill="#ECC238" opacity=".93" filter="url(#pm-pin)"/>
+          <circle cx="63.0" cy="180.5" r="2.8" fill="white" opacity=".95"/>
+          <text x="72" y="177" font-family="Poppins,sans-serif" font-size="8" font-weight="800" fill="rgba(255,255,255,.92)">Arequipa</text>
         </svg>
 
         <div class="mapa-leyenda">
@@ -286,7 +310,7 @@
     enviamos el catálogo completo y te ayudamos a elegir la talla perfecta.
   </p>
   <a [href]="waBase + 'Hola!%20Me%20interesa%20el%20calzado%20Piolito'"
-     class="wa-big rise" target="_blank" rel="noopener">
+    class="wa-big rise" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
     Escribir por WhatsApp
   </a>
@@ -306,7 +330,7 @@
       <h3>Tienda<br><em>Principal</em></h3>
       <p>Ven a conocer toda nuestra colección. Nuestro equipo te ayudará a elegir el calzado ideal para el desarrollo saludable del pie de tu hijo.</p>
       <a [href]="waBase + 'Hola!%20Quiero%20saber%20el%20horario%20de%20atención%20de%20la%20tienda'"
-         class="btn-wa" target="_blank" rel="noopener">
+        class="btn-wa" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
         Consultar horario
       </a>
@@ -328,6 +352,6 @@
 
 <!-- ═══════════════════════════════════════════ WA FLOAT ═══ -->
 <a [href]="waBase + 'Hola!%20Me%20interesa%20el%20calzado%20Piolito'"
-   class="wa-float" target="_blank" rel="noopener" title="Cotizar por WhatsApp">
+  class="wa-float" target="_blank" rel="noopener" title="Cotizar por WhatsApp">
   <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
 </a>
