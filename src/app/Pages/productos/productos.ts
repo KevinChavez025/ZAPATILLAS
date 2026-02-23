@@ -1,10 +1,11 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 export interface Producto {
   id: number;
   codigo: string;
-  linea: 'baby-piolito' | 'tilin' | 'piolito' | 'tobago';
+  linea: 'baby-piolito' | 'tilin' | 'piolito' | 'urbano';
   genero: 'nino' | 'nina' | 'ambos';
   etapa: string;
   tallas: string;
@@ -22,7 +23,21 @@ export interface Producto {
   templateUrl: './productos.html',
   styleUrl: './productos.css',
 })
-export class Productos {
+export class Productos implements OnInit {
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if (params['linea']) {
+        this.setLinea(params['linea']);
+        // Scroll suave a la sección de filtros
+        setTimeout(() => {
+          document.querySelector('.linea-tabs')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 150);
+      }
+    });
+  }
   readonly waBase = 'https://wa.me/51987654321?text=';
 
   readonly waIcon = 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.125.558 4.126 1.535 5.858L.057 23.927l6.235-1.635A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.017-1.376l-.36-.213-3.7.97.988-3.608-.235-.371A9.818 9.818 0 1112 21.818z';
@@ -33,14 +48,14 @@ export class Productos {
     { key: 'baby-piolito', label: 'Baby Piolito', color: '#C22D31' },
     { key: 'tilin',        label: 'Tilin',        color: '#343594' },
     { key: 'piolito',      label: 'Piolito',      color: '#ECC238' },
-    { key: 'tobago',       label: 'Tobago',       color: '#089347' },
+    { key: 'urbano',       label: 'Urbano',       color: '#089347' },
   ];
 
   readonly etapas: Record<string, string[]> = {
     'baby-piolito': ['Recién Nacidos (15-19)'],
     'tilin':        ['Primeros Pasos (18-21)'],
     'piolito':      ['Todo Camina (22-26)', 'Kids (27-32)', 'Juvenil (33-38)'],
-    'tobago':       ['Kids (27-32)', 'Escolar (27-38)', 'Juvenil (33-38)'],
+    'urbano':       ['Kids (27-32)', 'Escolar (27-38)', 'Juvenil (33-38)'],
     'todos':        ['Todo Camina (22-26)', 'Kids (27-32)', 'Juvenil (33-38)', 'Primeros Pasos (18-21)', 'Recién Nacidos (15-19)', 'Escolar (27-38)'],
   };
 
@@ -82,14 +97,14 @@ export class Productos {
     { id: 18, codigo: 'CH02-V5',linea: 'piolito', genero: 'nina',  etapa: 'Juvenil (33-38)',     tallas: '33-38', tallasArray: [33,34,35,36,37,38], colores: ['#FFFFFF'],                      imagen: 'assets/productos/ch02-v5.jpg',  descripcion: 'Cuero anapado blanco · Forro badana ovino · Planta huella caucho natural con cerco suela' },
 
     // ── TOBAGO - NIÑO ──
-    { id: 19, codigo: 'TB-101', linea: 'tobago', genero: 'nino',  etapa: 'Kids (27-32)',    tallas: '27-32', tallasArray: [27,28,29,30,31,32], colores: ['#1a1a1a','#C22D31'],                 imagen: 'assets/productos/tb-101.jpg',   descripcion: 'Comfort flex PU · Diseño deportivo · Planta agresiva poliuretano', nuevo: true },
-    { id: 20, codigo: 'TB-102', linea: 'tobago', genero: 'nino',  etapa: 'Escolar (27-38)', tallas: '27-38', tallasArray: [27,28,29,30,31,32,33,34,35,36,37,38], colores: ['#343594','#FFFFFF'], imagen: 'assets/productos/tb-102.jpg',   descripcion: 'Comfort flex PU · Estilo escolar · Planta poliuretano resistente' },
-    { id: 21, codigo: 'TB-103', linea: 'tobago', genero: 'nino',  etapa: 'Juvenil (33-38)', tallas: '33-38', tallasArray: [33,34,35,36,37,38], colores: ['#2F2F2F','#ECC238'],                 imagen: 'assets/productos/tb-103.jpg',   descripcion: 'Comfort flex PU · Tendencia juvenil · Planta agresiva bicolor' },
+    { id: 19, codigo: 'UR-101', linea: 'urbano', genero: 'nino',  etapa: 'Kids (27-32)',    tallas: '27-32', tallasArray: [27,28,29,30,31,32], colores: ['#1a1a1a','#C22D31'],                 imagen: 'assets/productos/tb-101.jpg',   descripcion: 'Comfort flex PU · Diseño deportivo · Planta agresiva poliuretano', nuevo: true },
+    { id: 20, codigo: 'UR-102', linea: 'urbano', genero: 'nino',  etapa: 'Escolar (27-38)', tallas: '27-38', tallasArray: [27,28,29,30,31,32,33,34,35,36,37,38], colores: ['#343594','#FFFFFF'], imagen: 'assets/productos/tb-102.jpg',   descripcion: 'Comfort flex PU · Estilo escolar · Planta poliuretano resistente' },
+    { id: 21, codigo: 'UR-103', linea: 'urbano', genero: 'nino',  etapa: 'Juvenil (33-38)', tallas: '33-38', tallasArray: [33,34,35,36,37,38], colores: ['#2F2F2F','#ECC238'],                 imagen: 'assets/productos/tb-103.jpg',   descripcion: 'Comfort flex PU · Tendencia juvenil · Planta agresiva bicolor' },
 
     // ── TOBAGO - NIÑA ──
-    { id: 22, codigo: 'TB-201', linea: 'tobago', genero: 'nina',  etapa: 'Kids (27-32)',    tallas: '27-32', tallasArray: [27,28,29,30,31,32], colores: ['#FF69B4','#FFFFFF'],                 imagen: 'assets/productos/tb-201.jpg',   descripcion: 'Comfort flex PU · Sandalia juvenil · Planta poliuretano' },
-    { id: 23, codigo: 'TB-202', linea: 'tobago', genero: 'nina',  etapa: 'Escolar (27-38)', tallas: '27-38', tallasArray: [27,28,29,30,31,32,33,34,35,36,37,38], colores: ['#1a1a1a','#FFB6C1'], imagen: 'assets/productos/tb-202.jpg',   descripcion: 'Comfort flex PU · Estilo escolar femenino · Planta poliuretano' },
-    { id: 24, codigo: 'TB-203', linea: 'tobago', genero: 'nina',  etapa: 'Juvenil (33-38)', tallas: '33-38', tallasArray: [33,34,35,36,37,38], colores: ['#DDA0DD','#FFFFFF'],                 imagen: 'assets/productos/tb-203.jpg',   descripcion: 'Comfort flex PU · Moda juvenil · Planta agresiva' },
+    { id: 22, codigo: 'UR-201', linea: 'urbano', genero: 'nina',  etapa: 'Kids (27-32)',    tallas: '27-32', tallasArray: [27,28,29,30,31,32], colores: ['#FF69B4','#FFFFFF'],                 imagen: 'assets/productos/tb-201.jpg',   descripcion: 'Comfort flex PU · Sandalia juvenil · Planta poliuretano' },
+    { id: 23, codigo: 'UR-202', linea: 'urbano', genero: 'nina',  etapa: 'Escolar (27-38)', tallas: '27-38', tallasArray: [27,28,29,30,31,32,33,34,35,36,37,38], colores: ['#1a1a1a','#FFB6C1'], imagen: 'assets/productos/tb-202.jpg',   descripcion: 'Comfort flex PU · Estilo escolar femenino · Planta poliuretano' },
+    { id: 24, codigo: 'UR-203', linea: 'urbano', genero: 'nina',  etapa: 'Juvenil (33-38)', tallas: '33-38', tallasArray: [33,34,35,36,37,38], colores: ['#DDA0DD','#FFFFFF'],                 imagen: 'assets/productos/tb-203.jpg',   descripcion: 'Comfort flex PU · Moda juvenil · Planta agresiva' },
   ];
 
   // ─── COMPUTED: productos filtrados ───
@@ -139,7 +154,7 @@ export class Productos {
       'baby-piolito': '#C22D31',
       'tilin':        '#343594',
       'piolito':      '#d4a800',
-      'tobago':       '#089347',
+      'urbano':       '#089347',
     };
     return map[linea] ?? '#343594';
   }
@@ -149,7 +164,7 @@ export class Productos {
       'baby-piolito': 'Baby Piolito',
       'tilin':        'Tilin',
       'piolito':      'Piolito',
-      'tobago':       'Tobago',
+      'urbano':       'Urbano',
     };
     return map[linea] ?? linea;
   }
