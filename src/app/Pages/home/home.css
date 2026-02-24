@@ -30,7 +30,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: .75rem;
+  font-size: 1rem;
   font-weight: 800;
   letter-spacing: .15em;
   text-transform: uppercase;
@@ -39,7 +39,7 @@
   opacity: 0;
   animation: heroFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
 }
-.chick-icon { font-size: 1.1rem; }
+.chick-icon { font-size: 1.5rem; }
 
 .hero-title {
   font-family: var(--font-title);

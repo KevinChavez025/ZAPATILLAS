@@ -2,6 +2,9 @@ import { Component, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
+const WA_NUMBER = '51933444277';
+const WA_BASE   = `https://wa.me/${WA_NUMBER}?text=`;
+
 interface TallaRow {
   cms: number;
   talla: number;
@@ -23,6 +26,8 @@ interface Linea {
   styleUrl: './guia-tallas.css',
 })
 export class GuiaTallas implements AfterViewInit {
+
+  readonly waBase = WA_BASE;
 
   ngAfterViewInit(): void {
     const io = new IntersectionObserver((entries) => {
