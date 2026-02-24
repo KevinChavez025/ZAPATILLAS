@@ -96,7 +96,7 @@
         <div class="cat-shimmer"></div>
         <div class="cat-dots-overlay"></div>
         <span class="cat-age">{{ cat.edad }}</span>
-        <span class="cat-icon">{{ cat.icon }}</span>
+        <img [src]="cat.img" [alt]="cat.nombre" class="cat-icon" />
         <div class="cat-bottom">
           <span class="cat-name">{{ cat.nombre }}</span>
           <span class="cat-sub">Tallas {{ cat.tallas }}</span>
@@ -194,7 +194,7 @@
           <p class="dest-etapa">{{ p.etapa }}</p>
           <div class="dest-footer">
             <span class="dest-tallas">Tallas {{ p.tallas }}</span>
-            <a [href]="'https://wa.me/51987654321?text=' + encodeWA(p)"
+            <a [href]="waBase + encodeWA(p)"
               class="dest-wa" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
             </a>
@@ -228,7 +228,7 @@
 
       <div class="ubic-btns">
         <a routerLink="/tiendas" class="btn-tiendas">Ver todas las tiendas →</a>
-        <a href="https://wa.me/51987654321?text=Hola!%20%C2%BFCu%C3%A1l%20es%20la%20tienda%20Piolito%20m%C3%A1s%20cercana%20a%20m%C3%AD%3F"
+        <a [href]="waBase + 'Hola!%20%C2%BFCu%C3%A1l%20es%20la%20tienda%20Piolito%20m%C3%A1s%20cercana%20a%20m%C3%AD%3F'"
           class="btn-wa" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
           Tienda más cercana
