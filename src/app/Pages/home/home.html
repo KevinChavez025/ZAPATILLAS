@@ -44,7 +44,6 @@
     <div class="hero-bg-blob"></div>
     <span class="ghost-text">PIOLITO</span>
 
-    <!-- ✅ IMAGEN HERO - reemplaza el SVG del zapato -->
     <div class="hero-img-wrap">
       <img
         src="/hero.webp"
@@ -212,9 +211,9 @@
     <div class="ubic-left rise">
       <span class="sec-eyebrow" style="color:var(--yellow)">Encuéntranos</span>
       <h2 class="sec-title" style="color:white">
-        Presentes en<br><span class="yl">todo el Perú</span>
+        Presentes en<br><span class="yl">toda Latinoamérica</span>
       </h2>
-      <p class="ubic-sub">Desde Lima hasta Cusco, Trujillo y Arequipa. Visítanos o contáctanos por WhatsApp y te indicamos el punto más cercano.</p>
+      <p class="ubic-sub">Desde Perú hasta Colombia, Chile y México. Visítanos o contáctanos por WhatsApp y te indicamos el punto más cercano.</p>
 
       <div class="ubic-ciudades">
         @for (c of ciudades; track c.nombre) {
@@ -240,52 +239,17 @@
       <div class="mapa-ilustrado">
         <div class="mapa-glow"></div>
 
-        <svg class="peru-map" viewBox="0 0 220 340" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <filter id="pm-pin" x="-80%" y="-80%" width="260%" height="260%">
-              <feGaussianBlur stdDeviation="2.5" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <filter id="pm-lima" x="-100%" y="-100%" width="300%" height="300%">
-              <feGaussianBlur stdDeviation="5" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
+        <!-- 🌍 Globo animado -->
+        <video
+          class="globe-video"
+          src="/globe.webm"
+          autoplay
+          loop
+          muted
+          playsinline
+        ></video>
 
-          <path class="peru-shape" d="M 100.6,29.0 L 106.0,35.0 L 107.0,41.9 L 103.5,41.9 L 101.6,50.9 L 84.7,66.7 L 65.8,73.2 L 60.9,81.1 L 58.9,79.2 L 53.4,97.5 L 48.9,103.0 L 44.5,103.5 L 40.5,96.5 L 31.6,93.1 L 26.1,95.5 L 27.6,91.6 L 25.1,89.1 L 30.6,86.6 L 29.1,79.7 L 20.6,85.1 L 13.2,96.0 L 16.7,103.0 L 15.2,107.0 L 20.1,112.4 L 15.7,119.4 L 31.6,128.3 L 48.9,152.6 L 69.3,194.8 L 69.3,199.8 L 76.7,206.2 L 77.7,212.7 L 91.6,232.5 L 89.2,241.0 L 96.1,252.9 L 109.0,265.3 L 149.2,285.2 L 163.6,294.6 L 166.1,301.1 L 177.5,309.5 L 185.0,311.0 L 189.4,307.0 L 188.4,301.5 L 193.9,298.6 L 191.9,293.6 L 204.3,279.2 L 198.4,276.7 L 195.4,267.8 L 199.4,262.3 L 195.9,255.9 L 203.8,246.0 L 200.3,237.5 L 201.8,225.6 L 206.3,218.6 L 193.4,195.8 L 177.0,196.3 L 178.5,172.0 L 165.6,180.9 L 152.7,180.4 L 151.2,173.5 L 137.8,172.0 L 140.8,164.5 L 124.9,142.7 L 125.9,139.2 L 129.4,139.2 L 128.9,132.3 L 138.3,126.3 L 136.8,119.9 L 142.3,105.0 L 157.2,96.0 L 177.0,90.1 L 186.9,92.6 L 181.0,85.6 L 175.5,84.1 L 185.5,68.7 L 172.5,61.3 L 141.3,64.3 L 137.8,62.3 L 137.3,54.3 L 132.3,52.8 L 130.4,46.4 L 121.9,42.9 L 117.9,35.0 L 107.5,28.0 Z"/>
 
-          <!-- PIURA -->
-          <circle cx="38.0" cy="74.0" r="12" fill="#ECC238" opacity=".09"/>
-          <circle cx="38.0" cy="74.0" r="6.5" fill="#ECC238" opacity=".93" filter="url(#pm-pin)"/>
-          <circle cx="38.0" cy="74.0" r="2.8" fill="white" opacity=".95"/>
-          <text x="48" y="71" font-family="Poppins,sans-serif" font-size="8" font-weight="800" fill="rgba(255,255,255,.92)">Piura</text>
-
-          <!-- TRUJILLO -->
-          <circle cx="32.1" cy="109.3" r="12" fill="#ECC238" opacity=".09"/>
-          <circle cx="32.1" cy="109.3" r="6.5" fill="#ECC238" opacity=".93" filter="url(#pm-pin)"/>
-          <circle cx="32.1" cy="109.3" r="2.8" fill="white" opacity=".95"/>
-          <text x="42" y="106" font-family="Poppins,sans-serif" font-size="8" font-weight="800" fill="rgba(255,255,255,.92)">Trujillo</text>
-
-          <!-- LIMA -->
-          <circle cx="27.0" cy="136.7" r="18" fill="#C22D31" opacity=".07"/>
-          <circle cx="27.0" cy="136.7" r="12" fill="#C22D31" opacity=".14"/>
-          <circle cx="27.0" cy="136.7" r="8"  fill="#C22D31" opacity=".96" filter="url(#pm-lima)"/>
-          <circle cx="27.0" cy="136.7" r="3.5" fill="white" opacity=".98"/>
-          <text x="39" y="133" font-family="Poppins,sans-serif" font-size="9.5" font-weight="900" fill="white">Lima</text>
-          <text x="39" y="143" font-family="Poppins,sans-serif" font-size="5" font-weight="700" fill="rgba(255,255,255,.5)" letter-spacing="0.6">SEDE PRINCIPAL</text>
-
-          <!-- CUSCO -->
-          <circle cx="90.9" cy="156.2" r="12" fill="#089347" opacity=".09"/>
-          <circle cx="90.9" cy="156.2" r="6.5" fill="#089347" opacity=".93" filter="url(#pm-pin)"/>
-          <circle cx="90.9" cy="156.2" r="2.8" fill="white" opacity=".95"/>
-          <text x="73" y="153" font-family="Poppins,sans-serif" font-size="8" font-weight="800" fill="rgba(255,255,255,.92)">Cusco</text>
-
-          <!-- AREQUIPA -->
-          <circle cx="63.0" cy="180.5" r="12" fill="#ECC238" opacity=".09"/>
-          <circle cx="63.0" cy="180.5" r="6.5" fill="#ECC238" opacity=".93" filter="url(#pm-pin)"/>
-          <circle cx="63.0" cy="180.5" r="2.8" fill="white" opacity=".95"/>
-          <text x="72" y="177" font-family="Poppins,sans-serif" font-size="8" font-weight="800" fill="rgba(255,255,255,.92)">Arequipa</text>
-        </svg>
 
         <div class="mapa-leyenda">
           <div class="ley-item"><span class="ley-dot" style="background:var(--red)"></span><span>Sede principal</span></div>

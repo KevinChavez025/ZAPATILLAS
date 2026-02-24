@@ -57,11 +57,12 @@ export class Home implements AfterViewInit {
   ];
 
   readonly ciudades = [
-    { nombre: 'Lima',     tiendas: 4, color: '#C22D31' },
-    { nombre: 'Trujillo', tiendas: 2, color: '#ECC238' },
-    { nombre: 'Cusco',    tiendas: 2, color: '#089347' },
-    { nombre: 'Arequipa', tiendas: 1, color: '#ECC238' },
-    { nombre: 'Piura',    tiendas: 1, color: '#ECC238' },
+    { nombre: 'Perú',      tiendas: 4, color: '#C22D31' },
+    { nombre: 'Colombia',  tiendas: 3, color: '#ECC238' },
+    { nombre: 'Ecuador',   tiendas: 2, color: '#089347' },
+    { nombre: 'Chile',     tiendas: 2, color: '#ECC238' },
+    { nombre: 'Bolivia',   tiendas: 1, color: '#ECC238' },
+    { nombre: 'México',    tiendas: 1, color: '#ECC238' },
   ];
 
   encodeWA(p: { codigo: string; linea: string }): string {
@@ -73,11 +74,31 @@ export class Home implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    // ── Intersection observer para animaciones .rise ──
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
       });
     }, { threshold: 0.1 });
     document.querySelectorAll('.rise').forEach(el => io.observe(el));
+
+    // ── Forzar reproducción del video del globo ──
+    const video = document.querySelector('.globe-video') as HTMLVideoElement;
+    if (video) {
+      video.muted = true;
+      video.loop = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      video.play().catch(() => {
+        // Si falla el autoplay, intentar al primer click/touch
+        const playOnInteraction = () => {
+          video.play();
+          document.removeEventListener('click', playOnInteraction);
+          document.removeEventListener('touchstart', playOnInteraction);
+        };
+        document.addEventListener('click', playOnInteraction);
+        document.addEventListener('touchstart', playOnInteraction);
+      });
+    }
   }
 }
