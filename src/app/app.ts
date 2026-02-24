@@ -11,8 +11,6 @@ import { Footer } from './Components/footer/footer';
     <router-outlet></router-outlet>
     <app-footer></app-footer>
   `,
-  styles: [`
-    :host { display: block; }
-  `]
+  styles: [`:host { display: block; }`]
 })
 export class App {}

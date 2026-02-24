@@ -7,6 +7,15 @@ interface TallaRow {
   talla: number;
 }
 
+interface Linea {
+  nombre: string;
+  rango: string;
+  edad: string;
+  color: string;
+  icon: string;
+  tallas: number[];
+}
+
 @Component({
   selector: 'app-guia-tallas',
   imports: [CommonModule, RouterLink],
@@ -15,7 +24,7 @@ interface TallaRow {
 })
 export class GuiaTallas implements AfterViewInit {
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
@@ -50,49 +59,49 @@ export class GuiaTallas implements AfterViewInit {
     { cms: 24.4, talla: 38 },
   ];
 
-  readonly lineas = [
+  readonly lineas: Linea[] = [
     {
       nombre: 'Baby Piolito',
-      rango: 'Tallas 16 – 19',
-      edad: '0 – 7 meses',
-      color: '#C22D31',
-      icon: '🍼',
+      rango:  'Tallas 16 – 19',
+      edad:   '0 – 7 meses',
+      color:  '#C22D31',
+      icon:   '🍼',
       tallas: [16, 17, 18, 19],
     },
     {
       nombre: 'Tilin',
-      rango: 'Tallas 18 – 21',
-      edad: '8 – 18 meses',
-      color: '#343594',
-      icon: '👣',
+      rango:  'Tallas 18 – 21',
+      edad:   '8 – 18 meses',
+      color:  '#343594',
+      icon:   '👣',
       tallas: [18, 19, 20, 21],
     },
     {
       nombre: 'Piolito',
-      rango: 'Tallas 22 – 38',
-      edad: '18 meses – 9 años',
-      color: '#d4a800',
-      icon: '🏃',
+      rango:  'Tallas 22 – 38',
+      edad:   '18 meses – 9 años',
+      color:  '#d4a800',
+      icon:   '🏃',
       tallas: [22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38],
     },
     {
-      nombre: 'Tobago',
-      rango: 'Tallas 27 – 38',
-      edad: '9 – 14 años',
-      color: '#089347',
-      icon: '⚡',
+      nombre: 'Urbano',
+      rango:  'Tallas 27 – 38',
+      edad:   '9 – 14 años',
+      color:  '#089347',
+      icon:   '⚡',
       tallas: [27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38],
     },
   ];
 
   readonly steps = [
-    { num: '01', title: 'Coloca el pie', desc: 'Pon el pie del niño sobre una hoja de papel en el suelo, con el talón contra la pared.' },
-    { num: '02', title: 'Marca la longitud', desc: 'Traza una línea en el punto más largo del pie (generalmente el dedo gordo o el segundo dedo).' },
+    { num: '01', title: 'Coloca el pie',      desc: 'Pon el pie del niño sobre una hoja de papel en el suelo, con el talón contra la pared.' },
+    { num: '02', title: 'Marca la longitud',   desc: 'Traza una línea en el punto más largo del pie (generalmente el dedo gordo o el segundo dedo).' },
     { num: '03', title: 'Mide en centímetros', desc: 'Con una regla mide desde la pared hasta la marca. Esa es la longitud del pie.' },
-    { num: '04', title: 'Busca tu talla', desc: 'Encuentra el centímetro en la tabla y selecciona la talla correspondiente.' },
+    { num: '04', title: 'Busca tu talla',      desc: 'Encuentra el centímetro en la tabla y selecciona la talla correspondiente.' },
   ];
 
-  isInLinea(talla: number, linea: any): boolean {
+  isInLinea(talla: number, linea: Linea): boolean {
     return linea.tallas.includes(talla);
   }
 }
