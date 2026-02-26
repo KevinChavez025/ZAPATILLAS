@@ -5,8 +5,6 @@
     <h1 class="page-title">Nuestros <span class="yl">Modelos</span></h1>
     <p class="page-sub">Cuero legítimo · Diseño ortopédico · Hecho en Perú</p>
   </div>
-
-  <!-- Buscador -->
   <div class="search-wrap">
     <span class="search-icon">🔍</span>
     <input
@@ -22,25 +20,47 @@
   </div>
 </div>
 
-<!-- ══════════════════════ FILTROS LÍNEA (tabs) ══════════════════════ -->
-<div class="linea-tabs">
-  @for (lin of lineas; track lin.key) {
-    <button
-      class="linea-tab"
-      [class.active]="filtroLinea() === lin.key"
-      [style.--tab-color]="lin.color"
-      (click)="setLinea(lin.key)"
-    >
-      {{ lin.label }}
-    </button>
-  }
-</div>
-
 <!-- ══════════════════════ LAYOUT: sidebar + grid ══════════════════════ -->
 <div class="catalog-layout">
 
   <!-- ── SIDEBAR FILTROS ── -->
   <aside class="sidebar">
+
+    <!-- Línea -->
+    <div class="filter-group">
+      <h3 class="filter-title">Línea</h3>
+      <div class="etapa-list">
+        @for (lin of lineas; track lin.key) {
+          <button
+            class="etapa-btn"
+            [class.active]="filtroLinea() === lin.key"
+            [style.--tab-color]="lin.color"
+            (click)="setLinea(lin.key)"
+          >{{ lin.label }}</button>
+        }
+      </div>
+    </div>
+
+    <!-- Subcategoría (solo si hay línea seleccionada) -->
+    @if (subcategoriasDisponibles().length > 0) {
+      <div class="filter-group">
+        <h3 class="filter-title">Subcategoría</h3>
+        <div class="etapa-list">
+          <button
+            class="etapa-btn"
+            [class.active]="filtroSubcat() === 'todas'"
+            (click)="setSubcat('todas')"
+          >Todas</button>
+          @for (s of subcategoriasDisponibles(); track s.key) {
+            <button
+              class="etapa-btn"
+              [class.active]="filtroSubcat() === s.key"
+              (click)="setSubcat(s.key)"
+            >{{ s.label }}</button>
+          }
+        </div>
+      </div>
+    }
 
     <!-- Género -->
     <div class="filter-group">
@@ -59,28 +79,6 @@
         }
       </div>
     </div>
-
-    <!-- Etapa -->
-    @if (etapasDisponibles().length > 0) {
-      <div class="filter-group">
-        <h3 class="filter-title">Etapa</h3>
-        <div class="etapa-list">
-          <button
-            class="etapa-btn"
-            [class.active]="filtroEtapa() === 'todas'"
-            (click)="setEtapa('todas')"
-          >Todas las etapas</button>
-
-          @for (e of etapasDisponibles(); track e) {
-            <button
-              class="etapa-btn"
-              [class.active]="filtroEtapa() === e"
-              (click)="setEtapa(e)"
-            >{{ e }}</button>
-          }
-        </div>
-      </div>
-    }
 
     <!-- Talla -->
     @if (tallasDisponibles().length > 0) {
@@ -106,7 +104,7 @@
     }
   </aside>
 
-  <!-- ── CONTENT: resultados + grid ── -->
+  <!-- ── CONTENT ── -->
   <div class="catalog-content">
 
     <!-- Toolbar -->
@@ -126,7 +124,7 @@
         <span class="empty-icon">🔍</span>
         <h3>No encontramos productos</h3>
         <p>Prueba con otros filtros o escríbenos para ayudarte.</p>
-        <a [href]="waBase + 'Hola!%20Busco%20un%20modelo%20específico%20y%20no%20lo%20encuentro%20en%20el%20catálogo'"
+        <a [href]="(waBase + 'Hola!%20Busco%20un%20modelo%20específico%20y%20no%20lo%20encuentro%20en%20el%20catálogo') | sanitizeUrl"
            class="btn-wa" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
           Consultar por WhatsApp
@@ -139,10 +137,7 @@
       <div class="products-grid">
         @for (p of productosFiltrados(); track p.id) {
           <div class="prod-card" (click)="abrirModal(p)">
-
-            <!-- Imagen -->
             <div class="prod-img" [style.--line-color]="lineaColor(p.linea)">
-              <!-- Placeholder: reemplazar con <img [src]="p.imagen" [alt]="p.codigo"> cuando tengas imágenes -->
               <div class="prod-img-placeholder">
                 <span class="prod-img-code">{{ p.codigo }}</span>
                 <div class="prod-colors-preview">
@@ -151,49 +146,33 @@
                   }
                 </div>
               </div>
-
-              <!-- Badges -->
               <div class="prod-badges">
                 @if (p.nuevo) {
                   <span class="badge badge-new">Nuevo</span>
                 }
-                @if (p.temporada) {
-                  <span class="badge badge-season">{{ p.temporada }}</span>
-                }
+                <span class="badge badge-season">{{ subcatLabel(p.subcategoria) }}</span>
               </div>
-
-              <!-- Hover overlay -->
               <div class="prod-overlay">
                 <span class="overlay-text">Ver detalle</span>
               </div>
             </div>
-
-            <!-- Info -->
             <div class="prod-info">
               <div class="prod-meta">
-                <span class="prod-linea" [style.color]="lineaColor(p.linea)">
-                  {{ lineaLabel(p.linea) }}
-                </span>
+                <span class="prod-linea" [style.color]="lineaColor(p.linea)">{{ lineaLabel(p.linea) }}</span>
                 <span class="prod-genero">{{ generoLabel(p.genero) }}</span>
               </div>
-
               <h3 class="prod-codigo">{{ p.codigo }}</h3>
-              <p class="prod-etapa">{{ p.etapa }}</p>
-
               <div class="prod-tallas-row">
                 <span class="tallas-label">Tallas:</span>
                 <span class="tallas-val">{{ p.tallas }}</span>
               </div>
-
-              <!-- Colores -->
               <div class="prod-colores">
                 @for (c of p.colores; track c) {
                   <span class="color-dot" [style.background]="c" [title]="c"></span>
                 }
               </div>
-
               <a
-                [href]="waBase + waTexto(p)"
+                [href]="(waBase + waTexto(p)) | sanitizeUrl"
                 class="btn-wa-prod"
                 target="_blank"
                 rel="noopener"
@@ -223,6 +202,7 @@
                 <span class="prod-linea" [style.color]="lineaColor(p.linea)">{{ lineaLabel(p.linea) }}</span>
                 <span class="prod-genero">{{ generoLabel(p.genero) }}</span>
                 @if (p.nuevo) { <span class="badge badge-new">Nuevo</span> }
+                <span class="badge badge-season">{{ subcatLabel(p.subcategoria) }}</span>
               </div>
               <h3 class="prod-codigo">{{ p.codigo }}</h3>
               <p class="prod-desc-short">{{ p.descripcion }}</p>
@@ -236,7 +216,7 @@
               </div>
             </div>
             <a
-              [href]="waBase + waTexto(p)"
+              [href]="(waBase + waTexto(p)) | sanitizeUrl"
               class="btn-wa-list"
               target="_blank"
               rel="noopener"
@@ -257,9 +237,7 @@
   <div class="modal-backdrop" (click)="cerrarModal()">
     <div class="modal" (click)="$event.stopPropagation()">
       <button class="modal-close" (click)="cerrarModal()">✕</button>
-
       <div class="modal-body">
-        <!-- Imagen modal -->
         <div class="modal-img" [style.--line-color]="lineaColor(productoModal()!.linea)">
           <div class="prod-img-placeholder large">
             <span class="prod-img-code">{{ productoModal()!.codigo }}</span>
@@ -269,21 +247,20 @@
               }
             </div>
           </div>
-          @if (productoModal()!.nuevo) {
-            <span class="badge badge-new modal-badge">Nuevo</span>
-          }
+          <div class="prod-badges modal-badges">
+            @if (productoModal()!.nuevo) {
+              <span class="badge badge-new">Nuevo</span>
+            }
+            <span class="badge badge-season">{{ subcatLabel(productoModal()!.subcategoria) }}</span>
+          </div>
         </div>
-
-        <!-- Detalle modal -->
         <div class="modal-detail">
           <span class="prod-linea lg" [style.color]="lineaColor(productoModal()!.linea)">
             {{ lineaLabel(productoModal()!.linea) }}
           </span>
           <h2 class="modal-title">{{ productoModal()!.codigo }}</h2>
           <span class="modal-genero">{{ generoLabel(productoModal()!.genero) }}</span>
-          <p class="modal-etapa">{{ productoModal()!.etapa }}</p>
           <p class="modal-desc">{{ productoModal()!.descripcion }}</p>
-
           <div class="modal-section">
             <span class="modal-label">Tallas disponibles</span>
             <div class="tallas-grid modal-tallas">
@@ -292,7 +269,6 @@
               }
             </div>
           </div>
-
           <div class="modal-section">
             <span class="modal-label">Colores disponibles</span>
             <div class="colores-row">
@@ -301,16 +277,14 @@
               }
             </div>
           </div>
-
           <a
-            [href]="waBase + waTexto(productoModal()!)"
+            [href]="(waBase + waTexto(productoModal()!)) | sanitizeUrl"
             class="btn-wa modal-wa"
             target="_blank" rel="noopener"
           >
             <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
             Cotizar este modelo por WhatsApp
           </a>
-
           <p class="modal-note">
             💬 Nuestro equipo te responderá con disponibilidad, tallas y precios.
           </p>
@@ -321,7 +295,7 @@
 }
 
 <!-- WA flotante -->
-<a [href]="waBase + 'Hola!%20Quiero%20ver%20el%20catálogo%20de%20Piolito'"
+<a [href]="(waBase + 'Hola!%20Quiero%20ver%20el%20catálogo%20de%20Piolito') | sanitizeUrl"
    class="wa-float" target="_blank" rel="noopener" title="Cotizar por WhatsApp">
   <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
 </a>

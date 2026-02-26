@@ -16,7 +16,7 @@
     </p>
 
     <div class="hero-btns">
-      <a [href]="waBase + 'Hola!%20Quiero%20ver%20el%20catálogo%20de%20Piolito'"
+      <a [href]="(waBase + 'Hola!%20Quiero%20ver%20el%20catálogo%20de%20Piolito') | sanitizeUrl"
         class="btn-wa" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
         Cotizar por WhatsApp
@@ -129,7 +129,7 @@
       Calzado con<br><span class="yl">amor peruano</span>
     </h2>
     <p>Cada par de zapatos Piolito está elaborado con cuero legítimo de primera calidad y forro de badana natural. Diseñados con arco semi-ortopédico, contrafuerte y cuello acojinado para el sano desarrollo del pie de tu hijo.</p>
-    <a [href]="waBase + 'Hola!%20Quisiera%20saber%20más%20sobre%20Piolito'"
+    <a [href]="(waBase + 'Hola!%20Quisiera%20saber%20más%20sobre%20Piolito') | sanitizeUrl"
       class="btn-wa" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
       Escríbenos
@@ -170,7 +170,7 @@
 
   <div class="destacados-grid">
     @for (p of destacados; track p.id; let i = $index) {
-      <div class="dest-card rise" [class]="'d' + (i+1)" [style.--lc]="p.color">
+      <div class="dest-card rise" [class]="'d' + (i+1)" [style.--lc]="lineaColor(p.linea)">
         <div class="dest-img">
           <div class="dest-img-inner">
             <span class="dest-img-code">{{ p.codigo }}</span>
@@ -180,20 +180,20 @@
               }
             </div>
           </div>
-          @if (p.badge) {
-            <span class="dest-badge">{{ p.badge }}</span>
+          @if (p.nuevo) {
+            <span class="dest-badge">Nuevo ✨</span>
           }
           <div class="dest-overlay">
             <a routerLink="/productos" class="dest-overlay-btn">Ver en catálogo</a>
           </div>
         </div>
         <div class="dest-info">
-          <span class="dest-linea" [style.color]="p.color">{{ p.linea }}</span>
+          <span class="dest-linea" [style.color]="lineaColor(p.linea)">{{ lineaLabel(p.linea) }}</span>
           <h3 class="dest-codigo">{{ p.codigo }}</h3>
-          <p class="dest-etapa">{{ p.etapa }}</p>
+          <p class="dest-etapa">{{ subcatLabel(p.subcategoria) }}</p>
           <div class="dest-footer">
             <span class="dest-tallas">Tallas {{ p.tallas }}</span>
-            <a [href]="waBase + encodeWA(p)"
+            <a [href]="(waBase + encodeWA(p)) | sanitizeUrl"
               class="dest-wa" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
             </a>
@@ -227,7 +227,7 @@
 
       <div class="ubic-btns">
         <a routerLink="/tiendas" class="btn-tiendas">Ver todas las tiendas →</a>
-        <a [href]="waBase + 'Hola!%20%C2%BFCu%C3%A1l%20es%20la%20tienda%20Piolito%20m%C3%A1s%20cercana%20a%20m%C3%AD%3F'"
+        <a [href]="(waBase + 'Hola!%20%C2%BFCu%C3%A1l%20es%20la%20tienda%20Piolito%20m%C3%A1s%20cercana%20a%20m%C3%AD%3F') | sanitizeUrl"
           class="btn-wa" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
           Tienda más cercana
@@ -273,7 +273,7 @@
     Escríbenos por WhatsApp, con gusto te asesoramos,
     enviamos el catálogo completo y te ayudamos a elegir la talla perfecta.
   </p>
-  <a [href]="waBase + 'Hola!%20Me%20interesa%20el%20calzado%20Piolito'"
+  <a [href]="(waBase + 'Hola!%20Me%20interesa%20el%20calzado%20Piolito') | sanitizeUrl"
     class="wa-big rise" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
     Escribir por WhatsApp
@@ -293,7 +293,7 @@
     <div class="store-left">
       <h3>Tienda<br><em>Principal</em></h3>
       <p>Ven a conocer toda nuestra colección. Nuestro equipo te ayudará a elegir el calzado ideal para el desarrollo saludable del pie de tu hijo.</p>
-      <a [href]="waBase + 'Hola!%20Quiero%20saber%20el%20horario%20de%20atención%20de%20la%20tienda'"
+      <a [href]="(waBase + 'Hola!%20Quiero%20saber%20el%20horario%20de%20atención%20de%20la%20tienda') | sanitizeUrl"
         class="btn-wa" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
         Consultar horario
@@ -315,7 +315,7 @@
 
 
 <!-- ═══════════════════════════════════════════ WA FLOAT ═══ -->
-<a [href]="waBase + 'Hola!%20Me%20interesa%20el%20calzado%20Piolito'"
+<a [href]="(waBase + 'Hola!%20Me%20interesa%20el%20calzado%20Piolito') | sanitizeUrl"
   class="wa-float" target="_blank" rel="noopener" title="Cotizar por WhatsApp">
   <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
 </a>
