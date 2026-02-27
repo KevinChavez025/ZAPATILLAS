@@ -52,8 +52,7 @@ export class Productos implements OnInit {
       { key: 'bp-primavera-verano-ninas',  label: '🌸 Primavera / Verano Niñas'   },
     ],
     'tilin': [
-      { key: 'tl-invierno-ninos',          label: '🍂 Invierno Niños'             },
-      { key: 'tl-invierno-ninas',          label: '🍂 Invierno Niñas'             },
+      { key: 'tl-invierno',          label: '🍂 Invierno'             },
     ],
     'piolito': [
       { key: 'pio-sandalias-verano-nina',  label: '👡 Sandalias Verano Niña'      },
@@ -93,7 +92,7 @@ export class Productos implements OnInit {
     return this.todos.filter(p => {
       if (linea  !== 'todos'  && p.linea        !== linea)                           return false;
       if (subcat !== 'todas'  && p.subcategoria !== subcat)                          return false;
-      if (genero !== 'todos'  && p.genero       !== genero && p.genero !== 'ambos')  return false;
+      if (genero !== 'todos'  && p.genero !== genero) return false;
       if (talla  !== null     && !p.tallasArray.includes(talla))                     return false;
       if (busq && !p.codigo.toLowerCase().includes(busq) &&
                   !p.descripcion.toLowerCase().includes(busq))                       return false;
@@ -110,7 +109,7 @@ export class Productos implements OnInit {
       .filter(p => {
         if (linea  !== 'todos' && p.linea        !== linea)                          return false;
         if (subcat !== 'todas' && p.subcategoria !== subcat)                         return false;
-        if (genero !== 'todos' && p.genero       !== genero && p.genero !== 'ambos') return false;
+        if (genero !== 'todos' && p.genero !== genero) return false;
         return true;
       })
       .forEach(p => p.tallasArray.forEach(t => set.add(t)));
@@ -137,7 +136,7 @@ export class Productos implements OnInit {
   generoLabel(g: string): string {
     if (g === 'nino') return '👦 Niño';
     if (g === 'nina') return '👧 Niña';
-    return '👦👧 Ambos';
+    return g;
   }
 
   subcatLabel(key: string): string {
@@ -153,6 +152,12 @@ export class Productos implements OnInit {
     this.filtroLinea.set(linea);
     this.filtroSubcat.set('todas');
     this.filtroTalla.set(null);
+    if (linea === 'baby-piolito' || linea === 'piolito') {
+      this.filtroGenero.set('todos');
+    }
+    if (linea !== 'piolito') {
+      this.filtroTalla.set(null);
+    }
   }
   setSubcat(s: string): void     { this.filtroSubcat.set(s);  this.filtroTalla.set(null); }
   setGenero(g: string): void     { this.filtroGenero.set(g);  this.filtroTalla.set(null); }

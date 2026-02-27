@@ -89,8 +89,7 @@ export class Home implements AfterViewInit {
     'pio-sandalias-verano-nino': '👟 Sandalias Verano Niño',
     'pio-zapato-cerrado-nina':   '👞 Zapato Cerrado Niña',
     'pio-zapatos-zapatillas':    '👟 Zapatos y Zapatillas',
-    'tl-invierno-ninas':         '🍂 Invierno Niñas',
-    'tl-invierno-ninos':         '🍂 Invierno Niños',
+    'tl-invierno':               '🍂 Invierno',
     'escolar':                   '🎒 Escolar',
   };
   subcatLabel(key: string): string { return this.subcatLabelMap[key] ?? key; }
