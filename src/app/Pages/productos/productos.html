@@ -140,7 +140,6 @@
         @for (p of productosFiltrados(); track p.id) {
           <div class="prod-card" (click)="abrirModal(p)">
             <div class="prod-img" [style.--line-color]="lineaColor(p.linea)">
-              <img [src]="p.imagen" [alt]="p.codigo" class="prod-image" />
               <div class="prod-img-placeholder">
                 <span class="prod-img-code">{{ p.codigo }}</span>
                 <div class="prod-colors-preview">

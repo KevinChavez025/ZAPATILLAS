@@ -6,19 +6,20 @@
     <img src="MedidaPie.webp" alt="Cómo medir el pie" class="foot-img"/>
   </div>
 
-  <!-- COLUMNA CENTRAL: texto -->
+  <!-- COLUMNA DERECHA: texto + patito juntos -->
   <div class="hero-content rise">
-    <h1>Guía de <span class="yl">Tallas:</span><br>Cómo Medir</h1>
-    <p class="hero-sub">
-      Coloca el talón contra la pared, marca el dedo más largo con un lápiz
-      y mide la distancia en cm con una regla para encontrar la talla perfecta.
-    </p>
-    <a routerLink="/productos" class="btn-primary">Ver Tabla de Tallas →</a>
-  </div>
-
-  <!-- COLUMNA DERECHA: patito -->
-  <div class="hero-duck">
-    <img src="izquierdapatito.webp" alt="Patito Piolito" class="duck-img"/>
+    <div class="hero-text">
+      <h1>Guía de <span class="yl">Tallas:</span><br>Cómo Medir</h1>
+      <p class="hero-sub">
+        Coloca el talón contra la pared, marca el dedo más largo con un lápiz
+        y mide la distancia en cm con una regla para encontrar la talla perfecta.
+      </p>
+      <a (click)="scrollToTabla($event)" href="#tabla" class="btn-primary">Ver Tabla de Tallas →</a>
+    </div>
+    <div class="hero-duck">
+      <img src="izquierdapatito.webp" alt="Patito Piolito" class="duck-img"/>
+      <span class="duck-label">📏 ¡Mídeme el pie!</span>
+    </div>
   </div>
 
 </section>
@@ -43,7 +44,7 @@
 
 
 <!-- ── TABLA DE TALLAS ── -->
-<section class="table-section">
+<section class="table-section" id="tabla">
   <div class="section-header rise">
     <h2>Tabla de Medidas</h2>
     <p>Encuentra tu talla según la longitud del pie en centímetros</p>

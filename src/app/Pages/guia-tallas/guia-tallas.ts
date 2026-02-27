@@ -2,7 +2,7 @@ import { Component, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
-const WA_NUMBER = '51933444277';
+const WA_NUMBER = '51977938796';
 const WA_BASE   = `https://wa.me/${WA_NUMBER}?text=`;
 
 interface TallaRow {
@@ -105,6 +105,12 @@ export class GuiaTallas implements AfterViewInit {
     { num: '03', title: 'Mide en centímetros', desc: 'Con una regla mide desde la pared hasta la marca. Esa es la longitud del pie.' },
     { num: '04', title: 'Busca tu talla',      desc: 'Encuentra el centímetro en la tabla y selecciona la talla correspondiente.' },
   ];
+
+  scrollToTabla(e: Event): void {
+    e.preventDefault();
+    const el = document.getElementById('tabla');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
 
   isInLinea(talla: number, linea: Linea): boolean {
     return linea.tallas.includes(talla);
