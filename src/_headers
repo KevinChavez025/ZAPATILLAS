@@ -1,0 +1,25 @@
+/*
+  # Evita que la página sea embebida en iframes (clickjacking)
+  X-Frame-Options: DENY
+
+  # Evita que el navegador adivine el tipo de contenido
+  X-Content-Type-Options: nosniff
+
+  # Controla qué información se envía en el header Referer
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Restringe permisos de APIs del navegador
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=()
+
+  # Política de seguridad de contenido
+  # - default-src 'self': solo recursos del propio dominio por defecto
+  # - script-src 'self': solo scripts del propio dominio
+  # - style-src 'self' 'unsafe-inline': estilos propios + inline (necesario para Angular)
+  # - img-src 'self' data: blob:: imágenes propias, data URIs y blobs
+  # - font-src 'self': fuentes del propio dominio
+  # - connect-src 'self' https://wa.me: fetch/XHR solo al origen y a WhatsApp
+  # - media-src 'self': video/audio del propio dominio
+  # - frame-src 'none': no se permiten iframes
+  # - object-src 'none': no se permiten plugins (Flash, etc.)
+  # - base-uri 'self': protege contra ataques de inyección de base href
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://wa.me; media-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'

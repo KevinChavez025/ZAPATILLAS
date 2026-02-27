@@ -2,7 +2,7 @@ import { Component, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
-const WA_NUMBER = '51977938796';
+const WA_NUMBER = '51933444277';
 const WA_BASE   = `https://wa.me/${WA_NUMBER}?text=`;
 
 interface TallaRow {
