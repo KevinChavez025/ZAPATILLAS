@@ -53,8 +53,18 @@
   <div class="mapa-panel">
     @if (tiendaActiva()) {
       <div class="mapa-wrap">
-        <iframe [src]="iframeUrl(tiendaActiva()!) | sanitizeUrl"
-          width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"></iframe>
+        <!-- Imagen estática de Geoapify — clickeable para abrir Google Maps -->
+        <a [href]="mapUrl(tiendaActiva()!)" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;position:relative;">
+          <img
+            [src]="mapaImagenUrl(tiendaActiva()!)"
+            [alt]="'Mapa de ' + tiendaActiva()!.nombre"
+            style="object-fit:cover;width:100%;height:100%;display:block;"
+          />
+          <div style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.65);color:#fff;padding:8px 18px;border-radius:20px;font-size:13px;white-space:nowrap;pointer-events:none;">
+            🗺️ Clic para abrir en Google Maps
+          </div>
+        </a>
+
         <div class="mapa-overlay-card">
           <div class="moc-left">
             <span class="moc-dept">{{ tiendaActiva()!.departamento }}</span>

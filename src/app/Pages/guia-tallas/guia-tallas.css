@@ -15,81 +15,95 @@
 /* ── HERO ── */
 .hero {
   background: var(--navy);
-  min-height: 62vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr 0.8fr;
+  min-height: 72vh;
+  display: flex;
   align-items: stretch;
   overflow: hidden;
   position: relative;
-  padding: 0 64px 0 0;
-  gap: 40px;
 }
 
+/* Barra de colores inferior */
 .hero::before {
   content: '';
   position: absolute;
-  width: 480px; height: 480px;
-  background: radial-gradient(circle, rgba(236,194,56,.07) 0%, transparent 65%);
-  top: -80px; right: 80px;
-  border-radius: 50%;
-  pointer-events: none;
+  bottom: 0; left: 0; right: 0;
+  height: 7px;
+  background: linear-gradient(90deg,
+    var(--red) 25%,
+    var(--navy-light, #4a4bcc) 25% 50%,
+    var(--yellow) 50% 75%,
+    var(--green) 75%);
+  z-index: 10;
 }
 .hero::after {
   content: '';
   position: absolute;
-  width: 280px; height: 280px;
-  background: radial-gradient(circle, rgba(194,45,49,.06) 0%, transparent 65%);
-  bottom: -60px; left: 40px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(236,194,56,.05) 0%, transparent 65%);
+  top: -80px; right: 100px;
   border-radius: 50%;
   pointer-events: none;
 }
 
-/* ── Ilustración del pie ── */
+/* ── Ilustración del pie (columna izquierda) ── */
 .hero-illustration {
+  flex: 0 0 38%;
   display: flex;
   align-items: flex-end;
-  justify-content: flex-start;
-  height: 100%;
-  min-height: 62vh;
+  justify-content: center;
+  min-height: 72vh;
   position: relative;
   z-index: 2;
-  padding-left: 32px;
+  padding: 0 0 7px 16px;
 }
 .foot-img {
   width: 100%;
-  max-width: 480px;
   height: 100%;
-  min-height: 62vh;
+  min-height: 72vh;
   object-fit: contain;
-  object-position: bottom left;
+  object-position: center center;
   mix-blend-mode: screen;
-  filter: drop-shadow(0 4px 16px rgba(0,0,0,.15));
+  filter: drop-shadow(0 4px 20px rgba(0,0,0,.2)) brightness(1.1);
 }
 
-/* ── Texto central ── */
+/* ── Columna derecha: texto + patito ── */
 .hero-content {
+  flex: 1;
   position: relative;
   z-index: 2;
-  padding: 48px 0;
-  align-self: center;
+  padding: 0 0 7px 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+}
+
+.hero-text {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 420px;
 }
 
 .hero h1 {
   font-family: var(--font-title);
-  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
-  font-weight: 800;
-  line-height: 1.08;
+  font-size: clamp(2.6rem, 3.8vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.05;
   color: var(--white);
   margin-bottom: 20px;
+  white-space: nowrap;
 }
 .hero h1 .yl { color: var(--yellow); }
 
 .hero-sub {
-  color: rgba(255,255,255,.7);
-  font-size: .95rem;
-  line-height: 1.75;
+  color: rgba(255,255,255,.75);
+  font-size: .97rem;
+  line-height: 1.8;
   max-width: 340px;
   margin-bottom: 32px;
+  font-weight: 500;
 }
 
 .btn-primary {
@@ -98,23 +112,30 @@
   gap: 8px;
   background: var(--red);
   color: var(--white);
-  padding: 14px 30px;
+  padding: 15px 34px;
   border-radius: 50px;
-  font-size: .88rem;
-  font-weight: 700;
+  font-size: .92rem;
+  font-weight: 800;
   text-decoration: none;
-  transition: transform .2s, filter .2s;
-  box-shadow: 0 6px 20px rgba(194,45,49,.4);
+  transition: transform .2s, filter .2s, box-shadow .2s;
+  box-shadow: 0 8px 28px rgba(194,45,49,.45);
+  width: fit-content;
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.1);
+  box-shadow: 0 14px 36px rgba(194,45,49,.55);
 }
 
-/* ── Patito ── */
+/* ── Patito pegado al texto ── */
 .hero-duck {
   flex: 0 0 auto;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  height: 100%;
-  min-height: 62vh;
+  align-self: center;
+  margin-left: 240px;
   position: relative;
 }
 
@@ -131,16 +152,15 @@
   margin-top: 8px;
 }
 .duck-img {
-  width: 300px;
-  max-height: 90%;
+  width: 280px;
+  max-width: 280px;
   object-fit: contain;
-  object-position: bottom;
-  filter: drop-shadow(0 8px 24px rgba(0,0,0,.2)) brightness(1.05);
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,.25)) brightness(1.05);
   animation: duckFloat 3.5s ease-in-out infinite;
 }
 @keyframes duckFloat {
   0%, 100% { transform: translateY(0) rotate(-1deg); }
-  50%       { transform: translateY(-12px) rotate(1deg); }
+  50%       { transform: translateY(-16px) rotate(1.5deg); }
 }
 
 /* ── PASOS ── */
@@ -340,9 +360,9 @@ tbody td.col-cms {
   margin-top: 4px;
 }
 .legend-info { display: flex; flex-direction: column; gap: 1px; }
-.legend-name  { font-weight: 700; font-size: .84rem; color: var(--text); }
-.legend-range { font-size: .74rem; font-weight: 600; color: var(--navy); }
-.legend-age   { font-size: .7rem; color: #999; }
+.legend-name  { font-weight: 800; font-size: .92rem; color: var(--text); }
+.legend-range { font-size: .82rem; font-weight: 700; color: var(--navy); }
+.legend-age   { font-size: .76rem; color: #888; }
 
 .tip-box {
   background: var(--navy);
@@ -441,18 +461,32 @@ tbody td.col-cms {
 }
 @media (max-width: 768px) {
   .hero {
-    grid-template-columns: 1fr;
-    padding: 48px 24px;
-    text-align: center;
+    flex-direction: column;
+    min-height: auto;
+    padding: 0;
   }
   .hero-illustration { display: none; }
   .hero-duck         { display: none; }
+  .hero-content {
+    padding: 52px 28px;
+    flex-direction: column;
+    text-align: left;
+    align-items: flex-start;
+  }
+  .hero-text {
+    max-width: 100%;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .hero h1 { font-size: 2.4rem; white-space: normal; }
+  .hero-sub { max-width: 100%; text-align: left; }
+  .btn-primary { align-self: flex-start; }
   .steps-section,
   .table-section,
   .cta-section { padding: 44px 24px; }
   .steps-grid  { grid-template-columns: 1fr 1fr; gap: 12px; }
   .cta-inner   { flex-direction: column; gap: 20px; text-align: center; }
-  .cta-duck    { width: 110px; }
+  .cta-duck    { display: none; }
   .cta-btns    { justify-content: center; }
 }
 @media (max-width: 480px) {
