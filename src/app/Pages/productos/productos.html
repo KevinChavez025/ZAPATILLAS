@@ -62,26 +62,28 @@
       </div>
     }
 
-    <!-- Género -->
-    <div class="filter-group">
-      <h3 class="filter-title">Género</h3>
-      <div class="genero-btns">
-        @for (g of [
-          {key:'todos', label:'Todos'},
-          {key:'nino',  label:'👦 Niño'},
-          {key:'nina',  label:'👧 Niña'}
-        ]; track g.key) {
-          <button
-            class="genero-btn"
-            [class.active]="filtroGenero() === g.key"
-            (click)="setGenero(g.key)"
-          >{{ g.label }}</button>
-        }
+    <!-- Género (solo para Tilin, Escolar y Todos) -->
+    @if (filtroLinea() === 'todos' || filtroLinea() === 'tilin' || filtroLinea() === 'escolar') {
+      <div class="filter-group">
+        <h3 class="filter-title">Género</h3>
+        <div class="genero-btns">
+          @for (g of [
+            {key:'todos', label:'Todos'},
+            {key:'nino',  label:'👦 Niño'},
+            {key:'nina',  label:'👧 Niña'}
+          ]; track g.key) {
+            <button
+              class="genero-btn"
+              [class.active]="filtroGenero() === g.key"
+              (click)="setGenero(g.key)"
+            >{{ g.label }}</button>
+          }
+        </div>
       </div>
-    </div>
+    }
 
-    <!-- Talla -->
-    @if (tallasDisponibles().length > 0) {
+    <!-- Talla (solo para Piolito) -->
+    @if (filtroLinea() === 'piolito' && tallasDisponibles().length > 0) {
       <div class="filter-group">
         <h3 class="filter-title">Talla</h3>
         <div class="tallas-grid">
