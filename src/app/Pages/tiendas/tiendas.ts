@@ -35,33 +35,16 @@ export class Tiendas {
   readonly waIcon = WA_ICON;
 
   readonly tiendas: Tienda[] = [
-    { id: 1,  nombre: 'Piolito — Surquillo',         ciudad: 'Lima',     departamento: 'Lima',        direccion: 'Jr. Domingo Elias 752, Surquillo',       telefono: '+511-445-3495', horario: 'Lun–Sáb 9am–6pm', tipo: 'propia',       lat: -12.1119, lng: -77.0282, destacada: true },
-    { id: 2,  nombre: 'Piolito — SJL',               ciudad: 'Lima',     departamento: 'Lima',        direccion: 'Av. Gran Chimú 410, SJL',                telefono: '+511-445-3495', horario: 'Lun–Sáb 9am–6pm', tipo: 'propia',       lat: -11.9833, lng: -77.0100 },
-    { id: 3,  nombre: 'Distribuidora Lima Centro',    ciudad: 'Lima',     departamento: 'Lima',        direccion: 'Jr. Gamarra 880, La Victoria',                                      horario: 'Lun–Sáb 9am–7pm', tipo: 'distribuidor', lat: -12.0653, lng: -77.0185 },
-    { id: 4,  nombre: 'Distribuidora Lima Norte',     ciudad: 'Lima',     departamento: 'Lima',        direccion: 'Av. Túpac Amaru 1200, Independencia',                               horario: 'Lun–Sáb 9am–6pm', tipo: 'distribuidor', lat: -11.9900, lng: -77.0550 },
-    { id: 5,  nombre: 'Piolito — Trujillo',           ciudad: 'Trujillo', departamento: 'La Libertad', direccion: 'Jr. Pizarro 543, Centro de Trujillo',   telefono: '+51-44-123456', horario: 'Lun–Sáb 9am–7pm', tipo: 'propia',       lat: -8.1116,  lng: -79.0287 },
-    { id: 6,  nombre: 'Distribuidora Trujillo Norte', ciudad: 'Trujillo', departamento: 'La Libertad', direccion: 'Av. España 1500, Trujillo',                                         horario: 'Lun–Sáb 9am–6pm', tipo: 'distribuidor', lat: -8.0952,  lng: -79.0238 },
-    { id: 7,  nombre: 'Piolito — Cusco',              ciudad: 'Cusco',    departamento: 'Cusco',       direccion: 'Av. El Sol 320, Cusco',                 telefono: '+51-84-234567', horario: 'Lun–Sáb 9am–6pm', tipo: 'propia',       lat: -13.5319, lng: -71.9675 },
-    { id: 8,  nombre: 'Distribuidora Cusco Centro',   ciudad: 'Cusco',    departamento: 'Cusco',       direccion: 'Calle Heladeros 156, Cusco',                                        horario: 'Lun–Dom 9am–7pm', tipo: 'distribuidor', lat: -13.5220, lng: -71.9780 },
-    { id: 9,  nombre: 'Distribuidora Arequipa',       ciudad: 'Arequipa', departamento: 'Arequipa',    direccion: 'Calle Mercaderes 234, Arequipa',                                    horario: 'Lun–Sáb 9am–6pm', tipo: 'distribuidor', lat: -16.3989, lng: -71.5369 },
-    { id: 10, nombre: 'Distribuidora Piura',          ciudad: 'Piura',    departamento: 'Piura',       direccion: 'Av. Grau 780, Piura',                                               horario: 'Lun–Sáb 9am–6pm', tipo: 'distribuidor', lat: -5.1945,  lng: -80.6328 },
+    { id: 1, nombre: 'Piolito — Fábrica & Showroom', ciudad: 'Lima', departamento: 'Lima', direccion: 'Jr. Domingo Elias 752, Surquillo', telefono: '+51 977 938 796', horario: 'Lun–Sáb 9am–6pm', tipo: 'propia', lat: -12.1127569, lng: -77.0238865, destacada: true },
   ];
 
-  readonly departamentos = ['Todos', ...Array.from(new Set(this.tiendas.map(t => t.departamento)))];
+  readonly departamentos = ['Todos'];
 
   filtroDept   = signal<string>('Todos');
   filtroTipo   = signal<string>('todos');
   tiendaActiva = signal<Tienda | null>(this.tiendas[0]);
 
-  readonly tiendaFiltradas = computed(() => {
-    const dept = this.filtroDept();
-    const tipo = this.filtroTipo();
-    return this.tiendas.filter(t => {
-      if (dept !== 'Todos' && t.departamento !== dept) return false;
-      if (tipo !== 'todos' && t.tipo          !== tipo) return false;
-      return true;
-    });
-  });
+  readonly tiendaFiltradas = computed(() => this.tiendas);
 
   seleccionar(t: Tienda): void { this.tiendaActiva.set(t); }
 

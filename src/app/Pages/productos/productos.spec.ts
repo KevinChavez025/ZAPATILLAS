@@ -27,8 +27,14 @@ describe('Productos', () => {
   });
 
   it('should filter by linea', () => {
-    component.setLinea('urbano');
-    expect(component.productosFiltrados().every(p => p.linea === 'urbano')).toBe(true);
+    component.setLinea('escolar');
+    expect(component.productosFiltrados().every(p => p.linea === 'escolar')).toBe(true);
+  });
+
+  it('should filter by subcategoria', () => {
+    component.setLinea('baby-piolito');
+    component.setSubcat('bp-otono-invierno-ninos');
+    expect(component.productosFiltrados().every(p => p.subcategoria === 'bp-otono-invierno-ninos')).toBe(true);
   });
 
   it('should clear filters', () => {
