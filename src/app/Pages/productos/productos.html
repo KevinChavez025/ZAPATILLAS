@@ -140,6 +140,7 @@
         @for (p of productosFiltrados(); track p.id) {
           <div class="prod-card" (click)="abrirModal(p)">
             <div class="prod-img" [style.--line-color]="lineaColor(p.linea)">
+              <img [src]="p.imagen" [alt]="p.codigo" class="prod-image" />
               <div class="prod-img-placeholder">
                 <span class="prod-img-code">{{ p.codigo }}</span>
                 <div class="prod-colors-preview">
@@ -195,6 +196,7 @@
         @for (p of productosFiltrados(); track p.id) {
           <div class="list-card" (click)="abrirModal(p)">
             <div class="list-img" [style.--line-color]="lineaColor(p.linea)">
+              <img [src]="p.imagen" [alt]="p.codigo" class="prod-image" />
               <div class="prod-img-placeholder small">
                 <span class="prod-img-code">{{ p.codigo }}</span>
               </div>
@@ -241,6 +243,7 @@
       <button class="modal-close" (click)="cerrarModal()">✕</button>
       <div class="modal-body">
         <div class="modal-img" [style.--line-color]="lineaColor(productoModal()!.linea)">
+          <img [src]="productoModal()!.imagen" [alt]="productoModal()!.codigo" class="prod-image" />
           <div class="prod-img-placeholder large">
             <span class="prod-img-code">{{ productoModal()!.codigo }}</span>
             <div class="prod-colors-preview">
