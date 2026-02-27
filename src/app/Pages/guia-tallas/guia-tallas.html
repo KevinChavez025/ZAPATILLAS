@@ -1,21 +1,29 @@
 <!-- ── HERO ── -->
 <section class="hero">
+
+  <!-- COLUMNA IZQUIERDA: ilustración del pie -->
+  <div class="hero-illustration">
+    <img src="MedidaPie.webp" alt="Cómo medir el pie" class="foot-img"/>
+  </div>
+
+  <!-- COLUMNA DERECHA: texto + patito juntos -->
   <div class="hero-content rise">
-    <span class="eyebrow">🦶 Calzado Infantil Piolito</span>
-    <h1>Guía de <span class="yl">Tallas</span></h1>
-    <p class="hero-sub">Mide correctamente el pie de tu pequeño y encuentra la talla perfecta. Un calzado bien ajustado es clave para el sano desarrollo del pie.</p>
-    <div class="hero-stripe">
-      <span class="s-r"></span><span class="s-b"></span><span class="s-y"></span><span class="s-g"></span>
+    <div class="hero-text">
+      <h1>Guía de <span class="yl">Tallas:</span><br>Cómo Medir</h1>
+      <p class="hero-sub">
+        Coloca el talón contra la pared, marca el dedo más largo con un lápiz
+        y mide la distancia en cm con una regla para encontrar la talla perfecta.
+      </p>
+      <a (click)="scrollToTabla($event)" href="#tabla" class="btn-primary">Ver Tabla de Tallas →</a>
     </div>
-    <a routerLink="/productos" class="btn-primary">Ver Productos →</a>
-  </div>
-  <div class="hero-duck rise d2">
-    <img src="izquierdapatito.webp" alt="Patito Piolito" class="duck-img"/>
-    <div class="duck-bubble">
-      ¡Mídeme<br>el pie! 🐾
+    <div class="hero-duck">
+      <img src="izquierdapatito.webp" alt="Patito Piolito" class="duck-img"/>
+      <span class="duck-label">📏 ¡Mídeme el pie!</span>
     </div>
   </div>
+
 </section>
+
 
 <!-- ── PASOS ── -->
 <section class="steps-section">
@@ -34,8 +42,9 @@
   </div>
 </section>
 
+
 <!-- ── TABLA DE TALLAS ── -->
-<section class="table-section">
+<section class="table-section" id="tabla">
   <div class="section-header rise">
     <h2>Tabla de Medidas</h2>
     <p>Encuentra tu talla según la longitud del pie en centímetros</p>
@@ -62,7 +71,10 @@
                 <div class="linea-tags">
                   @for (linea of lineas; track linea.nombre) {
                     @if (isInLinea(row.talla, linea)) {
-                      <span class="linea-tag" [style.background]="linea.color + '22'" [style.color]="linea.color" [style.borderColor]="linea.color + '44'">
+                      <span class="linea-tag"
+                        [style.background]="linea.color + '22'"
+                        [style.color]="linea.color"
+                        [style.borderColor]="linea.color + '44'">
                         {{ linea.nombre }}
                       </span>
                     }
@@ -96,6 +108,7 @@
   </div>
 </section>
 
+
 <!-- ── CTA ── -->
 <section class="cta-section">
   <div class="cta-inner rise">
@@ -105,8 +118,11 @@
       <p>Explora nuestro catálogo completo de calzado infantil de cuero legítimo.</p>
       <div class="cta-btns">
         <a routerLink="/productos" class="btn-primary">Ver Catálogo</a>
-        <a href="https://wa.me/51933444277?text=Hola!%20Quiero%20ayuda%20con%20la%20talla%20de%20mi%20niño" target="_blank" class="btn-wa">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.125.558 4.126 1.535 5.858L.057 23.927l6.235-1.635A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.017-1.376l-.36-.213-3.7.97.988-3.608-.235-.371A9.818 9.818 0 1112 21.818z"/></svg>
+        <a [href]="waBase + 'Hola!%20Quiero%20ayuda%20con%20la%20talla%20de%20mi%20ni%C3%B1o'"
+          target="_blank" rel="noopener" class="btn-wa">
+          <svg viewBox="0 0 24 24" fill="white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.125.558 4.126 1.535 5.858L.057 23.927l6.235-1.635A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.017-1.376l-.36-.213-3.7.97.988-3.608-.235-.371A9.818 9.818 0 1112 21.818z"/>
+          </svg>
           Consultar por WhatsApp
         </a>
       </div>
