@@ -1,25 +1,23 @@
 <!-- ═══════════════════════════════════════════ HERO ═══ -->
 <section class="hero">
   <div class="hero-left">
-    <span class="eyebrow">
-      <span class="chick-icon">🐣</span> Calzado Infantil Peruano
-    </span>
+    <span class="eyebrow eyebrow-lg">Fábrica Mayorista Peruana</span>
 
     <h1 class="hero-title">
-      Primeros pasos,<br>
-      <span class="yl">para siempre</span>
+      Tu marca,<br>
+      <span class="yl">nuestra fábrica</span>
     </h1>
 
     <p class="hero-sub">
-      Cuero legítimo, diseño ortopédico y amor peruano —
-      desde los primeros días hasta los 14 años.
+      Fabricamos calzado infantil al por mayor y con tu diseño propio —
+      desde 6 pares, entrega en 2–3 semanas.
     </p>
 
     <div class="hero-btns">
-      <a [href]="waBase + 'Hola!%20Quiero%20ver%20el%20catálogo%20de%20Piolito'"
+      <a [href]="(waBase + 'Hola!%20Quiero%20solicitar%20una%20cotización%20mayorista%20de%20Piolito') | sanitizeUrl"
         class="btn-wa" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
-        Cotizar por WhatsApp
+        Solicitar cotización
       </a>
       <a href="#colecciones" class="btn-ghost">Ver Colecciones</a>
     </div>
@@ -124,18 +122,20 @@
     />
   </div>
   <div class="about-text rise">
-    <span class="sec-eyebrow" style="color: var(--yellow)">Nuestra Esencia</span>
+    <span class="sec-eyebrow" style="color: var(--yellow)">Fabricación Propia</span>
     <h2 class="sec-title" style="color: white">
-      Calzado con<br><span class="yl">amor peruano</span>
+      Fabricamos con<br><span class="yl">tu diseño</span>
     </h2>
-    <p>Cada par de zapatos Piolito está elaborado con cuero legítimo de primera calidad y forro de badana natural. Diseñados con arco semi-ortopédico, contrafuerte y cuello acojinado para el sano desarrollo del pie de tu hijo.</p>
-    <a [href]="waBase + 'Hola!%20Quisiera%20saber%20más%20sobre%20Piolito'"
+    <p>Somos una fábrica peruana con más de 20 años de experiencia. Distribuimos nuestros modelos al por mayor desde 2 pares, y también fabricamos con tu propio diseño desde 6 pares. Entrega en 2 a 3 semanas. Enviamos a toda Latinoamérica y EE.UU.</p>
+    <a [href]="(waBase + 'Hola!%20Quisiera%20saber%20más%20sobre%20Piolito') | sanitizeUrl"
       class="btn-wa" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
       Escríbenos
     </a>
   </div>
 </div>
+
+
 
 
 <!-- ═══════════════════════════════════════════ FEATURES ═══ -->
@@ -170,7 +170,7 @@
 
   <div class="destacados-grid">
     @for (p of destacados; track p.id; let i = $index) {
-      <div class="dest-card rise" [class]="'d' + (i+1)" [style.--lc]="p.color">
+      <div class="dest-card rise" [class]="'d' + (i+1)" [style.--lc]="lineaColor(p.linea)">
         <div class="dest-img">
           <div class="dest-img-inner">
             <span class="dest-img-code">{{ p.codigo }}</span>
@@ -180,20 +180,20 @@
               }
             </div>
           </div>
-          @if (p.badge) {
-            <span class="dest-badge">{{ p.badge }}</span>
+          @if (p.nuevo) {
+            <span class="dest-badge">Nuevo ✨</span>
           }
           <div class="dest-overlay">
             <a routerLink="/productos" class="dest-overlay-btn">Ver en catálogo</a>
           </div>
         </div>
         <div class="dest-info">
-          <span class="dest-linea" [style.color]="p.color">{{ p.linea }}</span>
+          <span class="dest-linea" [style.color]="lineaColor(p.linea)">{{ lineaLabel(p.linea) }}</span>
           <h3 class="dest-codigo">{{ p.codigo }}</h3>
-          <p class="dest-etapa">{{ p.etapa }}</p>
+          <p class="dest-etapa">{{ subcatLabel(p.subcategoria) }}</p>
           <div class="dest-footer">
             <span class="dest-tallas">Tallas {{ p.tallas }}</span>
-            <a [href]="waBase + encodeWA(p)"
+            <a [href]="(waBase + encodeWA(p)) | sanitizeUrl"
               class="dest-wa" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
             </a>
@@ -209,33 +209,32 @@
 <section class="ubicacion-section" id="ubicaciones">
   <div class="ubic-inner">
     <div class="ubic-left rise">
-      <span class="sec-eyebrow" style="color:var(--yellow)">Encuéntranos</span>
+      <span class="sec-eyebrow no-dash eyebrow-xl" style="color:var(--yellow)">Cobertura internacional</span>
       <h2 class="sec-title" style="color:white">
-        Presentes en<br><span class="yl">toda Latinoamérica</span>
+        Llegamos a<br><span class="yl">toda Latinoamérica</span>
       </h2>
-      <p class="ubic-sub">Desde Perú hasta Colombia, Chile y México. Visítanos o contáctanos por WhatsApp y te indicamos el punto más cercano.</p>
+      <p class="ubic-sub">Desde nuestra fábrica en Lima enviamos pedidos mayoristas a toda Latinoamérica y EE.UU. Cotiza por WhatsApp y te respondemos en minutos.</p>
 
       <div class="ubic-ciudades">
         @for (c of ciudades; track c.nombre) {
           <div class="ciudad-pill">
             <span class="ciudad-dot" [style.background]="c.color"></span>
             <span class="ciudad-nombre">{{ c.nombre }}</span>
-            <span class="ciudad-count">{{ c.tiendas }} tienda{{ c.tiendas !== 1 ? 's' : '' }}</span>
           </div>
         }
       </div>
 
       <div class="ubic-btns">
-        <a routerLink="/tiendas" class="btn-tiendas">Ver todas las tiendas →</a>
-        <a [href]="waBase + 'Hola!%20%C2%BFCu%C3%A1l%20es%20la%20tienda%20Piolito%20m%C3%A1s%20cercana%20a%20m%C3%AD%3F'"
+        <a routerLink="/tiendas" class="btn-tiendas">Ver nuestra fábrica →</a>
+        <a [href]="(waBase + 'Hola!%20Quiero%20hacer%20un%20pedido%20mayorista%20de%20Piolito') | sanitizeUrl"
           class="btn-wa" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
-          Tienda más cercana
+          Hacer un pedido
         </a>
       </div>
     </div>
 
-    <div class="ubic-right rise d2">
+        <div class="ubic-right rise d2">
       <div class="mapa-ilustrado">
         <div class="mapa-glow"></div>
 
@@ -249,12 +248,10 @@
           playsinline
         ></video>
 
-
-
         <div class="mapa-leyenda">
           <div class="ley-item"><span class="ley-dot" style="background:var(--red)"></span><span>Sede principal</span></div>
-          <div class="ley-item"><span class="ley-dot" style="background:var(--yellow)"></span><span>Distribuidor</span></div>
-          <div class="ley-item"><span class="ley-dot" style="background:var(--green)"></span><span>Tienda propia</span></div>
+          <div class="ley-item"><span class="ley-dot" style="background:var(--yellow)"></span><span>Latinoamérica</span></div>
+          <div class="ley-item"><span class="ley-dot" style="background:var(--green)"></span><span>EE.UU.</span></div>
         </div>
       </div>
     </div>
@@ -265,38 +262,37 @@
 <!-- ═══════════════════════════════════════════ CONTACT ═══ -->
 <section class="contact-section" id="contacto">
   <div class="contact-glow"></div>
-  <span class="sec-eyebrow" style="color:var(--yellow);display:block;text-align:center">Contáctanos</span>
+  <span class="sec-eyebrow no-dash" style="color:var(--yellow);display:block;text-align:center">Contáctanos</span>
   <h2 class="sec-title rise" style="color:white;text-align:center">
-    ¿Listo para elegir<br>el calzado ideal?
+    ¿Listo para hacer<br>tu pedido mayorista?
   </h2>
   <p class="contact-sub rise">
-    Escríbenos por WhatsApp, con gusto te asesoramos,
-    enviamos el catálogo completo y te ayudamos a elegir la talla perfecta.
+    Escríbenos por WhatsApp, te enviamos el catálogo completo, cotizamos tu pedido y coordinamos el envío a tu país.
   </p>
-  <a [href]="waBase + 'Hola!%20Me%20interesa%20el%20calzado%20Piolito'"
+  <a [href]="(waBase + 'Hola!%20Me%20interesa%20el%20calzado%20Piolito') | sanitizeUrl"
     class="wa-big rise" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
     Escribir por WhatsApp
   </a>
-  <span class="wa-number">+511 · 445 · 3495</span>
+  <span class="wa-number">+51 977 938 796</span>
 </section>
 
 
 <!-- ═══════════════════════════════════════════ TIENDAS ═══ -->
 <section class="section stores-section" id="tiendas">
   <div class="rise">
-    <span class="sec-eyebrow">Encuéntranos</span>
-    <h2 class="sec-title">Visítanos en <span class="nv">Surquillo, Lima</span></h2>
+    <span class="sec-eyebrow">Nuestra sede</span>
+    <h2 class="sec-title">Fabricamos en <span class="nv">Surquillo, Lima</span></h2>
   </div>
 
   <div class="store-card rise">
     <div class="store-left">
-      <h3>Tienda<br><em>Principal</em></h3>
-      <p>Ven a conocer toda nuestra colección. Nuestro equipo te ayudará a elegir el calzado ideal para el desarrollo saludable del pie de tu hijo.</p>
-      <a [href]="waBase + 'Hola!%20Quiero%20saber%20el%20horario%20de%20atención%20de%20la%20tienda'"
+      <h3>Fábrica &<br><em>Showroom</em></h3>
+      <p>Visita nuestro showroom en Lima y conoce toda la colección. También puedes traer tu diseño y lo producimos. Atendemos distribuidores mayoristas de lunes a sábado.</p>
+      <a [href]="(waBase + 'Hola!%20Quiero%20agendar%20una%20visita%20a%20la%20fábrica%20Piolito') | sanitizeUrl"
         class="btn-wa" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
-        Consultar horario
+        Agendar visita
       </a>
     </div>
     <div class="store-right">
@@ -315,7 +311,7 @@
 
 
 <!-- ═══════════════════════════════════════════ WA FLOAT ═══ -->
-<a [href]="waBase + 'Hola!%20Me%20interesa%20el%20calzado%20Piolito'"
-  class="wa-float" target="_blank" rel="noopener" title="Cotizar por WhatsApp">
+<a [href]="(waBase + 'Hola!%20Me%20interesa%20el%20calzado%20Piolito') | sanitizeUrl"
+  class="wa-float" target="_blank" rel="noopener" title="Solicitar cotización">
   <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
 </a>

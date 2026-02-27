@@ -1,32 +1,13 @@
 <!-- ══ HERO ══ -->
 <div class="page-hero">
   <div class="hero-inner">
-    <span class="eyebrow">🗺️ Encuéntranos</span>
-    <h1 class="hero-title">Nuestras <span class="yl">Tiendas</span></h1>
-    <p class="hero-sub">Visítanos en cualquiera de nuestros puntos de venta a nivel nacional</p>
+    <span class="eyebrow">🏭 Encuéntranos</span>
+    <h1 class="hero-title">Nuestra <span class="yl">Fábrica</span></h1>
+    <p class="hero-sub">Visítanos en nuestro showroom en Surquillo, Lima y conoce toda la colección</p>
     <div class="hero-stats">
-      <div class="hstat"><span class="hstat-n">{{ tiendas.length }}</span><span class="hstat-l">Puntos de venta</span></div>
-      <div class="hstat"><span class="hstat-n">{{ departamentos.length - 1 }}</span><span class="hstat-l">Departamentos</span></div>
-      <div class="hstat"><span class="hstat-n">🇵🇪</span><span class="hstat-l">Todo el Perú</span></div>
-    </div>
-  </div>
-
-  <div class="hero-filters">
-    <div class="filter-row">
-      <span class="filter-label">Departamento</span>
-      <div class="dept-tabs">
-        @for (d of departamentos; track d) {
-          <button class="dept-tab" [class.active]="filtroDept() === d" (click)="filtroDept.set(d)">{{ d }}</button>
-        }
-      </div>
-    </div>
-    <div class="filter-row">
-      <span class="filter-label">Tipo</span>
-      <div class="tipo-btns">
-        <button class="tipo-btn" [class.active]="filtroTipo() === 'todos'"        (click)="filtroTipo.set('todos')">Todos</button>
-        <button class="tipo-btn" [class.active]="filtroTipo() === 'propia'"       (click)="filtroTipo.set('propia')">Tienda Propia</button>
-        <button class="tipo-btn" [class.active]="filtroTipo() === 'distribuidor'" (click)="filtroTipo.set('distribuidor')">Distribuidor</button>
-      </div>
+      <div class="hstat"><span class="hstat-n">1</span><span class="hstat-l">Fábrica & Showroom</span></div>
+      <div class="hstat"><span class="hstat-n">20+</span><span class="hstat-l">Años de experiencia</span></div>
+      <div class="hstat"><span class="hstat-n">🌎</span><span class="hstat-l">Toda Latinoamérica</span></div>
     </div>
   </div>
 </div>

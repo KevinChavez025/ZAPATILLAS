@@ -1,5 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { PRODUCTOS } from '../../data/productos.data';
+import { SanitizeUrlPipe } from '../../pipes/sanitize-url.pipe';
 
 const WA_NUMBER = '51977938796';
 const WA_BASE   = `https://wa.me/${WA_NUMBER}?text=`;
@@ -8,7 +10,7 @@ const WA_ICON   =
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [RouterLink, SanitizeUrlPipe],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -23,14 +25,14 @@ export class Home implements AfterViewInit {
     { color: '#C22D31', label: 'Baby Piolito' },
     { color: '#343594', label: 'Tilin' },
     { color: '#ECC238', label: 'Piolito' },
-    { color: '#089347', label: 'Urbano' },
+    { color: '#089347', label: 'Escolar' },
   ];
 
   readonly categorias = [
     { nombre: 'Baby Piolito', edad: '0 – 7 meses',  tallas: '15 – 19', img: 'babypiolito.webp', gradient: 'linear-gradient(160deg, #9e2428, #C22D31)', linea: 'baby-piolito' },
     { nombre: 'Tilin',        edad: '8 – 18 meses',  tallas: '18 – 21', img: 'tilinpiolito.webp', gradient: 'linear-gradient(160deg, #27287a, #343594)', linea: 'tilin' },
     { nombre: 'Piolito',      edad: '18m – 9 años',  tallas: '22 – 38', img: 'Piolito.webp', gradient: 'linear-gradient(160deg, #d4a800, #ECC238)', linea: 'piolito' },
-    { nombre: 'Urbano',       edad: '9 – 14 años',   tallas: '27 – 38', img: 'Urbanopiolito.webp',  gradient: 'linear-gradient(160deg, #075e2e, #089347)', linea: 'urbano' },
+    { nombre: 'Escolar',       edad: '9 – 14 años',   tallas: '27 – 38', img: 'Urbanopiolito.webp',  gradient: 'linear-gradient(160deg, #075e2e, #089347)', linea: 'urbano' },
   ];
 
   readonly features = [
@@ -47,14 +49,7 @@ export class Home implements AfterViewInit {
     { icon: '🕐', label: 'Horario',   value: 'Lun – Sáb: 9:00 am – 6:00 pm' },
   ];
 
-  readonly destacados = [
-    { id: 1, codigo: '3172',    linea: 'Piolito',      etapa: 'Todo Camina',   tallas: '22-26', colores: ['#8B4513','#F5F5DC'], color: '#ECC238', badge: '🔥 Más vendido' },
-    { id: 2, codigo: 'AM01-V6', linea: 'Piolito',      etapa: 'Todo Camina',   tallas: '22-26', colores: ['#CFB53B','#D4AF37'], color: '#ECC238', badge: '✨ Nuevo' },
-    { id: 3, codigo: '814',     linea: 'Piolito',      etapa: 'Juvenil',       tallas: '33-38', colores: ['#1a1a1a'],           color: '#ECC238', badge: '✨ Nuevo' },
-    { id: 4, codigo: 'TL-001',  linea: 'Tilin',        etapa: 'Primeros Pasos',tallas: '18-21', colores: ['#8B4513','#F5F5DC'], color: '#343594', badge: '🔥 Más vendido' },
-    { id: 5, codigo: 'BP-002',  linea: 'Baby Piolito', etapa: 'Recién Nacidos',tallas: '15-19', colores: ['#FFB6C1','#FFFFFF'], color: '#C22D31', badge: '✨ Nuevo' },
-    { id: 6, codigo: 'UR-101',  linea: 'Urbano',       etapa: 'Kids',          tallas: '27-32', colores: ['#1a1a1a','#C22D31'], color: '#089347', badge: '✨ Nuevo' },
-  ];
+  readonly destacados = PRODUCTOS.filter(p => p.destacado);
 
   readonly ciudades = [
     { nombre: 'Perú',      tiendas: 4, color: '#C22D31' },
@@ -65,8 +60,42 @@ export class Home implements AfterViewInit {
     { nombre: 'México',    tiendas: 1, color: '#ECC238' },
   ];
 
+  private readonly lineaLabelMap: Record<string, string> = {
+    'baby-piolito': 'Baby Piolito',
+    'tilin':        'Tilin',
+    'piolito':      'Piolito',
+    'escolar':      'Escolar',
+  };
+  private readonly lineaColorMap: Record<string, string> = {
+    'baby-piolito': '#C22D31',
+    'tilin':        '#343594',
+    'piolito':      '#d4a800',
+    'escolar':      '#089347',
+  };
+  lineaLabel(linea: string): string { return this.lineaLabelMap[linea] ?? linea; }
+  lineaColor(linea: string): string { return this.lineaColorMap[linea] ?? '#343594'; }
+
+  tipoLabel(t: string): string {
+    if (t === 'zapato')    return '👞 Zapato';
+    if (t === 'sandalia')  return '👡 Sandalia';
+    if (t === 'zapatilla') return '👟 Zapatilla';
+    return t;
+  }
+
+  private readonly subcatLabelMap: Record<string, string> = {
+    'bp-otono-invierno-ninos':   '🍂 Otoño / Invierno Niños',
+    'bp-primavera-verano-ninas': '🌸 Primavera / Verano Niñas',
+    'pio-sandalias-verano-nina': '👡 Sandalias Verano Niña',
+    'pio-sandalias-verano-nino': '👟 Sandalias Verano Niño',
+    'pio-zapato-cerrado-nina':   '👞 Zapato Cerrado Niña',
+    'pio-zapatos-zapatillas':    '👟 Zapatos y Zapatillas',
+    'tl-invierno':               '🍂 Invierno',
+    'escolar':                   '🎒 Escolar',
+  };
+  subcatLabel(key: string): string { return this.subcatLabelMap[key] ?? key; }
+
   encodeWA(p: { codigo: string; linea: string }): string {
-    return encodeURIComponent(`Hola! Me interesa el modelo *${p.codigo}* de la línea *${p.linea}*. ¿Pueden darme más info?`);
+    return encodeURIComponent(`Hola! Me interesa hacer un pedido mayorista del modelo *${p.codigo}* línea *${this.lineaLabel(p.linea)}*. ¿Cuál es el precio y disponibilidad?`);
   }
 
   irAColeccion(linea: string): void {
