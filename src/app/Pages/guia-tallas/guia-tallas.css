@@ -106,17 +106,29 @@
   transition: transform .2s, filter .2s;
   box-shadow: 0 6px 20px rgba(194,45,49,.4);
 }
-.btn-primary:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
 /* ── Patito ── */
 .hero-duck {
+  flex: 0 0 auto;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   height: 100%;
   min-height: 62vh;
   position: relative;
-  z-index: 2;
+}
+
+.duck-label {
+  background: var(--yellow);
+  color: var(--navy);
+  font-size: .72rem;
+  font-weight: 900;
+  padding: 5px 14px;
+  border-radius: 50px;
+  white-space: nowrap;
+  letter-spacing: .05em;
+  box-shadow: 0 3px 10px rgba(0,0,0,.2);
+  margin-top: 8px;
 }
 .duck-img {
   width: 300px;
@@ -243,21 +255,21 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: .88rem;
+  font-size: 1rem;
 }
 
 thead { background: var(--navy); }
 thead th {
   color: var(--white);
-  font-weight: 700;
-  font-size: .72rem;
+  font-weight: 800;
+  font-size: .82rem;
   letter-spacing: .1em;
   text-transform: uppercase;
-  padding: 13px 18px;
+  padding: 15px 20px;
   text-align: left;
 }
-thead th.col-cms   { width: 100px; }
-thead th.col-talla { width: 90px; }
+thead th.col-cms   { width: 110px; }
+thead th.col-talla { width: 100px; }
 
 tbody tr {
   border-bottom: 1px solid #f2f2f2;
@@ -267,11 +279,11 @@ tbody tr:hover { background: rgba(52,53,148,.04); }
 tbody tr:last-child { border-bottom: none; }
 tbody tr.highlighted { background: rgba(236,194,56,.07); }
 
-tbody td { padding: 9px 18px; color: var(--text); }
+tbody td { padding: 11px 20px; color: var(--text); }
 tbody td.col-cms {
-  font-weight: 600;
-  color: #666;
-  font-size: .82rem;
+  font-weight: 700;
+  color: #555;
+  font-size: .95rem;
   font-variant-numeric: tabular-nums;
 }
 
@@ -281,17 +293,17 @@ tbody td.col-cms {
   justify-content: center;
   background: var(--navy);
   color: var(--white);
-  font-weight: 800;
-  font-size: .78rem;
-  width: 32px; height: 32px;
+  font-weight: 900;
+  font-size: .9rem;
+  width: 36px; height: 36px;
   border-radius: 8px;
 }
 
-.linea-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.linea-tags { display: flex; flex-wrap: wrap; gap: 5px; }
 .linea-tag {
-  font-size: .68rem;
-  font-weight: 700;
-  padding: 2px 8px;
+  font-size: .78rem;
+  font-weight: 800;
+  padding: 3px 11px;
   border-radius: 20px;
   border: 1px solid;
   white-space: nowrap;
@@ -308,7 +320,7 @@ tbody td.col-cms {
 }
 .legend h3 {
   font-family: var(--font-title);
-  font-size: .9rem;
+  font-size: 1rem;
   font-weight: 800;
   color: var(--navy);
   margin-bottom: 16px;
@@ -322,7 +334,7 @@ tbody td.col-cms {
   margin-bottom: 14px;
 }
 .legend-dot {
-  width: 10px; height: 10px;
+  width: 11px; height: 11px;
   border-radius: 50%;
   flex-shrink: 0;
   margin-top: 4px;
@@ -341,13 +353,13 @@ tbody td.col-cms {
 .tip-box strong {
   display: block;
   color: var(--yellow);
-  font-size: .78rem;
-  margin-bottom: 5px;
+  font-size: .84rem;
+  margin-bottom: 6px;
 }
 .tip-box p {
-  font-size: .74rem;
-  line-height: 1.55;
-  color: rgba(255,255,255,.7);
+  font-size: .8rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,.75);
 }
 
 /* ── CTA ── */

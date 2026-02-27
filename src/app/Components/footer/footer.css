@@ -100,17 +100,19 @@ footer {
 
 .socials { display: flex; gap: 10px; }
 .soc {
-  width: 34px; height: 34px;
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.1);
-  border-radius: 8px;
+  width: 38px; height: 38px;
+  border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
   text-decoration: none;
-  font-size: .78rem; font-weight: 900;
-  color: rgba(255,255,255,.4);
-  transition: background .2s, color .2s, border-color .2s;
+  color: #fff;
+  transition: transform .2s, filter .2s;
 }
-.soc:hover { background: var(--yellow); color: var(--navy-dark); border-color: var(--yellow); }
+.soc svg { width: 18px; height: 18px; fill: currentColor; }
+.soc:hover { transform: translateY(-3px); filter: brightness(1.15); }
+
+.soc-fb { background: #1877F2; }
+.soc-ig { background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+.soc-tk { background: #010101; border: 1.5px solid #69C9D0; }
 
 @media (max-width: 900px) {
   .foot-inner { padding: 52px 24px 28px; }
