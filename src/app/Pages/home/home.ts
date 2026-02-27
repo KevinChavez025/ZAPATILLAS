@@ -109,7 +109,7 @@ export class Home implements AfterViewInit {
         if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
       });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.rise').forEach(el => io.observe(el));
+    document.querySelectorAll('.rise, .slide-right').forEach(el => io.observe(el));
 
     // ── Forzar reproducción del video del globo ──
     const video = document.querySelector('.globe-video') as HTMLVideoElement;

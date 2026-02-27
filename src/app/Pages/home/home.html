@@ -4,8 +4,8 @@
     <span class="eyebrow eyebrow-lg">Fábrica Mayorista Peruana</span>
 
     <h1 class="hero-title">
-      Tu marca,<br>
-      <span class="yl">nuestra fábrica</span>
+      Primeros pasos,<br>
+      <span class="yl">para siempre</span>
     </h1>
 
     <p class="hero-sub">
@@ -80,7 +80,7 @@
   <div class="cats-grid">
     @for (cat of categorias; track cat.nombre; let i = $index) {
       <div
-        class="cat rise"
+        class="cat slide-right"
         [class]="'d' + (i+1)"
         (click)="irAColeccion(cat.linea)"
         role="button"
@@ -141,7 +141,7 @@
 <!-- ═══════════════════════════════════════════ FEATURES ═══ -->
 <section class="section features-section">
   <div class="rise" style="text-align:center">
-    <span class="sec-eyebrow" style="display:block;text-align:center">¿Por qué elegirnos?</span>
+    <span class="sec-eyebrow no-dash eyebrow-xl" style="display:block;text-align:center">¿Por qué elegirnos?</span>
     <h2 class="sec-title" style="text-align:center">
       Lo que nos hace <span class="nv">diferentes</span>
     </h2>
@@ -262,19 +262,27 @@
 <!-- ═══════════════════════════════════════════ CONTACT ═══ -->
 <section class="contact-section" id="contacto">
   <div class="contact-glow"></div>
-  <span class="sec-eyebrow no-dash" style="color:var(--yellow);display:block;text-align:center">Contáctanos</span>
-  <h2 class="sec-title rise" style="color:white;text-align:center">
-    ¿Listo para hacer<br>tu pedido mayorista?
-  </h2>
-  <p class="contact-sub rise">
-    Escríbenos por WhatsApp, te enviamos el catálogo completo, cotizamos tu pedido y coordinamos el envío a tu país.
-  </p>
-  <a [href]="(waBase + 'Hola!%20Me%20interesa%20el%20calzado%20Piolito') | sanitizeUrl"
-    class="wa-big rise" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
-    Escribir por WhatsApp
-  </a>
-  <span class="wa-number">+51 977 938 796</span>
+  <div class="contact-dots"></div>
+
+  <div class="contact-inner">
+    <h3 class="contact-eyebrow">Contáctanos</h3>
+    <h2 class="sec-title rise" style="color:white;text-align:center">
+      ¿Listo para hacer<br>tu pedido mayorista?
+    </h2>
+    <p class="contact-sub rise">
+      Escríbenos por WhatsApp, te enviamos el catálogo completo, cotizamos tu pedido y coordinamos el envío a tu país.
+    </p>
+    <div class="contact-btns rise">
+      <a [href]="(waBase + 'Hola!%20Quiero%20hacer%20un%20pedido%20mayorista%20de%20Piolito') | sanitizeUrl"
+        class="wa-big" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
+        Escribir por WhatsApp
+      </a>
+      <a routerLink="/productos" class="btn-catalog">
+        Ver Catálogo →
+      </a>
+    </div>
+  </div>
 </section>
 
 

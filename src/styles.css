@@ -42,6 +42,15 @@ body {
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 .rise.on { opacity: 1; transform: translateY(0); }
+
+/* Entrada desde la derecha */
+.slide-right {
+  opacity: 0;
+  transform: translateX(80px);
+  transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+}
+.slide-right.on { opacity: 1; transform: translateX(0); }
+
 .d1 { transition-delay: 0.1s; }
 .d2 { transition-delay: 0.2s; }
 .d3 { transition-delay: 0.3s; }
