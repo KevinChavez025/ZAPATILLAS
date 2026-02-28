@@ -639,16 +639,30 @@
 }
 .dest-card {
   background: var(--white); border-radius: 18px; overflow: hidden;
-  box-shadow: 0 3px 16px rgba(0,0,0,.08); transition: transform .3s, box-shadow .3s;
-  cursor: pointer; border: 1.5px solid rgba(0,0,0,.06);
+  box-shadow: 0 2px 12px rgba(0,0,0,.07); transition: transform .3s, box-shadow .3s;
+  cursor: pointer;
 }
-.dest-card:hover { transform: translateY(-7px); box-shadow: 0 18px 44px rgba(0,0,0,.14); }
+.dest-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,.14); }
 .dest-card:hover .dest-overlay { opacity: 1; }
 .dest-img {
   position: relative; aspect-ratio: 4/3;
-  background: linear-gradient(145deg, color-mix(in srgb, var(--lc, var(--navy)) 18%, white), color-mix(in srgb, var(--lc, var(--navy)) 32%, white));
+  background: #ffffff;
   display: flex; align-items: center; justify-content: center; overflow: hidden;
 }
+
+/* Imagen real del producto destacado - encima del fondo azul */
+.dest-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  padding: 8px;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
 .dest-img-inner { display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .dest-img-code {
   font-family: var(--font-title), sans-serif; font-size: 1.6rem;
@@ -657,7 +671,7 @@
 .dest-colores { display: flex; gap: 7px; }
 .dest-swatch { width: 16px; height: 16px; border-radius: 50%; border: 2.5px solid rgba(255,255,255,.8); box-shadow: 0 1px 4px rgba(0,0,0,.15); }
 .dest-badge {
-  position: absolute; top: 12px; left: 12px; background: var(--navy-dark); color: var(--yellow);
+  position: absolute; top: 12px; left: 12px; z-index: 2; background: var(--navy-dark); color: var(--yellow);
   font-size: .62rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase;
   padding: 4px 10px; border-radius: 50px;
 }
@@ -665,6 +679,7 @@
   position: absolute; inset: 0; background: rgba(27,42,107,.65);
   display: flex; align-items: center; justify-content: center;
   opacity: 0; transition: opacity .3s; backdrop-filter: blur(3px);
+  z-index: 3;
 }
 .dest-overlay-btn {
   background: var(--yellow); color: var(--navy-dark); text-decoration: none;
@@ -672,7 +687,7 @@
   letter-spacing: .06em; transition: transform .2s;
 }
 .dest-overlay-btn:hover { transform: scale(1.05); }
-.dest-info { padding: 16px 18px; }
+.dest-info { padding: 16px 18px; border-top: 2px solid var(--navy); }
 .dest-linea { font-size: .65rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; display: block; margin-bottom: 4px; }
 .dest-codigo { font-family: var(--font-title), sans-serif; font-size: 1.5rem; letter-spacing: .05em; color: var(--text); margin-bottom: 2px; }
 .dest-etapa { font-size: .72rem; color: #999; font-weight: 600; margin-bottom: 12px; }
