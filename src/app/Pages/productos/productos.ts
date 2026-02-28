@@ -21,7 +21,7 @@ export class Productos implements OnInit {
 
   constructor(private route: ActivatedRoute) {
     // En móvil siempre usar vista grilla
-    if (window.innerWidth <= 480) {
+    if (window.innerWidth <= 768) {
       this.vistaGrid.set(true);
     }
   }

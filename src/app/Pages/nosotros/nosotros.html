@@ -1,0 +1,158 @@
+<!-- ═══════════════════════════════════════ HERO ═══ -->
+<section class="nos-hero">
+  <div class="nos-hero-inner">
+    <div class="nos-hero-text">
+      <span class="sec-eyebrow no-dash eyebrow-xl" style="color:var(--yellow)">Quiénes somos</span>
+      <h1 class="nos-title">
+        Más de 40 años<br>
+        <span class="yl">cuidando cada paso</span>
+      </h1>
+      <p class="nos-hero-sub">
+        Somos una fábrica peruana de calzado infantil con más de cuatro décadas de experiencia. Nacimos para acompañar los primeros pasos de los niños con cuidado, conciencia y amor peruano.
+      </p>
+    </div>
+    <div class="nos-hero-stats">
+      @for (s of stats; track s.label; let i = $index) {
+        <div class="nos-stat rise" [class]="'d' + (i+1)">
+          <span class="nos-stat-n">{{ s.n }}</span>
+          <span class="nos-stat-l">{{ s.label }}</span>
+        </div>
+      }
+    </div>
+  </div>
+  <div class="nos-hero-stripe">
+    <span class="s-red"></span>
+    <span class="s-yellow"></span>
+    <span class="s-navy"></span>
+    <span class="s-green"></span>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════ HISTORIA ═══ -->
+<section class="nos-historia">
+  <div class="nos-historia-inner">
+    <div class="nos-historia-visual rise">
+      <div class="historia-chick-wrap">
+        <img src="/patito.webp" alt="Mascota Piolito" class="historia-chick" />
+      </div>
+    </div>
+    <div class="nos-historia-text rise d2">
+      <span class="sec-eyebrow">Historia de la marca</span>
+      <h2 class="sec-title">
+        Primeros pasos,<br><span class="rd">para siempre</span>
+      </h2>
+      <p>Piolito nace para acompañar los primeros pasos de los niños con cuidado y conciencia. Diseñamos calzado que respeta el desarrollo natural del pie, brindando comodidad, seguridad y libertad en cada etapa del crecimiento.</p>
+      <p>Nuestra esencia es el cuidado, la empatía y el compromiso con las familias, ofreciendo calzado que acompaña, protege y permite crecer con libertad y seguridad. Hoy distribuimos nuestros modelos al por mayor a toda Latinoamérica y EE.UU. desde nuestra fábrica en Surquillo, Lima.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════ MISIÓN / VISIÓN ═══ -->
+<section class="nos-mv">
+  <div class="nos-mv-grid">
+    <div class="mv-card mv-mision rise">
+      <div class="mv-icon">🎯</div>
+      <h3>Misión</h3>
+      <p>Diseñar y ofrecer calzado infantil que respete el desarrollo natural del pie, brindando comodidad, seguridad y libertad en cada etapa del crecimiento, acompañando a los niños y dando tranquilidad a las familias.</p>
+    </div>
+    <div class="mv-card mv-vision rise d2">
+      <div class="mv-icon">🌟</div>
+      <h3>Visión</h3>
+      <p>Ser una marca referente en calzado infantil consciente, reconocida por promover un crecimiento saludable, fortalecer la confianza desde los primeros pasos y acompañar a las familias en la elección de un mejor futuro para sus hijos.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════ VALORES ═══ -->
+<section class="section nos-valores">
+  <div class="rise" style="text-align:center">
+    <span class="sec-eyebrow no-dash eyebrow-xl" style="display:block;text-align:center">Nuestra cultura</span>
+    <h2 class="sec-title" style="text-align:center">Lo que nos <span class="nv">define</span></h2>
+  </div>
+  <div class="nos-valores-grid">
+    @for (v of valores; track v.titulo; let i = $index) {
+      <div class="valor-card rise" [class]="'d' + (i+1)" [style.--vc]="v.color">
+        <span class="valor-icon">{{ v.icon }}</span>
+        <h3 class="valor-titulo">{{ v.titulo }}</h3>
+        <p class="valor-desc">{{ v.desc }}</p>
+      </div>
+    }
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════ CALIDAD ═══ -->
+<section class="nos-calidad">
+  <div class="nos-calidad-inner">
+
+    <div class="nos-calidad-header rise">
+      <span class="sec-eyebrow" style="color:var(--yellow)">Nuestra promesa</span>
+      <h2 class="sec-title" style="color:white">
+        Calidad que se<br><span class="yl">siente en cada par</span>
+      </h2>
+      <p class="calidad-sub">Cada par de Piolito pasa por un proceso de fabricación artesanal en nuestra fábrica de Lima, usando solo materiales seleccionados que cuidan el pie en desarrollo.</p>
+    </div>
+
+    <div class="calidad-cards">
+      <div class="calidad-card rise d1">
+        <div class="cc-icon" style="background:rgba(236,194,56,.12);color:var(--yellow)">🪵</div>
+        <h4>Cuero legítimo</h4>
+        <p>Piel de primera calidad con forro de badana natural que respira y se adapta al pie.</p>
+      </div>
+      <div class="calidad-card rise d2">
+        <div class="cc-icon" style="background:rgba(194,45,49,.12);color:#e05555">🦶</div>
+        <h4>Arco semi-ortopédico</h4>
+        <p>Diseño que respeta y favorece el desarrollo natural del arco plantar infantil.</p>
+      </div>
+      <div class="calidad-card rise d3">
+        <div class="cc-icon" style="background:rgba(8,147,71,.12);color:var(--green)">🛡️</div>
+        <h4>Planta antideslizante</h4>
+        <p>Caucho de alta resistencia que protege en superficies lisas y húmedas.</p>
+      </div>
+      <div class="calidad-card rise d4">
+        <div class="cc-icon" style="background:rgba(52,53,148,.2);color:#8fa3ff">📐</div>
+        <h4>Tallas 15 – 38</h4>
+        <p>Sistema de tallas adaptado al pie infantil peruano, desde bebé hasta escolar.</p>
+      </div>
+    </div>
+
+    <div class="calidad-banner rise">
+      <div class="cb-flag">🇵🇪</div>
+      <div class="cb-text">
+        <strong>100% fabricado en Perú</strong>
+        <span>Fábrica propia en Surquillo, Lima — más de 40 años de experiencia artesanal</span>
+      </div>
+      <div class="cb-stat">
+        <span class="cb-n">100%</span>
+        <span class="cb-l">Cuero legítimo</span>
+      </div>
+      <div class="cb-stat">
+        <span class="cb-n">40+</span>
+        <span class="cb-l">Años de oficio</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════ CTA ═══ -->
+<section class="nos-cta">
+  <div class="nos-cta-inner rise">
+    <h2 class="sec-title" style="color:white;text-align:center">
+      ¿Quieres distribuir<br><span class="yl">Piolito en tu país?</span>
+    </h2>
+    <p>Escríbenos por WhatsApp, te enviamos el catálogo completo y cotizamos tu pedido mayorista.</p>
+    <div class="nos-cta-btns">
+      <a [href]="(waBase + 'Hola!%20Quiero%20ser%20distribuidor%20de%20Piolito') | sanitizeUrl"
+        class="wa-big" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
+        Escribir por WhatsApp
+      </a>
+      <a routerLink="/productos" class="btn-catalog">Ver Catálogo →</a>
+    </div>
+  </div>
+</section>
