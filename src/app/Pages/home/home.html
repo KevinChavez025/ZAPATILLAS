@@ -4,8 +4,8 @@
     <span class="eyebrow eyebrow-lg">Fábrica Mayorista Peruana</span>
 
     <h1 class="hero-title">
-      Tu marca,<br>
-      <span class="yl">nuestra fábrica</span>
+      Primeros pasos,<br>
+      <span class="yl">para siempre</span>
     </h1>
 
     <p class="hero-sub">
@@ -172,7 +172,8 @@
     @for (p of destacados; track p.id; let i = $index) {
       <div class="dest-card rise" [class]="'d' + (i+1)" [style.--lc]="lineaColor(p.linea)">
         <div class="dest-img">
-          <div class="dest-img-inner">
+          <img [src]="p.imagen" [alt]="p.codigo" class="dest-image" />
+          <div class="dest-img-inner dest-img-fallback">
             <span class="dest-img-code">{{ p.codigo }}</span>
             <div class="dest-colores">
               @for (c of p.colores; track c) {

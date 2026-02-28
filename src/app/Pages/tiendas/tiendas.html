@@ -41,7 +41,7 @@
         }
         <div class="card-actions">
           <a [href]="mapUrl(t)" target="_blank" rel="noopener" class="btn-map" (click)="$event.stopPropagation()">🗺️ Cómo llegar</a>
-          <a [href]="waBase + waTexto(t)" target="_blank" rel="noopener" class="btn-wa-sm" (click)="$event.stopPropagation()">
+          <a [href]="(waBase + waTexto(t)) | sanitizeUrl" target="_blank" rel="noopener" class="btn-wa-sm" (click)="$event.stopPropagation()">
             <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg> WhatsApp
           </a>
         </div>
@@ -93,7 +93,7 @@
         </div>
         <div class="detalle-actions">
           <a [href]="mapUrl(tiendaActiva()!)" target="_blank" rel="noopener" class="btn-map-lg">🗺️ Abrir en Google Maps</a>
-          <a [href]="waBase + waTexto(tiendaActiva()!)" target="_blank" rel="noopener" class="btn-wa-lg">
+          <a [href]="(waBase + waTexto(tiendaActiva()!)) | sanitizeUrl" target="_blank" rel="noopener" class="btn-wa-lg">
             <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg> Consultar por WhatsApp
           </a>
         </div>
@@ -102,6 +102,6 @@
   </div>
 </div>
 
-<a [href]="waBase + 'Hola!%20Quisiera%20saber%20d%C3%B3nde%20encontrar%20calzado%20Piolito'" class="wa-float" target="_blank" rel="noopener">
+<a [href]="(waBase + 'Hola!%20Quisiera%20saber%20d%C3%B3nde%20encontrar%20calzado%20Piolito') | sanitizeUrl" class="wa-float" target="_blank" rel="noopener">
   <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
 </a>

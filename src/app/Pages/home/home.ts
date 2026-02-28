@@ -32,7 +32,7 @@ export class Home implements AfterViewInit {
     { nombre: 'Baby Piolito', edad: '0 – 7 meses',  tallas: '15 – 19', img: 'babypiolito.webp', gradient: 'linear-gradient(160deg, #9e2428, #C22D31)', linea: 'baby-piolito' },
     { nombre: 'Tilin',        edad: '8 – 18 meses',  tallas: '18 – 21', img: 'tilinpiolito.webp', gradient: 'linear-gradient(160deg, #27287a, #343594)', linea: 'tilin' },
     { nombre: 'Piolito',      edad: '18m – 9 años',  tallas: '22 – 38', img: 'Piolito.webp', gradient: 'linear-gradient(160deg, #d4a800, #ECC238)', linea: 'piolito' },
-    { nombre: 'Escolar',       edad: '9 – 14 años',   tallas: '27 – 38', img: 'Urbanopiolito.webp',  gradient: 'linear-gradient(160deg, #075e2e, #089347)', linea: 'urbano' },
+    { nombre: 'Escolar',       edad: '9 – 14 años',   tallas: '27 – 38', img: 'Urbanopiolito.webp',  gradient: 'linear-gradient(160deg, #075e2e, #089347)', linea: 'escolar' },
   ];
 
   readonly features = [
