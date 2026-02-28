@@ -265,7 +265,7 @@
   border-radius: 2px;
 }
 .sec-eyebrow.no-dash::before { display: none; }
-.sec-eyebrow.eyebrow-xl { font-size: 1rem; letter-spacing: .25em; }
+.sec-eyebrow.eyebrow-xl { font-size: 1.25rem; letter-spacing: .25em; }
 .sec-title {
   font-family: var(--font-title);
   font-size: clamp(1.7rem, 3vw, 2.6rem);

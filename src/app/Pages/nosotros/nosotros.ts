@@ -36,9 +36,9 @@ export class Nosotros implements AfterViewInit {
   ];
 
   stats = [
-    { n: '40+',  label: 'Años de experiencia' },
-    { n: '4',    label: 'Líneas de calzado'   },
-    { n: '100%', label: 'Cuero legítimo'      },
-    { n: '🇵🇪',  label: 'Hecho en Perú'       },
+    { n: '41',   label: 'Años de historia'  },
+    { n: '1985', label: 'Año de fundación'  },
+    { n: '100%', label: 'Cuero legítimo'    },
+    { n: '🇵🇪',  label: 'Hecho en Perú'     },
   ];
 }
