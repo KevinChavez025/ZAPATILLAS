@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, AfterViewInit, ElementRef, ViewChild, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SanitizeUrlPipe } from '../../pipes/sanitize-url.pipe';
 
@@ -31,7 +31,87 @@ export interface Tienda {
   templateUrl: './tiendas.html',
   styleUrl: './tiendas.css',
 })
-export class Tiendas {
+export class Tiendas implements AfterViewInit, OnDestroy {
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  // ─── PROCESO DE FABRICACIÓN ───────────────────────────────────────────────
+  readonly pasos = [
+    { num: 1, nombre: 'Selección de materiales', icon: '🐄', video: 'assets/videos/paso1.mp4',
+      desc: 'Elegimos cueros de primera calidad, revisados a mano por su textura, resistencia y suavidad. Solo los mejores materiales forman parte de un Piolito.' },
+    { num: 2, nombre: 'Corte de cuero',           icon: '✂️', video: 'assets/videos/paso2.mp4',
+      desc: 'Cada pieza se corta con precisión usando moldes propios diseñados especialmente para el pie infantil, garantizando un ajuste perfecto en cada talla.' },
+    { num: 3, nombre: 'Manipulación de cueros',   icon: '🤲', video: 'assets/videos/paso3.mp4',
+      desc: 'Los cortes son tratados y preparados a mano: se humedecen, moldean y acondicnan para que el cuero quede flexible y listo para el armado.' },
+    { num: 4, nombre: 'Aparado de los cortes',    icon: '🧵', video: 'assets/videos/paso4.mp4',
+      desc: 'Las piezas se unen con costuras finas y resistentes. Este proceso define la forma del zapato y garantiza que las uniones duren con el uso diario.' },
+    { num: 5, nombre: 'Conformado de los cortes', icon: '👟', video: 'assets/videos/paso5.mp4',
+      desc: 'El corte armado se monta sobre una horma que replica la forma del pie del niño, dándole al zapato su silueta definitiva y su comodidad característica.' },
+    { num: 6, nombre: 'Cosido',                   icon: '🪡', video: 'assets/videos/paso6.mp4',
+      desc: 'Se realizan los costuras estructurales que dan firmeza al calzado. Cada punto es revisado para asegurar que soporte el movimiento activo del niño.' },
+    { num: 7, nombre: 'Ensuelado',                icon: '👞', video: 'assets/videos/paso7.mp4',
+      desc: 'La suela antideslizante se adhiere con presión y calor, asegurando una unión duradera que protege los primeros pasos del niño en cualquier superficie.' },
+    { num: 8, nombre: 'Acabado',                  icon: '✨', video: 'assets/videos/paso8.mp4',
+      desc: 'El zapato pasa por un control de calidad final: limpieza, pulido, revisión de costuras y presentación. Cada Piolito sale de fábrica listo para conquistar.' },
+  ];
+
+  pasoActivo  = 0;
+  pasoAnterior = -1;
+  progreso    = 0;
+  private timerInterval?: ReturnType<typeof setInterval>;
+  private readonly DURACION_SEG = 5;
+
+  ngAfterViewInit() {
+    this.iniciarTimer();
+  }
+
+  ngOnDestroy() {
+    this.detenerTimer();
+  }
+
+  private iniciarTimer() {
+    this.detenerTimer();
+    this.progreso = 0;
+    const intervalo = 100;
+    const totalTicks = (this.DURACION_SEG * 1000) / intervalo;
+    let tick = 0;
+    this.timerInterval = setInterval(() => {
+      tick++;
+      this.progreso = (tick / totalTicks) * 100;
+      this.cdr.detectChanges();
+      if (tick >= totalTicks) { this.siguientePaso(); }
+    }, intervalo);
+  }
+
+  private detenerTimer() {
+    if (this.timerInterval) { clearInterval(this.timerInterval); }
+  }
+
+  private activarVideo(i: number) {
+    setTimeout(() => {
+      const videos = document.querySelectorAll<HTMLVideoElement>('.reel-video');
+      videos.forEach((v, idx) => {
+        if (idx === i) { v.currentTime = 0; v.play(); }
+        else { v.pause(); }
+      });
+    }, 50);
+  }
+
+  siguientePaso() {
+    this.pasoAnterior = this.pasoActivo;
+    this.pasoActivo = (this.pasoActivo + 1) % this.pasos.length;
+    this.iniciarTimer();
+    this.activarVideo(this.pasoActivo);
+    setTimeout(() => { this.pasoAnterior = -1; this.cdr.detectChanges(); }, 600);
+  }
+
+  irAPaso(i: number) {
+    if (i === this.pasoActivo) return;
+    this.pasoAnterior = this.pasoActivo;
+    this.pasoActivo = i;
+    this.iniciarTimer();
+    this.activarVideo(this.pasoActivo);
+    setTimeout(() => { this.pasoAnterior = -1; this.cdr.detectChanges(); }, 600);
+  }
 
   readonly waBase = WA_BASE;
   readonly waIcon = WA_ICON;

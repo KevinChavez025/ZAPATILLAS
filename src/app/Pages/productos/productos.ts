@@ -53,20 +53,20 @@ export class Productos implements OnInit {
   readonly subcategorias: Record<string, { key: string; label: string }[]> = {
     'todos': [],
     'baby-piolito': [
-      { key: 'bp-otono-invierno-ninos',    label: ' Otoño / Invierno Niños'     },
-      { key: 'bp-primavera-verano-ninas',  label: ' Primavera / Verano Niñas'   },
+      { key: 'bp-otono-invierno-ninos',    label: '🍂 Otoño / Invierno Niños'     },
+      { key: 'bp-primavera-verano-ninas',  label: '🌸 Primavera / Verano Niñas'   },
     ],
     'tilin': [
-      { key: 'tl-invierno',          label: ' Invierno'             },
+      { key: 'tl-invierno',          label: '🍂 Invierno'             },
     ],
     'piolito': [
-      { key: 'pio-sandalias-verano-nina',  label: ' Sandalias Verano Niña'      },
-      { key: 'pio-sandalias-verano-nino',  label: ' Sandalias Verano Niño'      },
-      { key: 'pio-zapato-cerrado-nina',    label: ' Zapato Cerrado Niña'        },
-      { key: 'pio-zapatos-zapatillas',     label: ' Zapatillas'                 },
+      { key: 'pio-sandalias-verano-nina',  label: '👡 Sandalias Verano Niña'      },
+      { key: 'pio-sandalias-verano-nino',  label: '👟 Sandalias Verano Niño'      },
+      { key: 'pio-zapato-cerrado-nina',    label: '👞 Zapato Cerrado Niña'        },
+      { key: 'pio-zapatos-zapatillas',     label: '👟 Zapatos y Zapatillas'       },
     ],
     'escolar': [
-      { key: 'escolar',                    label: ' Escolar'                    },
+      { key: 'escolar',                    label: '🎒 Escolar'                    },
     ],
   };
 
@@ -139,8 +139,8 @@ export class Productos implements OnInit {
   lineaLabel(linea: string): string { return this.lineaLabelMap[linea] ?? linea; }
 
   generoLabel(g: string): string {
-    if (g === 'nino') return ' Niño';
-    if (g === 'nina') return ' Niña';
+    if (g === 'nino') return '👦 Niño';
+    if (g === 'nina') return '👧 Niña';
     return g;
   }
 

@@ -20,12 +20,22 @@ export class Nosotros implements AfterViewInit {
   readonly waIcon = WA_ICON;
 
   ngAfterViewInit(): void {
+    // Animaciones generales rise/slide
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
       });
     }, { threshold: 0.12 });
     document.querySelectorAll('.rise, .slide-right, .slide-up').forEach(el => io.observe(el));
+
+    // Animación sección TikToks/redes sociales
+    const ioTiktoks = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in-view'); ioTiktoks.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    const tiktoksSection = document.querySelector('.nos-tiktoks');
+    if (tiktoksSection) ioTiktoks.observe(tiktoksSection);
   }
 
   valores = [
@@ -41,4 +51,11 @@ export class Nosotros implements AfterViewInit {
     { n: '100%', label: 'Cuero legítimo'    },
     { n: '🇵🇪',  label: 'Hecho en Perú'     },
   ];
+
+  playVideo(event: Event) {
+    (event.target as HTMLVideoElement).play();
+  }
+  pauseVideo(event: Event) {
+    (event.target as HTMLVideoElement).pause();
+  }
 }
