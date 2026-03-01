@@ -102,6 +102,80 @@
   </div>
 </div>
 
+<!-- ══ ASÍ NACE UN PIOLITO ══ -->
+<section class="proceso-section">
+
+  <div class="proceso-header">
+    <span class="proceso-eyebrow">Nuestra fábrica</span>
+    <h2 class="proceso-title">Así nace un <span class="yl">Piolito</span></h2>
+    <p class="proceso-sub">Cada par pasa por 8 etapas artesanales, con cuero legítimo y manos peruanas.</p>
+  </div>
+
+  <div class="pnace-layout">
+
+    <!-- COLUMNA IZQUIERDA: STACK DE VIDEOS -->
+    <div class="pnace-stack">
+      @for (paso of pasos; track paso.num; let i = $index) {
+        <div class="pstack-card"
+          [attr.data-pos]="i - pasoActivo"
+          (click)="i !== pasoActivo ? irAPaso(i) : null">
+          <video
+            class="pstack-video"
+            [src]="paso.video"
+            muted playsinline loop
+            [autoplay]="i === pasoActivo"
+          ></video>
+          <div class="pstack-overlay"></div>
+          <div class="pstack-num">{{ paso.num }}</div>
+        </div>
+      }
+    </div>
+
+    <!-- COLUMNA DERECHA: INFO -->
+    <div class="pnace-info">
+      <!-- Barras stories -->
+      <div class="pnace-bars">
+        @for (paso of pasos; track paso.num; let i = $index) {
+          <div class="pnbar" [class.done]="i < pasoActivo" (click)="irAPaso(i)">
+            <div class="pnbar-fill" [style.width]="i === pasoActivo ? progreso + '%' : (i < pasoActivo ? '100%' : '0%')"></div>
+          </div>
+        }
+      </div>
+
+      <!-- Paso actual -->
+      <div class="pnace-paso-info">
+        <span class="pnace-icon">{{ pasos[pasoActivo].icon }}</span>
+        <div>
+          <span class="pnace-step-label">Paso {{ pasoActivo + 1 }} de 8</span>
+          <h3 class="pnace-step-title">{{ pasos[pasoActivo].nombre }}</h3>
+        </div>
+      </div>
+
+      <!-- Descripción -->
+      <p class="pnace-desc">{{ pasos[pasoActivo].desc }}</p>
+
+      <!-- Lista de pasos -->
+      <div class="pnace-list">
+        @for (paso of pasos; track paso.num; let i = $index) {
+          <button class="pnace-item" [class.active]="i === pasoActivo" [class.done]="i < pasoActivo" (click)="irAPaso(i)">
+            <span class="pni-num">{{ paso.num }}</span>
+            <span class="pni-nombre">{{ paso.nombre }}</span>
+            @if (i < pasoActivo) { <span class="pni-check">✓</span> }
+          </button>
+        }
+      </div>
+
+      <!-- Botones nav -->
+      <div class="pnace-nav">
+        <button class="pnace-btn" (click)="irAPaso((pasoActivo - 1 + 8) % 8)">&#8249;</button>
+        <button class="pnace-btn pnace-btn-next" (click)="siguientePaso()">Siguiente paso &#8250;</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
 <a [href]="(waBase + 'Hola!%20Quisiera%20saber%20d%C3%B3nde%20encontrar%20calzado%20Piolito') | sanitizeUrl" class="wa-float" target="_blank" rel="noopener">
   <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
 </a>
