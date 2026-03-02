@@ -1,4 +1,4 @@
-import { Component, computed, signal, OnInit, AfterViewInit } from '@angular/core';
+import { Component, computed, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { PRODUCTOS, Producto } from '../../data/productos.data';
@@ -17,7 +17,7 @@ export type { Producto };
   templateUrl: './productos.html',
   styleUrl: './productos.css',
 })
-export class Productos implements OnInit, AfterViewInit {
+export class Productos implements OnInit {
 
   constructor(private route: ActivatedRoute) {
     // En móvil siempre usar vista grilla
@@ -27,6 +27,16 @@ export class Productos implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    // ── Activar animaciones fade-up ──
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.05 });
+    setTimeout(() => {
+      document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+    }, 50);
+
     this.route.queryParams.subscribe(params => {
       if (params['linea']) {
         this.setLinea(params['linea']);
@@ -34,30 +44,14 @@ export class Productos implements OnInit, AfterViewInit {
           document.querySelector('.sidebar')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 150);
       }
+      if (params['codigo']) {
+        setTimeout(() => {
+          const producto = this.productosFiltrados().find(p => p.codigo === params['codigo'])
+                        || PRODUCTOS.find(p => p.codigo === params['codigo']);
+          if (producto) { this.abrirModal(producto); }
+        }, 150);
+      }
     });
-  }
-
-  private fadeObserver!: IntersectionObserver;
-
-  ngAfterViewInit(): void {
-    this.fadeObserver = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          this.fadeObserver.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08 });
-
-    this.observeFadeElements();
-  }
-
-  private observeFadeElements(): void {
-    setTimeout(() => {
-      document.querySelectorAll('.fade-up:not(.visible)').forEach(el => {
-        this.fadeObserver?.observe(el);
-      });
-    }, 50);
   }
 
   readonly waBase = WA_BASE;
@@ -83,10 +77,10 @@ export class Productos implements OnInit, AfterViewInit {
       { key: 'tl-invierno',          label: ' Invierno'             },
     ],
     'piolito': [
-      { key: 'pio-sandalias-verano-nina',  label: ' Sandalias Verano Niña'      },
-      { key: 'pio-sandalias-verano-nino',  label: ' Sandalias Verano Niño'      },
-      { key: 'pio-zapato-cerrado-nina',    label: ' Zapato Cerrado Niña'        },
-      { key: 'pio-zapatos-zapatillas',     label: ' Zapatillas'                 },
+      { key: 'pio-sandalias',     label: 'Sandalias'      },
+      { key: 'pio-zapatos',       label: 'Zapatos'        },
+      { key: 'pio-ballerinas',    label: 'Ballerinas'     },
+      { key: 'pio-botas-botines', label: 'Botas y Botines'},
     ],
     'escolar': [
       { key: 'escolar',                    label: ' Escolar'                    },
@@ -186,11 +180,10 @@ export class Productos implements OnInit, AfterViewInit {
     if (linea !== 'piolito') {
       this.filtroTalla.set(null);
     }
-    this.observeFadeElements();
   }
-  setSubcat(s: string): void     { this.filtroSubcat.set(s);  this.filtroTalla.set(null);  this.observeFadeElements(); }
-  setGenero(g: string): void     { this.filtroGenero.set(g);  this.filtroTalla.set(null);  this.observeFadeElements(); }
-  toggleTalla(t: number): void   { this.filtroTalla.set(this.filtroTalla() === t ? null : t); this.observeFadeElements(); }
+  setSubcat(s: string): void     { this.filtroSubcat.set(s);  this.filtroTalla.set(null); }
+  setGenero(g: string): void     { this.filtroGenero.set(g);  this.filtroTalla.set(null); }
+  toggleTalla(t: number): void   { this.filtroTalla.set(this.filtroTalla() === t ? null : t); }
   abrirModal(p: Producto): void  { this.productoModal.set(p); }
   cerrarModal(): void            { this.productoModal.set(null); }
 
@@ -200,7 +193,6 @@ export class Productos implements OnInit, AfterViewInit {
     this.filtroGenero.set('todos');
     this.filtroTalla.set(null);
     this.busqueda.set('');
-    this.observeFadeElements();
   }
 
   waTexto(p: Producto): string {

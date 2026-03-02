@@ -824,7 +824,13 @@
 }
 
 
-/* ── Mejoras Manual de Marca ── */
+/* ── Fix: tarjetas del grid visibles sin observer ── */
+.products-grid .fade-up,
+.products-list .fade-up {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeUp .4s ease var(--delay, 0s) both;
+}
 .stripe {
   display: grid;
   grid-template-columns: repeat(4,1fr);
