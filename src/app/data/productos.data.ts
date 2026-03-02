@@ -26,6 +26,7 @@ export interface Producto {
   descripcion:   string;
   nuevo?:        boolean;
   destacado?:    boolean;   // true → aparece en el Home
+  colores?:      string[];  // CSS color strings for swatches
 }
 
 export const PRODUCTOS: Producto[] = [

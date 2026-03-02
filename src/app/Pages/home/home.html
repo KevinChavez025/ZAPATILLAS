@@ -180,7 +180,7 @@
             <span class="dest-badge">Nuevo ✨</span>
           }
           <div class="dest-overlay">
-            <a routerLink="/productos" class="dest-overlay-btn">Ver en catálogo</a>
+            <a [routerLink]="['/productos']" [queryParams]="{linea: p.linea, id: p.id}" class="dest-overlay-btn">Ver en catálogo</a>
           </div>
         </div>
         <div class="dest-info">
@@ -209,7 +209,7 @@
             <span class="dest-badge">Nuevo ✨</span>
           }
           <div class="dest-overlay">
-            <a routerLink="/productos" class="dest-overlay-btn">Ver en catálogo</a>
+            <a [routerLink]="['/productos']" [queryParams]="{linea: p.linea, id: p.id}" class="dest-overlay-btn">Ver en catálogo</a>
           </div>
         </div>
         <div class="dest-info">

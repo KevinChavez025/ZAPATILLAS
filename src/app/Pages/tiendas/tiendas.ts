@@ -1,4 +1,4 @@
-import { Component, signal, computed, AfterViewInit, ElementRef, ViewChild, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, signal, computed, AfterViewInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SanitizeUrlPipe } from '../../pipes/sanitize-url.pipe';
 
@@ -40,36 +40,55 @@ export class Tiendas implements AfterViewInit, OnDestroy {
       desc: 'Cada pieza se corta con precisión usando moldes propios diseñados especialmente para el pie infantil, garantizando un ajuste perfecto en cada talla.' },
     { num: 2, nombre: 'Manipulación de cueros',   icon: '', video: 'assets/videos/paso2.webm',
       desc: 'Los cortes son tratados y preparados a mano: se humedecen, moldean y acondicnan para que el cuero quede flexible y listo para el armado.' },
-    { num: 3, nombre: 'Aparado de los cortes',    icon: '', video: 'assets/videos/paso3.webm',
-      desc: 'Las piezas se unen con costuras finas y resistentes. Este proceso define la forma del zapato y garantiza que las uniones duren con el uso diario.' },
-    { num: 4, nombre: 'Conformado de los cortes', icon: '', video: 'assets/videos/paso4.webm',
+    { num: 3, nombre: 'Conformado de los cortes', icon: '', video: 'assets/videos/paso4.webm',
       desc: 'El corte armado se monta sobre una horma que replica la forma del pie del niño, dándole al zapato su silueta definitiva y su comodidad característica.' },
-    { num: 5, nombre: 'Cosido',                   icon: '', video: 'assets/videos/paso5.webm',
+    { num: 4, nombre: 'Cosido',                   icon: '', video: 'assets/videos/paso5.webm',
       desc: 'Se realizan los costuras estructurales que dan firmeza al calzado. Cada punto es revisado para asegurar que soporte el movimiento activo del niño.' },
-    { num: 6, nombre: 'Ensuelado',                icon: '', video: 'assets/videos/paso6.webm',
+    { num: 5, nombre: 'Ensuelado',                icon: '', video: 'assets/videos/paso6.webm',
       desc: 'La suela antideslizante se adhiere con presión y calor, asegurando una unión duradera que protege los primeros pasos del niño en cualquier superficie.' },
-    { num: 7, nombre: 'Acabado',                  icon: '', video: 'assets/videos/paso7.webm',
+    { num: 6, nombre: 'Acabado',                  icon: '', video: 'assets/videos/paso7.webm',
       desc: 'El zapato pasa por un control de calidad final: limpieza, pulido, revisión de costuras y presentación. Cada Piolito sale de fábrica listo para conquistar.' },
-    { num: 8, nombre: 'Empaquetado',              icon: '', video: 'assets/videos/paso8.webm',
-      desc: 'Cada Piolito es empacado con cuidado, asegurando que llegue al niño en perfecto estado, listo para ser disfrutado.' },
   ];
 
-  pasoActivo  = 0;
+  pasoActivo   = 0;
   pasoAnterior = -1;
-  progreso    = 0;
+  progreso     = 0;
   private timerInterval?: ReturnType<typeof setInterval>;
+  private scrollObserver?: IntersectionObserver;         // ← NUEVO
   private readonly DURACION_SEG = 5;
 
   ngAfterViewInit() {
+    // ─── Videos ──────────────────────────────────────────────────────────────
+    document.querySelectorAll<HTMLVideoElement>('.pstack-video').forEach(v => {
+      v.muted = true;
+      v.volume = 0;
+    });
     this.iniciarTimer();
-    setTimeout(() => {
-      document.querySelectorAll<HTMLVideoElement>('.pstack-video')
-        .forEach(v => { v.muted = true; v.volume = 0; });
-    }, 200);
+    this.activarVideo(0);
+
+    // ─── IntersectionObserver para fade-in al hacer scroll ───────────────────
+    this.scrollObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            this.scrollObserver!.unobserve(entry.target); // solo una vez
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    // Registrar todos los elementos que deben animarse al entrar en viewport
+    const targets = document.querySelectorAll(
+      '.proceso-header, .pnace-stack, .pnace-info, .tiendas-layout'
+    );
+    targets.forEach(el => this.scrollObserver!.observe(el));
   }
 
   ngOnDestroy() {
     this.detenerTimer();
+    this.scrollObserver?.disconnect();                   // ← NUEVO
   }
 
   private iniciarTimer() {
@@ -92,9 +111,11 @@ export class Tiendas implements AfterViewInit, OnDestroy {
 
   private activarVideo(i: number) {
     setTimeout(() => {
-      const videos = document.querySelectorAll<HTMLVideoElement>('.reel-video');
+      const videos = document.querySelectorAll<HTMLVideoElement>('.pstack-video');
       videos.forEach((v, idx) => {
-        if (idx === i) { v.currentTime = 0; v.play(); }
+        v.muted = true;
+        v.volume = 0;
+        if (idx === i) { v.currentTime = 0; v.play().catch(() => {}); }
         else { v.pause(); }
       });
     }, 50);
@@ -132,7 +153,14 @@ export class Tiendas implements AfterViewInit, OnDestroy {
 
   readonly tiendaFiltradas = computed(() => this.tiendas);
 
-  seleccionar(t: Tienda): void { this.tiendaActiva.set(t); }
+  seleccionar(t: Tienda): void {
+    if (this.tiendaActiva()?.id === t.id) return;
+    this.tiendaActiva.set(null);
+    setTimeout(() => {
+      this.tiendaActiva.set(t);
+      this.cdr.detectChanges();
+    }, 20);
+  }
 
   mapUrl(t: Tienda): string {
     return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(t.direccion + ', ' + t.ciudad + ', Perú')}`;
@@ -141,6 +169,7 @@ export class Tiendas implements AfterViewInit, OnDestroy {
   waTexto(t: Tienda): string {
     return encodeURIComponent(`Hola! Quisiera saber el horario y cómo llegar a *${t.nombre}* en ${t.ciudad}.`);
   }
+
   mapaImagenUrl(t: Tienda): string {
     return `https://maps.geoapify.com/v1/staticmap?style=osm-bright&width=800&height=450&center=lonlat:${t.lng},${t.lat}&zoom=16&marker=lonlat:${t.lng},${t.lat}&apiKey=${GEOAPIFY_KEY}`;
   }
@@ -150,5 +179,4 @@ export class Tiendas implements AfterViewInit, OnDestroy {
     video.volume = 0;
     if (video.paused) { video.play(); } else { video.pause(); }
   }
-
 }

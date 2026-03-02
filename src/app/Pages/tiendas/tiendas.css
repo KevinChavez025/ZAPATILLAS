@@ -19,6 +19,7 @@
   pointer-events: none;
 }
 .hero-inner { position: relative; z-index: 2; }
+
 /* ─── ANIMACIONES HERO ─── */
 @keyframes fadeSlideDown {
   from { opacity: 0; transform: translateY(-18px); }
@@ -50,11 +51,12 @@
   animation: fadeSlideUp .6s cubic-bezier(.22,1,.36,1) .1s both;
 }
 .hero-title .yl { color: var(--yellow); }
-.hero-sub { color: rgba(255,255,255,.55); font-size: .9rem; font-weight: 600; margin-bottom: 32px;
+.hero-sub {
+  color: rgba(255,255,255,.55); font-size: .9rem; font-weight: 600; margin-bottom: 32px;
   animation: fadeIn .6s ease .3s both;
 }
-
-.hero-stats { display: flex; gap: 36px;
+.hero-stats {
+  display: flex; gap: 36px;
   animation: fadeIn .6s ease .4s both;
 }
 .hstat-n { font-family: var(--font-title), sans-serif; font-size: 2.2rem; color: var(--yellow); display: block; line-height: 1; }
@@ -69,7 +71,6 @@
 .filter-row { display: flex; flex-direction: column; gap: 8px; }
 .filter-label { font-size: .68rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.4); }
 .dept-tabs, .tipo-btns { display: flex; flex-wrap: wrap; gap: 6px; }
-
 .dept-tab, .tipo-btn {
   background: rgba(255,255,255,.08);
   border: 1.5px solid rgba(255,255,255,.12);
@@ -119,7 +120,16 @@
   margin-bottom: 10px;
   cursor: pointer;
   transition: all .25s;
+  animation: detalleFadeIn .4s cubic-bezier(.22,1,.36,1) both;
 }
+.tienda-card:nth-child(1) { animation-delay: .05s; }
+.tienda-card:nth-child(2) { animation-delay: .12s; }
+.tienda-card:nth-child(3) { animation-delay: .19s; }
+.tienda-card:nth-child(4) { animation-delay: .26s; }
+.tienda-card:nth-child(5) { animation-delay: .33s; }
+.tienda-card:nth-child(6) { animation-delay: .40s; }
+.tienda-card:nth-child(7) { animation-delay: .47s; }
+.tienda-card:nth-child(8) { animation-delay: .54s; }
 .tienda-card:hover { border-color: var(--navy); transform: translateX(3px); }
 .tienda-card.active { border-color: var(--navy); background: #eef1ff; box-shadow: 0 4px 20px rgba(27,42,107,.12); }
 .tienda-card.destacada { border-left: 4px solid var(--red); }
@@ -139,38 +149,27 @@
   font-size: 1rem; font-weight: 900; color: var(--navy);
   margin-bottom: 10px; line-height: 1.2;
 }
-.card-row {
-  display: flex; align-items: flex-start; gap: 8px;
-  margin-bottom: 5px;
-}
+.card-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 5px; }
 .card-icon { font-size: .85rem; flex-shrink: 0; margin-top: 1px; }
 .card-val { font-size: .78rem; color: #666; font-weight: 600; line-height: 1.4; }
 
 .card-actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
 .btn-map {
-  flex: 1;
-  text-align: center;
+  flex: 1; text-align: center;
   background: var(--cream, #fdf6e3);
   border: 1.5px solid #e0ddd0;
-  color: var(--navy);
-  text-decoration: none;
-  padding: 7px 12px;
-  border-radius: 50px;
-  font-size: .72rem; font-weight: 800;
-  transition: all .2s;
+  color: var(--navy); text-decoration: none;
+  padding: 7px 12px; border-radius: 50px;
+  font-size: .72rem; font-weight: 800; transition: all .2s;
 }
 .btn-map:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
 
 .btn-wa-sm {
   flex: 1;
   display: inline-flex; align-items: center; justify-content: center; gap: 5px;
-  background: var(--wa);
-  color: var(--white);
-  text-decoration: none;
-  padding: 7px 12px;
-  border-radius: 50px;
-  font-size: .72rem; font-weight: 800;
-  transition: filter .2s;
+  background: var(--wa); color: var(--white); text-decoration: none;
+  padding: 7px 12px; border-radius: 50px;
+  font-size: .72rem; font-weight: 800; transition: filter .2s;
 }
 .btn-wa-sm svg { width: 13px; height: 13px; fill: white; flex-shrink: 0; }
 .btn-wa-sm:hover { filter: brightness(1.1); }
@@ -179,24 +178,19 @@
 .mapa-panel { display: flex; flex-direction: column; overflow: hidden; }
 
 .mapa-wrap {
-  flex: 1;
-  min-height: 420px;
-  position: relative;
-  background: #ddd;
+  flex: 1; min-height: 420px;
+  position: relative; background: #ddd;
 }
 .mapa-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
 
 /* Card flotante sobre mapa */
 .mapa-overlay-card {
-  position: absolute;
-  top: 16px; left: 16px;
-  background: var(--white);
-  border-radius: 12px;
+  position: absolute; top: 16px; left: 16px;
+  background: var(--white); border-radius: 12px;
   padding: 14px 18px;
   box-shadow: 0 8px 28px rgba(0,0,0,.18);
   display: flex; align-items: center; gap: 16px;
-  max-width: 380px;
-  z-index: 10;
+  max-width: 380px; z-index: 10;
 }
 .moc-left { display: flex; flex-direction: column; gap: 2px; }
 .moc-dept { font-size: .62rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; color: var(--red); }
@@ -206,8 +200,7 @@
   background: var(--navy); color: var(--white);
   text-decoration: none; padding: 8px 16px;
   border-radius: 50px; font-size: .72rem; font-weight: 800;
-  white-space: nowrap; transition: filter .2s;
-  flex-shrink: 0;
+  white-space: nowrap; transition: filter .2s; flex-shrink: 0;
 }
 .moc-btn:hover { filter: brightness(1.15); }
 
@@ -220,8 +213,7 @@
 .detalle-header {
   display: flex; align-items: flex-start;
   justify-content: space-between; gap: 16px;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
+  margin-bottom: 20px; padding-bottom: 20px;
   border-bottom: 2px solid #f0f0f0;
 }
 .detalle-header.destacada { border-left: 5px solid var(--red); padding-left: 16px; }
@@ -229,10 +221,8 @@
 .detalle-nombre { font-family: var(--font-title); font-size: 1.4rem; font-weight: 900; color: var(--navy); }
 
 .detalle-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 24px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-bottom: 24px;
 }
 .detalle-item { display: flex; flex-direction: column; gap: 4px; }
 .di-label { font-size: .68rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; color: #bbb; }
@@ -240,27 +230,19 @@
 
 .detalle-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 .btn-map-lg {
-  flex: 1;
-  text-align: center;
+  flex: 1; text-align: center;
   background: var(--cream, #fdf6e3);
-  border: 2px solid #ddd;
-  color: var(--navy);
-  text-decoration: none;
-  padding: 12px 20px;
-  border-radius: 50px;
-  font-size: .82rem; font-weight: 800;
-  transition: all .2s;
+  border: 2px solid #ddd; color: var(--navy);
+  text-decoration: none; padding: 12px 20px;
+  border-radius: 50px; font-size: .82rem; font-weight: 800; transition: all .2s;
 }
 .btn-map-lg:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
 
 .btn-wa-lg {
   flex: 1;
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  background: var(--wa);
-  color: var(--white);
-  text-decoration: none;
-  padding: 12px 20px;
-  border-radius: 50px;
+  background: var(--wa); color: var(--white); text-decoration: none;
+  padding: 12px 20px; border-radius: 50px;
   font-size: .82rem; font-weight: 800;
   box-shadow: 0 6px 18px rgba(37,211,102,.35);
   transition: filter .2s, transform .2s;
@@ -297,10 +279,7 @@
   padding: 72px 60px 80px;
   overflow: hidden;
 }
-.proceso-header {
-  max-width: 600px;
-  margin-bottom: 48px;
-}
+.proceso-header { max-width: 600px; margin-bottom: 48px; }
 .proceso-eyebrow {
   font-size: 1.2rem; font-weight: 800;
   letter-spacing: .18em; text-transform: uppercase;
@@ -314,58 +293,45 @@
 .proceso-title .yl { color: var(--yellow); }
 .proceso-sub { color: rgba(255,255,255,.45); font-size: 1.05rem; line-height: 1.7; }
 
-/* ── LAYOUT 2 COLS ── */
+/* ── LAYOUT 2 COLS — stack izquierda FIJO, info derecha ── */
 .pnace-layout {
   display: grid;
-  grid-template-columns: 420px 1fr;
-  gap: 40px;
-  align-items: center;
+  grid-template-columns: 340px 1fr;  /* ← stack con ancho fijo garantizado */
+  gap: 60px;
+  align-items: start;
 }
-
-/* En desktop: info (2do en DOM) va a la derecha, stack (1ro en DOM → pero movido al final) va izquierda */
-.pnace-info  { order: 2; }
 .pnace-stack { order: 1; }
+.pnace-info  { order: 2; }
 
 /* ── STACK VIDEOS ── */
 .pnace-stack {
   position: relative;
-  height: 620px;
+  height: 500px;
 }
 
 .pstack-card {
-  position: absolute;
-  width: 220px;
-  aspect-ratio: 9/16;
-  border-radius: 18px;
-  overflow: hidden;
-  background: #111;
-  transition: all .55s cubic-bezier(.4,0,.2,1);
-  cursor: pointer;
+  position: absolute; width: 220px;
+  aspect-ratio: 9/16; border-radius: 18px;
+  overflow: hidden; background: #111;
+  transition: all .55s cubic-bezier(.4,0,.2,1); cursor: pointer;
 }
-
-/* activo (pos=0): al frente, centrado */
 .pstack-card[data-pos="0"] {
-  left: 30px; top: 0;
-  width: 310px;
-  transform: scale(1) rotate(0deg);
-  z-index: 10;
-  box-shadow: 0 24px 64px rgba(0,0,0,.9);
-  cursor: default;
+  left: 0; top: 0;
+  width: 260px;
+  transform: scale(1) rotate(0deg); z-index: 10;
+  box-shadow: 0 24px 64px rgba(0,0,0,.9); cursor: default;
 }
-/* siguiente (pos=1): ligeramente visible detrás */
 .pstack-card[data-pos="1"] {
-  left: 50px; top: 14px;
+  left: 18px; top: 12px;
   transform: scale(0.91) rotate(2deg);
   z-index: 8; opacity: .7;
   box-shadow: 0 12px 32px rgba(0,0,0,.6);
 }
-/* pos=2 */
 .pstack-card[data-pos="2"] {
-  left: 65px; top: 26px;
+  left: 32px; top: 22px;
   transform: scale(0.83) rotate(4deg);
   z-index: 6; opacity: .45;
 }
-/* pos>=3: oculto */
 .pstack-card[data-pos="3"],
 .pstack-card[data-pos="4"],
 .pstack-card[data-pos="5"],
@@ -375,7 +341,6 @@
   transform: scale(0.78) rotate(6deg);
   z-index: 2; opacity: 0; pointer-events: none;
 }
-/* pasados (pos negativo): salen por abajo a la izquierda */
 .pstack-card[data-pos="-1"],
 .pstack-card[data-pos="-2"],
 .pstack-card[data-pos="-3"],
@@ -387,11 +352,7 @@
   transform: scale(0.6) rotate(-8deg);
   z-index: 1; opacity: 0; pointer-events: none;
 }
-
-.pstack-video {
-  width: 100%; height: 100%;
-  object-fit: cover; display: block;
-}
+.pstack-video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .pstack-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(to top, rgba(0,0,0,.5) 0%, transparent 50%);
@@ -406,14 +367,8 @@
 }
 
 /* ── INFO DERECHA ── */
-.pnace-info {
-  display: flex; flex-direction: column; gap: 16px;
-}
-
-/* Barras */
-.pnace-bars {
-  display: flex; gap: 5px;
-}
+.pnace-info { display: flex; flex-direction: column; gap: 16px; }
+.pnace-bars { display: flex; gap: 5px; }
 .pnbar {
   flex: 1; height: 3px;
   background: rgba(255,255,255,.15);
@@ -422,10 +377,7 @@
 .pnbar.done { background: rgba(255,255,255,.45); }
 .pnbar-fill { height: 100%; background: white; transition: width .1s linear; }
 
-/* Paso actual */
-.pnace-paso-info {
-  display: flex; align-items: center; gap: 16px;
-}
+.pnace-paso-info { display: flex; align-items: center; gap: 16px; }
 .pnace-icon { font-size: 3rem; }
 .pnace-step-label {
   display: block; font-size: .75rem; font-weight: 800;
@@ -437,25 +389,17 @@
   font-size: 1.8rem; font-weight: 900;
   color: white; line-height: 1.1; margin: 0;
 }
-
-/* Descripción */
 .pnace-desc {
   color: rgba(255,255,255,.6);
   font-size: .88rem; line-height: 1.7;
-  border-left: 3px solid var(--yellow);
-  padding-left: 16px;
+  border-left: 3px solid var(--yellow); padding-left: 16px;
 }
-
-/* Lista de pasos */
-.pnace-list {
-  display: flex; flex-direction: column; gap: 4px;
-}
+.pnace-list { display: flex; flex-direction: column; gap: 4px; }
 .pnace-item {
   display: flex; align-items: center; gap: 10px;
   background: transparent; border: none;
   padding: 5px 12px; border-radius: 8px;
-  cursor: pointer; text-align: left;
-  transition: background .2s;
+  cursor: pointer; text-align: left; transition: background .2s;
 }
 .pnace-item:hover { background: rgba(255,255,255,.06); }
 .pnace-item.active { background: rgba(236,194,56,.1); }
@@ -470,112 +414,115 @@
 .pnace-item.done .pni-num { background: rgba(255,255,255,.25); color: white; }
 .pni-nombre {
   font-size: .82rem; font-weight: 600;
-  color: rgba(255,255,255,.45); flex: 1;
-  transition: color .2s;
+  color: rgba(255,255,255,.45); flex: 1; transition: color .2s;
 }
 .pnace-item.active .pni-nombre { color: white; font-weight: 700; }
 .pnace-item.done .pni-nombre { color: rgba(255,255,255,.6); }
 .pni-check { color: var(--yellow); font-size: .8rem; font-weight: 900; }
 
-/* Nav botones */
 .pnace-nav { display: flex; gap: 12px; align-items: center; }
 .pnace-btn {
   background: rgba(255,255,255,.08);
   border: 1.5px solid rgba(255,255,255,.15);
   color: rgba(255,255,255,.7);
   font-family: var(--font-title); font-weight: 700; font-size: .85rem;
-  padding: 10px 20px; border-radius: 50px;
-  cursor: pointer; transition: all .2s;
+  padding: 10px 20px; border-radius: 50px; cursor: pointer; transition: all .2s;
 }
 .pnace-btn:hover { background: rgba(255,255,255,.15); color: white; }
-.pnace-btn-next {
-  background: var(--yellow); color: var(--navy);
-  border-color: var(--yellow);
-}
+.pnace-btn-next { background: var(--yellow); color: var(--navy); border-color: var(--yellow); }
 .pnace-btn-next:hover { background: #f0c800; }
 
 @media (max-width: 860px) {
   .proceso-section { padding: 48px 20px 80px; }
-
-  .pnace-layout {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  /* En móvil: info primero (order 1), stack después (order 2) */
+  .pnace-layout { grid-template-columns: 1fr; gap: 32px; }
+  .pnace-stack { order: 1; height: 360px; margin-bottom: 20px; overflow: hidden; }
   .pnace-info  { order: 2; }
-  .pnace-stack {
-    order: 1;
-    height: 360px;
-    margin-bottom: 20px;
-    overflow: hidden;
-  }
-
   .pstack-card[data-pos="0"] {
-    left: 50%;
-    top: 0;
-    width: 200px;
-    height: 340px;
-    aspect-ratio: unset;
+    left: 50%; top: 0; width: 200px; height: 340px; aspect-ratio: unset;
     transform: translateX(-50%) scale(1) rotate(0deg);
   }
   .pstack-card[data-pos="1"] {
-    left: calc(50% + 14px);
-    top: 14px;
-    width: 175px;
-    height: 310px;
-    aspect-ratio: unset;
+    left: calc(50% + 14px); top: 14px; width: 175px; height: 310px; aspect-ratio: unset;
     transform: translateX(-50%) scale(0.93) rotate(2deg);
   }
   .pstack-card[data-pos="2"] {
-    left: calc(50% + 26px);
-    top: 26px;
-    width: 160px;
-    height: 290px;
-    aspect-ratio: unset;
+    left: calc(50% + 26px); top: 26px; width: 160px; height: 290px; aspect-ratio: unset;
     transform: translateX(-50%) scale(0.86) rotate(4deg);
   }
-
   .pnace-list { max-height: 200px; overflow-y: auto; }
 }
 
 /* ─── CONTROLES VIDEO STACK ─── */
-.pstack-overlay.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
+.pstack-overlay.hidden { opacity: 0; pointer-events: none; }
 .pstack-controls {
-  position: absolute;
-  bottom: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-  z-index: 10;
+  position: absolute; bottom: 14px; left: 50%;
+  transform: translateX(-50%); display: flex; gap: 8px; z-index: 10;
 }
-
 .psc-btn {
-  width: 38px; height: 38px;
-  border-radius: 50%;
+  width: 38px; height: 38px; border-radius: 50%;
   background: rgba(0,0,0,.55);
-  border: 1.5px solid rgba(255,255,255,.25);
-  color: white;
+  border: 1.5px solid rgba(255,255,255,.25); color: white;
   display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  backdrop-filter: blur(4px);
+  cursor: pointer; backdrop-filter: blur(4px);
   transition: background .2s, transform .15s;
 }
-.psc-btn:hover {
-  background: rgba(0,0,0,.8);
-  transform: scale(1.1);
+.psc-btn:hover { background: rgba(0,0,0,.8); transform: scale(1.1); }
+.psc-btn svg { width: 16px; height: 16px; fill: white; stroke: none; }
+.psc-btn.muted svg { stroke: white; fill: none; }
+
+/* ════════════════════════════════════════════════════
+   ─── ANIMACIONES DE ENTRADA (SCROLL) ───
+   ════════════════════════════════════════════════════ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-.psc-btn svg {
-  width: 16px; height: 16px;
-  fill: white;
-  stroke: none;
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
-.psc-btn.muted svg {
-  stroke: white;
-  fill: none;
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
+
+/* Estado inicial — oculto antes de entrar al viewport */
+.proceso-header,
+.pnace-stack,
+.pnace-info,
+.tiendas-layout {
+  opacity: 0;
+}
+
+.proceso-header.visible {
+  animation: fadeInUp .75s cubic-bezier(.22,1,.36,1) forwards;
+}
+.pnace-stack.visible {
+  animation: fadeInLeft .85s cubic-bezier(.22,1,.36,1) .2s forwards;
+}
+.pnace-info.visible {
+  animation: fadeInRight .85s cubic-bezier(.22,1,.36,1) .35s forwards;
+}
+.tiendas-layout.visible {
+  animation: fadeInUp .75s cubic-bezier(.22,1,.36,1) .1s forwards;
+}
+
+/* ════════════════════════════════════════════════════
+   ─── FADE-IN SECCIÓN TIENDAS / MAPA ───
+   ════════════════════════════════════════════════════ */
+@keyframes mapaPanelFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes detalleFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.mapa-panel        { animation: mapaPanelFadeIn .65s cubic-bezier(.22,1,.36,1) both; }
+.mapa-wrap         { animation: mapaPanelFadeIn .5s  cubic-bezier(.22,1,.36,1) .1s  both; }
+.mapa-overlay-card { animation: mapaPanelFadeIn .55s cubic-bezier(.22,1,.36,1) .2s  both; }
+.detalle-card      { animation: detalleFadeIn   .5s  cubic-bezier(.22,1,.36,1) .25s both; }
+.detalle-header    { animation: detalleFadeIn   .45s cubic-bezier(.22,1,.36,1) .3s  both; }
+.detalle-grid      { animation: detalleFadeIn   .45s cubic-bezier(.22,1,.36,1) .4s  both; }
+.detalle-actions   { animation: detalleFadeIn   .45s cubic-bezier(.22,1,.36,1) .5s  both; }
