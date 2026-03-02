@@ -108,7 +108,7 @@
   <div class="proceso-header">
     <span class="proceso-eyebrow">Nuestra fábrica</span>
     <h2 class="proceso-title">Así nace un <span class="yl">Piolito</span></h2>
-    <p class="proceso-sub">Cada par pasa por 8 etapas artesanales, con cuero legítimo y manos peruanas.</p>
+    <p class="proceso-sub">Cada par pasa por 7 etapas artesanales, con cuero legítimo y manos peruanas.</p>
   </div>
 
   <div class="pnace-layout">
@@ -128,7 +128,7 @@
       <div class="pnace-paso-info">
         <span class="pnace-icon">{{ pasos[pasoActivo].icon }}</span>
         <div>
-          <span class="pnace-step-label">Paso {{ pasoActivo + 1 }} de 8</span>
+          <span class="pnace-step-label">Paso {{ pasoActivo + 1 }} de {{ pasos.length }}</span>
           <h3 class="pnace-step-title">{{ pasos[pasoActivo].nombre }}</h3>
         </div>
       </div>
@@ -149,7 +149,7 @@
 
       <!-- Botones nav -->
       <div class="pnace-nav">
-        <button class="pnace-btn" (click)="irAPaso((pasoActivo - 1 + 8) % 8)">&#8249;</button>
+        <button class="pnace-btn" (click)="irAPaso((pasoActivo - 1 + pasos.length) % pasos.length)">&#8249;</button>
         <button class="pnace-btn pnace-btn-next" (click)="siguientePaso()">Siguiente paso &#8250;</button>
       </div>
     </div>
@@ -163,11 +163,24 @@
           <video
             class="pstack-video"
             [src]="paso.video"
-            muted playsinline loop
-            [autoplay]="i === pasoActivo"
+            muted playsinline loop autoplay
+            #stackVid
           ></video>
-          <div class="pstack-overlay"></div>
+          <div class="pstack-overlay" [class.hidden]="i === pasoActivo"></div>
           <div class="pstack-num">{{ paso.num }}</div>
+          @if (i === pasoActivo) {
+            <div class="pstack-controls">
+              <button class="psc-btn" (click)="togglePlay(stackVid); $event.stopPropagation()" [class.playing]="!stackVid.paused">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  @if (stackVid.paused) {
+                    <polygon points="5,3 19,12 5,21"/>
+                  } @else {
+                    <rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>
+                  }
+                </svg>
+              </button>
+            </div>
+          }
         </div>
       }
     </div>

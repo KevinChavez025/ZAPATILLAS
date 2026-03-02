@@ -18,6 +18,7 @@ export class Nosotros implements AfterViewInit, OnDestroy {
   readonly waIcon = WA_ICON;
 
   activeSlide = 1;
+  playingIndex = -1; // -1 = ninguno reproduciéndose
 
   ngAfterViewInit(): void {
     const io = new IntersectionObserver((entries) => {
@@ -43,13 +44,10 @@ export class Nosotros implements AfterViewInit, OnDestroy {
 
   setActive(index: number) {
     if (this.activeSlide !== index) {
-      // Pausar todos los videos al cambiar de slide
       document.querySelectorAll('.tiktok-video').forEach((v: Element) => {
-        const vid = v as HTMLVideoElement;
-        vid.pause();
-        const ov = vid.nextElementSibling as HTMLElement;
-        if (ov) ov.classList.remove('hidden');
+        (v as HTMLVideoElement).pause();
       });
+      this.playingIndex = -1;
     }
     this.activeSlide = index;
   }
@@ -65,25 +63,28 @@ export class Nosotros implements AfterViewInit, OnDestroy {
     const overlay = event.currentTarget as HTMLElement;
     const card = overlay.closest('.tiktok-card') as HTMLElement;
     const cardIndex = parseInt(card?.getAttribute('data-index') || '-1');
+    const video = overlay.previousElementSibling as HTMLVideoElement;
 
-    // Pausar todos los otros videos siempre
+    // Pausar todos primero
     document.querySelectorAll('.tiktok-video').forEach((v: Element) => {
-      const vid = v as HTMLVideoElement;
-      const ov = vid.nextElementSibling as HTMLElement;
-      vid.pause();
-      if (ov) ov.classList.remove('hidden');
+      (v as HTMLVideoElement).pause();
     });
 
-    // Si no está centrada, centrarla primero
+    // Si ya estaba reproduciendo este → solo pausar
+    if (this.playingIndex === cardIndex) {
+      this.playingIndex = -1;
+      return;
+    }
+
+    // Centrar si no está centrado
     if (cardIndex >= 0 && this.activeSlide !== cardIndex) {
       this.activeSlide = cardIndex;
     }
 
-    // Reproducir el video de esta card
-    const video = overlay.previousElementSibling as HTMLVideoElement;
+    // Reproducir
     if (video && video.tagName === 'VIDEO') {
       video.play().catch(() => {});
-      overlay.classList.add('hidden');
+      this.playingIndex = cardIndex;
     }
   }
 

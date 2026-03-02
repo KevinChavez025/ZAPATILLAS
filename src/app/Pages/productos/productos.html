@@ -1,11 +1,11 @@
 <!-- ══════════════════════ PAGE HEADER ══════════════════════ -->
 <div class="page-hero">
-  <div class="page-hero-inner">
+  <div class="page-hero-inner fade-up">
     <span class="page-eyebrow">Catálogo Completo</span>
     <h1 class="page-title">Nuestros <span class="yl">Modelos</span></h1>
     <p class="page-sub">Cuero legítimo · Diseño ortopédico · Hecho en Perú</p>
   </div>
-  <div class="search-wrap">
+  <div class="search-wrap fade-up" style="animation-delay:.15s">
     <span class="search-icon">🔍</span>
     <input
       type="text"
@@ -23,7 +23,7 @@
 <div class="catalog-layout">
 
   <!-- ── SIDEBAR FILTROS ── -->
-  <aside class="sidebar">
+  <aside class="sidebar sidebar-enter">
 
     <!-- Línea -->
     <div class="filter-group">
@@ -109,7 +109,7 @@
   <div class="catalog-content">
 
     <!-- Toolbar -->
-    <div class="toolbar">
+    <div class="toolbar toolbar-enter">
       <span class="result-count">
         <strong>{{ productosFiltrados().length }}</strong> modelo{{ productosFiltrados().length !== 1 ? 's' : '' }} encontrado{{ productosFiltrados().length !== 1 ? 's' : '' }}
       </span>
@@ -136,17 +136,12 @@
     <!-- GRID de productos -->
     @if (productosFiltrados().length > 0 && vistaGrid()) {
       <div class="products-grid">
-        @for (p of productosFiltrados(); track p.id) {
-          <div class="prod-card" (click)="abrirModal(p)">
+        @for (p of productosFiltrados(); track p.id; let idx = $index) {
+          <div class="prod-card fade-up" [style.--delay]="(idx % 12 * 0.05) + 's'" (click)="abrirModal(p)">
             <div class="prod-img" [style.--line-color]="lineaColor(p.linea)">
               <img [src]="p.imagen" [alt]="p.codigo" class="prod-image" />
               <div class="prod-img-placeholder">
                 <span class="prod-img-code">{{ p.codigo }}</span>
-                <div class="prod-colors-preview">
-                  @for (c of p.colores.slice(0,3); track c) {
-                    <span class="color-swatch" [style.background]="c"></span>
-                  }
-                </div>
               </div>
               <div class="prod-badges">
                 @if (p.nuevo) {
@@ -168,11 +163,6 @@
                 <span class="tallas-label">Tallas:</span>
                 <span class="tallas-val">{{ p.tallas }}</span>
               </div>
-              <div class="prod-colores">
-                @for (c of p.colores; track c) {
-                  <span class="color-dot" [style.background]="c" [title]="c"></span>
-                }
-              </div>
               <a
                 [href]="(waBase + waTexto(p)) | sanitizeUrl"
                 class="btn-wa-prod"
@@ -192,8 +182,8 @@
     <!-- LISTA de productos -->
     @if (productosFiltrados().length > 0 && !vistaGrid()) {
       <div class="products-list">
-        @for (p of productosFiltrados(); track p.id) {
-          <div class="list-card" (click)="abrirModal(p)">
+        @for (p of productosFiltrados(); track p.id; let idx = $index) {
+          <div class="list-card fade-up" [style.--delay]="(idx % 12 * 0.05) + 's'" (click)="abrirModal(p)">
             <div class="list-img" [style.--line-color]="lineaColor(p.linea)">
               <img [src]="p.imagen" [alt]="p.codigo" class="prod-image" />
               <div class="prod-img-placeholder small">
@@ -211,11 +201,7 @@
               <p class="prod-desc-short">{{ p.descripcion }}</p>
               <div class="list-bottom">
                 <span class="tallas-val">Tallas: <strong>{{ p.tallas }}</strong></span>
-                <div class="prod-colores">
-                  @for (c of p.colores; track c) {
-                    <span class="color-dot" [style.background]="c"></span>
-                  }
-                </div>
+
               </div>
             </div>
             <a
@@ -245,11 +231,6 @@
           <img [src]="productoModal()!.imagen" [alt]="productoModal()!.codigo" class="prod-image" />
           <div class="prod-img-placeholder large">
             <span class="prod-img-code">{{ productoModal()!.codigo }}</span>
-            <div class="prod-colors-preview">
-              @for (c of productoModal()!.colores; track c) {
-                <span class="color-swatch lg" [style.background]="c"></span>
-              }
-            </div>
           </div>
           <div class="prod-badges modal-badges">
             @if (productoModal()!.nuevo) {
@@ -273,14 +254,6 @@
               }
             </div>
           </div>
-          <div class="modal-section">
-            <span class="modal-label">Colores disponibles</span>
-            <div class="colores-row">
-              @for (c of productoModal()!.colores; track c) {
-                <span class="color-dot lg" [style.background]="c" [title]="c"></span>
-              }
-            </div>
-          </div>
           <a
             [href]="(waBase + waTexto(productoModal()!)) | sanitizeUrl"
             class="btn-wa modal-wa"
@@ -299,14 +272,10 @@
 }
 
 <!-- WA flotante -->
-<a [href]="(waBase + 'Hola!%20Quiero%20ver%20el%20catálogo%20de%20Piolito') | sanitizeUrl"
-   class="wa-float" target="_blank" rel="noopener" title="Cotizar por WhatsApp">
-  <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
-</a>
-
-
-
-
-
-
-
+<div class="wa-float-wrap">
+  <span class="wa-bubble">Solicita nuestro catálogo completo</span>
+  <a [href]="(waBase + 'Hola!%20Quiero%20ver%20el%20catálogo%20de%20Piolito') | sanitizeUrl"
+     class="wa-float" target="_blank" rel="noopener" title="Solicita nuestro catálogo completo">
+    <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
+  </a>
+</div>

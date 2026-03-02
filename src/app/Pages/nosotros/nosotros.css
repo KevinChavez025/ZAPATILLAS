@@ -498,13 +498,26 @@
   position: absolute; inset: 0;
   background: rgba(0,0,0,.25);
   display: flex; align-items: center; justify-content: center;
-  transition: opacity .2s;
+  transition: opacity .3s, background .3s;
+  cursor: pointer;
 }
+/* Video reproduciéndose → overlay invisible */
 .tiktok-overlay.hidden {
   opacity: 0;
-  pointer-events: none;
+  background: rgba(0,0,0,0);
 }
-.tiktok-phone:hover .tiktok-overlay { opacity: 0; }
+/* Desktop: mostrar ⏸ al hacer hover */
+@media (hover: hover) {
+  .tiktok-phone:hover .tiktok-overlay.hidden {
+    opacity: 1;
+    background: rgba(0,0,0,.2);
+  }
+}
+/* Mobile: mostrar ⏸ al tocar (active) */
+.tiktok-phone:active .tiktok-overlay.hidden {
+  opacity: 1;
+  background: rgba(0,0,0,.2);
+}
 .tiktok-play {
   width: 48px; height: 48px;
   background: rgba(255,255,255,.9);
