@@ -113,25 +113,7 @@
 
   <div class="pnace-layout">
 
-    <!-- COLUMNA IZQUIERDA: STACK DE VIDEOS -->
-    <div class="pnace-stack">
-      @for (paso of pasos; track paso.num; let i = $index) {
-        <div class="pstack-card"
-          [attr.data-pos]="i - pasoActivo"
-          (click)="i !== pasoActivo ? irAPaso(i) : null">
-          <video
-            class="pstack-video"
-            [src]="paso.video"
-            muted playsinline loop
-            [autoplay]="i === pasoActivo"
-          ></video>
-          <div class="pstack-overlay"></div>
-          <div class="pstack-num">{{ paso.num }}</div>
-        </div>
-      }
-    </div>
-
-    <!-- COLUMNA DERECHA: INFO -->
+    <!-- COLUMNA DERECHA: INFO (primero en DOM para móvil) -->
     <div class="pnace-info">
       <!-- Barras stories -->
       <div class="pnace-bars">
@@ -170,6 +152,24 @@
         <button class="pnace-btn" (click)="irAPaso((pasoActivo - 1 + 8) % 8)">&#8249;</button>
         <button class="pnace-btn pnace-btn-next" (click)="siguientePaso()">Siguiente paso &#8250;</button>
       </div>
+    </div>
+
+    <!-- COLUMNA IZQUIERDA: STACK DE VIDEOS -->
+    <div class="pnace-stack">
+      @for (paso of pasos; track paso.num; let i = $index) {
+        <div class="pstack-card"
+          [attr.data-pos]="i - pasoActivo"
+          (click)="i !== pasoActivo ? irAPaso(i) : null">
+          <video
+            class="pstack-video"
+            [src]="paso.video"
+            muted playsinline loop
+            [autoplay]="i === pasoActivo"
+          ></video>
+          <div class="pstack-overlay"></div>
+          <div class="pstack-num">{{ paso.num }}</div>
+        </div>
+      }
     </div>
 
   </div>

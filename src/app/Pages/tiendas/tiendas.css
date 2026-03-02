@@ -322,6 +322,10 @@
   align-items: center;
 }
 
+/* En desktop: info (2do en DOM) va a la derecha, stack (1ro en DOM → pero movido al final) va izquierda */
+.pnace-info  { order: 2; }
+.pnace-stack { order: 1; }
+
 /* ── STACK VIDEOS ── */
 .pnace-stack {
   position: relative;
@@ -491,10 +495,46 @@
 .pnace-btn-next:hover { background: #f0c800; }
 
 @media (max-width: 860px) {
-  .proceso-section { padding: 48px 24px 60px; }
-  .pnace-layout { grid-template-columns: 1fr; gap: 40px; }
-  .pnace-stack { height: 360px; }
-  .pstack-card[data-pos="0"] { left: 50%; transform: translateX(-50%); }
-  .pstack-card[data-pos="1"] { left: calc(50% + 14px); top: 12px; transform: translateX(-50%) scale(0.93) rotate(2deg); }
-  .pstack-card[data-pos="2"] { left: calc(50% + 26px); top: 22px; transform: translateX(-50%) scale(0.86) rotate(4deg); }
+  .proceso-section { padding: 48px 20px 80px; }
+
+  .pnace-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  /* En móvil: info primero (order 1), stack después (order 2) */
+  .pnace-info  { order: 2; }
+  .pnace-stack {
+    order: 1;
+    height: 360px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .pstack-card[data-pos="0"] {
+    left: 50%;
+    top: 0;
+    width: 200px;
+    height: 340px;
+    aspect-ratio: unset;
+    transform: translateX(-50%) scale(1) rotate(0deg);
+  }
+  .pstack-card[data-pos="1"] {
+    left: calc(50% + 14px);
+    top: 14px;
+    width: 175px;
+    height: 310px;
+    aspect-ratio: unset;
+    transform: translateX(-50%) scale(0.93) rotate(2deg);
+  }
+  .pstack-card[data-pos="2"] {
+    left: calc(50% + 26px);
+    top: 26px;
+    width: 160px;
+    height: 290px;
+    aspect-ratio: unset;
+    transform: translateX(-50%) scale(0.86) rotate(4deg);
+  }
+
+  .pnace-list { max-height: 200px; overflow-y: auto; }
 }

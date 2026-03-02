@@ -92,7 +92,7 @@ footer {
 .foot-bottom {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding-top: 24px;
 }
 .foot-bottom p { color: rgba(255,255,255,.25); font-size: .75rem; font-weight: 600; }
