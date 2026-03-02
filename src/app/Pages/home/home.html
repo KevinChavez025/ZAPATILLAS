@@ -175,11 +175,6 @@
           <img [src]="p.imagen" [alt]="p.codigo" class="dest-image" />
           <div class="dest-img-inner dest-img-fallback">
             <span class="dest-img-code">{{ p.codigo }}</span>
-            <div class="dest-colores">
-              @for (c of p.colores; track c) {
-                <span class="dest-swatch" [style.background]="c"></span>
-              }
-            </div>
           </div>
           @if (p.nuevo) {
             <span class="dest-badge">Nuevo ✨</span>
@@ -209,11 +204,6 @@
           <img [src]="p.imagen" [alt]="p.codigo" class="dest-image" />
           <div class="dest-img-inner dest-img-fallback">
             <span class="dest-img-code">{{ p.codigo }}</span>
-            <div class="dest-colores">
-              @for (c of p.colores; track c) {
-                <span class="dest-swatch" [style.background]="c"></span>
-              }
-            </div>
           </div>
           @if (p.nuevo) {
             <span class="dest-badge">Nuevo ✨</span>
