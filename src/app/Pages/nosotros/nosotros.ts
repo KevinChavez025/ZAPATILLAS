@@ -1,7 +1,5 @@
-import { Component, AfterViewInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SanitizeUrlPipe } from '../../pipes/sanitize-url.pipe';
 
 const WA_NUMBER = '51977938796';
 const WA_BASE   = `https://wa.me/${WA_NUMBER}?text=`;
@@ -11,16 +9,17 @@ const WA_ICON   =
 @Component({
   selector: 'app-nosotros',
   standalone: true,
-  imports: [RouterLink, CommonModule, SanitizeUrlPipe],
+  imports: [CommonModule],
   templateUrl: './nosotros.html',
   styleUrl: './nosotros.css',
 })
-export class Nosotros implements AfterViewInit {
+export class Nosotros implements AfterViewInit, OnDestroy {
   readonly waBase = WA_BASE;
   readonly waIcon = WA_ICON;
 
+  activeSlide = 1;
+
   ngAfterViewInit(): void {
-    // Animaciones generales rise/slide
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
@@ -28,14 +27,77 @@ export class Nosotros implements AfterViewInit {
     }, { threshold: 0.12 });
     document.querySelectorAll('.rise, .slide-right, .slide-up').forEach(el => io.observe(el));
 
-    // Animación sección TikToks/redes sociales
     const ioTiktoks = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('in-view'); ioTiktoks.unobserve(e.target); }
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          ioTiktoks.unobserve(e.target);
+        }
       });
     }, { threshold: 0.15 });
     const tiktoksSection = document.querySelector('.nos-tiktoks');
     if (tiktoksSection) ioTiktoks.observe(tiktoksSection);
+  }
+
+  ngOnDestroy(): void {}
+
+  setActive(index: number) {
+    if (this.activeSlide !== index) {
+      // Pausar todos los videos al cambiar de slide
+      document.querySelectorAll('.tiktok-video').forEach((v: Element) => {
+        const vid = v as HTMLVideoElement;
+        vid.pause();
+        const ov = vid.nextElementSibling as HTMLElement;
+        if (ov) ov.classList.remove('hidden');
+      });
+    }
+    this.activeSlide = index;
+  }
+
+  onCardClick(index: number, event: Event) {
+    const target = event.target as HTMLElement;
+    if (target.closest('.tiktok-phone')) return;
+    this.setActive(index);
+  }
+
+  toggleVideo(event: Event) {
+    event.stopPropagation();
+    const overlay = event.currentTarget as HTMLElement;
+    const card = overlay.closest('.tiktok-card') as HTMLElement;
+    const cardIndex = parseInt(card?.getAttribute('data-index') || '-1');
+
+    // Pausar todos los otros videos siempre
+    document.querySelectorAll('.tiktok-video').forEach((v: Element) => {
+      const vid = v as HTMLVideoElement;
+      const ov = vid.nextElementSibling as HTMLElement;
+      vid.pause();
+      if (ov) ov.classList.remove('hidden');
+    });
+
+    // Si no está centrada, centrarla primero
+    if (cardIndex >= 0 && this.activeSlide !== cardIndex) {
+      this.activeSlide = cardIndex;
+    }
+
+    // Reproducir el video de esta card
+    const video = overlay.previousElementSibling as HTMLVideoElement;
+    if (video && video.tagName === 'VIDEO') {
+      video.play().catch(() => {});
+      overlay.classList.add('hidden');
+    }
+  }
+
+  get orderedCards() {
+    // Orden fijo - las clases CSS controlan la posición visual
+    return [0, 1, 2];
+  }
+
+  getPos(index: number): string {
+    const total = 3;
+    const diff = (index - this.activeSlide + total) % total;
+    if (diff === 0) return 'center';
+    if (diff === 1) return 'right';
+    return 'left';
   }
 
   valores = [

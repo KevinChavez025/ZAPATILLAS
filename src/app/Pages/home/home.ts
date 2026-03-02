@@ -57,7 +57,6 @@ export class Home implements AfterViewInit {
     { nombre: 'Ecuador',   tiendas: 2, color: '#089347' },
     { nombre: 'Chile',     tiendas: 2, color: '#ECC238' },
     { nombre: 'Bolivia',   tiendas: 1, color: '#ECC238' },
-    { nombre: 'México',    tiendas: 1, color: '#ECC238' },
   ];
 
   private readonly lineaLabelMap: Record<string, string> = {

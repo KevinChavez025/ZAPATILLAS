@@ -634,13 +634,39 @@
 
 /* ═══════════════════════════ PRODUCTOS DESTACADOS ═══════════════════════════ */
 .destacados-section { background: var(--white); }
+
+/* Wrapper del slider */
 .destacados-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 8px;
+  display: flex;
+  gap: 20px;
+  margin-top: 8px;
+  overflow: hidden;
+  position: relative;
 }
+
+/* Track que se mueve */
+.destacados-track {
+  display: flex;
+  gap: 20px;
+  animation: slider-scroll 30s linear infinite;
+  will-change: transform;
+}
+
+.destacados-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes slider-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 .dest-card {
   background: var(--white); border-radius: 18px; overflow: hidden;
   box-shadow: 0 2px 12px rgba(0,0,0,.07); transition: transform .3s, box-shadow .3s;
   cursor: pointer;
+  flex-shrink: 0;
+  width: 280px;
 }
 .dest-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,.14); }
 .dest-card:hover .dest-overlay { opacity: 1; }
@@ -881,7 +907,7 @@
   .store-right { padding: 40px 32px; }
   .contact-section { padding: 60px 24px; }
   .stores-section { padding: 60px 24px; }
-  .destacados-grid { grid-template-columns: 1fr 1fr; }
+  .destacados-grid { }
   .ubic-inner { grid-template-columns: 1fr; }
   .ubic-left { padding: 52px 24px; }
   .ubic-right { clip-path: none; padding: 40px 24px; min-height: 380px; }
@@ -893,7 +919,7 @@
   .hero-stats { gap: 24px; }
   .store-left { padding: 40px 28px; }
   .hero-kid-img { height: 260px; }
-  .destacados-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .destacados-grid { }
   .hero-right { display: none; }
 }
 

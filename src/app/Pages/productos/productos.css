@@ -487,6 +487,7 @@
   background: #ffffff;
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
+  position: relative;
 }
 .list-img .prod-image {
   padding: 8px;

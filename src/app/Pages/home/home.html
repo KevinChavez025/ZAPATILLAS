@@ -9,8 +9,7 @@
     </h1>
 
     <p class="hero-sub">
-      Fabricamos calzado infantil al por mayor y con tu diseño propio —
-      desde 6 pares, entrega en 2–3 semanas.
+      Fabricamos calzado infantil al por mayor con la calidad y el corazón que nos distingue — desde 6 pares, entrega en 2 a 3 semanas.
     </p>
 
     <div class="hero-btns">
@@ -124,9 +123,9 @@
   <div class="about-text rise">
     <span class="sec-eyebrow" style="color: var(--yellow)">Fabricación Propia</span>
     <h2 class="sec-title" style="color: white">
-      Fabricamos con<br><span class="yl">tu diseño</span>
+      Calzado infantil<br><span class="yl">hecho en Perú</span>
     </h2>
-    <p>Somos una fábrica peruana con más de 20 años de experiencia. Distribuimos nuestros modelos al por mayor desde 2 pares, y también fabricamos con tu propio diseño desde 6 pares. Entrega en 2 a 3 semanas. Enviamos a toda Latinoamérica y EE.UU.</p>
+    <p>Somos una fábrica peruana con más de 20 años de experiencia. Distribuimos nuestros modelos al por mayor desde 6 pares con el sello y la calidad que nos distingue. Entrega en 2 a 3 semanas. Enviamos a toda Latinoamérica y EE.UU.</p>
     <a [href]="(waBase + 'Hola!%20Quisiera%20saber%20más%20sobre%20Piolito') | sanitizeUrl"
       class="btn-wa" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
@@ -169,8 +168,9 @@
   </div>
 
   <div class="destacados-grid">
+    <div class="destacados-track">
     @for (p of destacados; track p.id; let i = $index) {
-      <div class="dest-card rise" [class]="'d' + (i+1)" [style.--lc]="lineaColor(p.linea)">
+      <div class="dest-card" [style.--lc]="lineaColor(p.linea)">
         <div class="dest-img">
           <img [src]="p.imagen" [alt]="p.codigo" class="dest-image" />
           <div class="dest-img-inner dest-img-fallback">
@@ -202,6 +202,41 @@
         </div>
       </div>
     }
+    <!-- Duplicado para loop infinito -->
+    @for (p of destacados; track p.id) {
+      <div class="dest-card" [style.--lc]="lineaColor(p.linea)">
+        <div class="dest-img">
+          <img [src]="p.imagen" [alt]="p.codigo" class="dest-image" />
+          <div class="dest-img-inner dest-img-fallback">
+            <span class="dest-img-code">{{ p.codigo }}</span>
+            <div class="dest-colores">
+              @for (c of p.colores; track c) {
+                <span class="dest-swatch" [style.background]="c"></span>
+              }
+            </div>
+          </div>
+          @if (p.nuevo) {
+            <span class="dest-badge">Nuevo ✨</span>
+          }
+          <div class="dest-overlay">
+            <a routerLink="/productos" class="dest-overlay-btn">Ver en catálogo</a>
+          </div>
+        </div>
+        <div class="dest-info">
+          <span class="dest-linea" [style.color]="lineaColor(p.linea)">{{ lineaLabel(p.linea) }}</span>
+          <h3 class="dest-codigo">{{ p.codigo }}</h3>
+          <p class="dest-etapa">{{ subcatLabel(p.subcategoria) }}</p>
+          <div class="dest-footer">
+            <span class="dest-tallas">Tallas {{ p.tallas }}</span>
+            <a [href]="(waBase + encodeWA(p)) | sanitizeUrl"
+              class="dest-wa" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    }
+    </div>
   </div>
 </section>
 
@@ -297,7 +332,7 @@
   <div class="store-card rise">
     <div class="store-left">
       <h3>Fábrica &<br><em>Showroom</em></h3>
-      <p>Visita nuestro showroom en Lima y conoce toda la colección. También puedes traer tu diseño y lo producimos. Atendemos distribuidores mayoristas de lunes a sábado.</p>
+      <p>Visita nuestro showroom en Lima y conoce toda la colección Piolito. Atendemos distribuidores mayoristas de lunes a sábado.</p>
       <a [href]="(waBase + 'Hola!%20Quiero%20agendar%20una%20visita%20a%20la%20fábrica%20Piolito') | sanitizeUrl"
         class="btn-wa" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
