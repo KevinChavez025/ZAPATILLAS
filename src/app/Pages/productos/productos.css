@@ -328,17 +328,6 @@
 }
 .prod-img-placeholder.large .prod-img-code { font-size: 2.2rem; opacity: .7; }
 
-.prod-colors-preview {
-  display: flex;
-  gap: 6px;
-}
-.color-swatch {
-  width: 18px; height: 18px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,255,255,.7);
-  box-shadow: 0 1px 4px rgba(0,0,0,.15);
-}
-.color-swatch.lg { width: 26px; height: 26px; }
 
 .prod-badges {
   position: absolute;
@@ -437,14 +426,6 @@
   margin-bottom: 12px;
   flex-wrap: wrap;
 }
-.color-dot {
-  width: 16px; height: 16px;
-  border-radius: 50%;
-  border: 2px solid rgba(0,0,0,.1);
-  box-shadow: 0 1px 3px rgba(0,0,0,.12);
-  cursor: default;
-}
-.color-dot.lg { width: 24px; height: 24px; }
 
 .btn-wa-prod {
   display: inline-flex;
@@ -683,7 +664,6 @@
   color: var(--navy);
   background: var(--cream, #fdf6e3);
 }
-.colores-row { display: flex; gap: 8px; flex-wrap: wrap; }
 
 .modal-wa {
   margin-top: 8px;

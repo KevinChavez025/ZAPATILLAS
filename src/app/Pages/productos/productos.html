@@ -142,11 +142,6 @@
               <img [src]="p.imagen" [alt]="p.codigo" class="prod-image" />
               <div class="prod-img-placeholder">
                 <span class="prod-img-code">{{ p.codigo }}</span>
-                <div class="prod-colors-preview">
-                  @for (c of p.colores.slice(0,3); track c) {
-                    <span class="color-swatch" [style.background]="c"></span>
-                  }
-                </div>
               </div>
               <div class="prod-badges">
                 @if (p.nuevo) {
@@ -236,11 +231,6 @@
           <img [src]="productoModal()!.imagen" [alt]="productoModal()!.codigo" class="prod-image" />
           <div class="prod-img-placeholder large">
             <span class="prod-img-code">{{ productoModal()!.codigo }}</span>
-            <div class="prod-colors-preview">
-              @for (c of productoModal()!.colores; track c) {
-                <span class="color-swatch lg" [style.background]="c"></span>
-              }
-            </div>
           </div>
           <div class="prod-badges modal-badges">
             @if (productoModal()!.nuevo) {
@@ -261,14 +251,6 @@
             <div class="tallas-grid modal-tallas">
               @for (t of productoModal()!.tallasArray; track t) {
                 <span class="talla-display">{{ t }}</span>
-              }
-            </div>
-          </div>
-          <div class="modal-section">
-            <span class="modal-label">Colores disponibles</span>
-            <div class="colores-row">
-              @for (c of productoModal()!.colores; track c) {
-                <span class="color-dot lg" [style.background]="c" [title]="c"></span>
               }
             </div>
           </div>

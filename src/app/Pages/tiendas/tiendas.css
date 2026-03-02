@@ -312,7 +312,7 @@
   font-weight: 900; color: white; line-height: 1.1; margin-bottom: 10px;
 }
 .proceso-title .yl { color: var(--yellow); }
-.proceso-sub { color: rgba(255,255,255,.45); font-size: .95rem; line-height: 1.7; }
+.proceso-sub { color: rgba(255,255,255,.45); font-size: 1.05rem; line-height: 1.7; }
 
 /* ── LAYOUT 2 COLS ── */
 .pnace-layout {
@@ -537,4 +537,45 @@
   }
 
   .pnace-list { max-height: 200px; overflow-y: auto; }
+}
+
+/* ─── CONTROLES VIDEO STACK ─── */
+.pstack-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pstack-controls {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.psc-btn {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(0,0,0,.55);
+  border: 1.5px solid rgba(255,255,255,.25);
+  color: white;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background .2s, transform .15s;
+}
+.psc-btn:hover {
+  background: rgba(0,0,0,.8);
+  transform: scale(1.1);
+}
+.psc-btn svg {
+  width: 16px; height: 16px;
+  fill: white;
+  stroke: none;
+}
+.psc-btn.muted svg {
+  stroke: white;
+  fill: none;
 }
