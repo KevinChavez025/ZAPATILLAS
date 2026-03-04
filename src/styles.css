@@ -55,3 +55,17 @@ body {
 .d2 { transition-delay: 0.2s; }
 .d3 { transition-delay: 0.3s; }
 .d4 { transition-delay: 0.4s; }
+
+
+/* Accesibilidad: oculto visualmente pero legible por Google y lectores de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}

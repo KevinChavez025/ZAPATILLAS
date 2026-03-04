@@ -27,7 +27,7 @@
 
     <!-- Línea -->
     <div class="filter-group">
-      <h3 class="filter-title">Línea</h3>
+      <p class="filter-title">Línea</p>
       <div class="etapa-list">
         @for (lin of lineas; track lin.key) {
           <button
@@ -43,7 +43,7 @@
     <!-- Subcategoría (solo si hay línea seleccionada) -->
     @if (subcategoriasDisponibles().length > 0) {
       <div class="filter-group">
-        <h3 class="filter-title">Subcategoría</h3>
+        <p class="filter-title">Subcategoría</p>
         <div class="etapa-list">
           <button
             class="etapa-btn"
@@ -64,7 +64,7 @@
     <!-- Género (solo para Tilin, Escolar y Todos) -->
     @if (filtroLinea() === 'todos' || filtroLinea() === 'tilin' || filtroLinea() === 'escolar') {
       <div class="filter-group">
-        <h3 class="filter-title">Género</h3>
+        <p class="filter-title">Género</p>
         <div class="genero-btns">
           @for (g of [
             {key:'todos', label:'Todos'},
@@ -84,7 +84,7 @@
     <!-- Talla (solo para Piolito) -->
     @if (filtroLinea() === 'piolito' && tallasDisponibles().length > 0) {
       <div class="filter-group">
-        <h3 class="filter-title">Talla</h3>
+        <p class="filter-title">Talla</p>
         <div class="tallas-grid">
           @for (t of tallasDisponibles(); track t) {
             <button
@@ -123,7 +123,7 @@
     @if (productosFiltrados().length === 0) {
       <div class="empty-state">
         <span class="empty-icon">🔍</span>
-        <h3>No encontramos productos</h3>
+        <p class="empty-title">No encontramos productos</p>
         <p>Prueba con otros filtros o escríbenos para ayudarte.</p>
         <a [href]="(waBase + 'Hola!%20Busco%20un%20modelo%20específico%20y%20no%20lo%20encuentro%20en%20el%20catálogo') | sanitizeUrl"
            class="btn-wa" target="_blank" rel="noopener">
@@ -133,6 +133,7 @@
       </div>
     }
 
+    <h2 class="sr-only">Catálogo de productos</h2>
     <!-- GRID de productos -->
     @if (productosFiltrados().length > 0 && vistaGrid()) {
       <div class="products-grid">
@@ -275,7 +276,7 @@
 <div class="wa-float-wrap">
   <span class="wa-bubble">Solicita nuestro catálogo completo</span>
   <a [href]="(waBase + 'Hola!%20Quiero%20ver%20el%20catálogo%20de%20Piolito') | sanitizeUrl"
-     class="wa-float" target="_blank" rel="noopener" title="Solicita nuestro catálogo completo">
+     class="wa-float" target="_blank" rel="noopener" aria-label="Solicita nuestro catálogo completo por WhatsApp">
     <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
   </a>
 </div>

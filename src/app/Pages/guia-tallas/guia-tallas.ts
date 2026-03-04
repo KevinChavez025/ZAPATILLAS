@@ -84,7 +84,7 @@ export class GuiaTallas implements AfterViewInit {
     {
       nombre: 'Piolito',
       rango:  'Tallas 22 – 38',
-      edad:   '18 meses – 9 años',
+      edad:   '18 meses – 16 años',
       color:  '#d4a800',
       icon:   '🏃',
       tallas: [22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38],
@@ -92,7 +92,7 @@ export class GuiaTallas implements AfterViewInit {
     {
       nombre: 'Escolar',
       rango:  'Tallas 27 – 38',
-      edad:   '9 – 14 años',
+      edad:   '2 – 16 años',
       color:  '#089347',
       icon:   '⚡',
       tallas: [27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38],

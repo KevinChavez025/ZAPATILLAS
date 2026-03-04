@@ -46,7 +46,7 @@
 
   <div class="tiktoks-grid">
     <!-- Flecha anterior -->
-    <button class="story-arrow story-arrow--prev" (click)="setActive((activeSlide - 1 + 3) % 3)">&#8249;</button>
+    <button class="story-arrow story-arrow--prev" aria-label="Post anterior" (click)="setActive((activeSlide - 1 + 3) % 3)">&#8249;</button>
 
     @for (i of orderedCards; track i) {
       @if (i === 0) {
@@ -91,7 +91,7 @@
     }
 
     <!-- Flecha siguiente -->
-    <button class="story-arrow story-arrow--next" (click)="setActive((activeSlide + 1) % 3)">&#8250;</button>
+    <button class="story-arrow story-arrow--next" aria-label="Siguiente post" (click)="setActive((activeSlide + 1) % 3)">&#8250;</button>
   </div>
 
   <div class="tiktoks-ctas">
@@ -155,7 +155,7 @@
           <div class="tl-dot" style="background:var(--yellow)"></div>
           <div class="tl-content">
             <span class="tl-year">10 oct 1985</span>
-            <h4>Nace Piolito</h4>
+            <h3>Nace Piolito</h3>
             <p>El Sr. Pío León Cocha funda la marca solo, movido por la pasión de hacer calzado infantil de calidad. Un hombre, una idea y mucho trabajo artesanal en Lima.</p>
           </div>
         </div>
@@ -163,7 +163,7 @@
           <div class="tl-dot" style="background:var(--red)"></div>
           <div class="tl-content">
             <span class="tl-year">Los primeros años</span>
-            <h4>Trabajo de pasión</h4>
+            <h3>Trabajo de pasión</h3>
             <p>Piolito crece gracias al boca a boca y la calidad del producto. Cada par fabricado con las manos y el corazón de una familia peruana.</p>
           </div>
         </div>
@@ -171,7 +171,7 @@
           <div class="tl-dot" style="background:var(--green)"></div>
           <div class="tl-content">
             <span class="tl-year">Hoy</span>
-            <h4>41 años, mismo compromiso</h4>
+            <h3>41 años, mismo compromiso</h3>
             <p>Distribuimos al por mayor a toda Latinoamérica y EE.UU. con la misma pasión del primer día — calzado infantil hecho con cuidado y conciencia desde Surquillo, Lima.</p>
           </div>
         </div>
@@ -258,4 +258,3 @@
 
   </div>
 </section>
-
