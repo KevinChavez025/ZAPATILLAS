@@ -13,7 +13,7 @@ export interface Tienda {
   id: number;
   nombre: string;
   ciudad: string;
-  departamento: string;
+  pais: string;
   horario: string;
   telefono?: string;
   tipo: TiendaTipo;
@@ -140,7 +140,7 @@ export class Tiendas implements AfterViewInit, OnDestroy {
       id: 1,
       nombre: 'Piolito — Fábrica & Showroom',
       ciudad: 'Lima',
-      departamento: 'Lima',
+      pais: 'Perú',
       telefono: '+51 977 938 796',
       horario: 'Lun–Sáb 9am–6pm',
       tipo: 'propia',
@@ -149,7 +149,7 @@ export class Tiendas implements AfterViewInit, OnDestroy {
   ];
 
   waTexto(t: Tienda): string {
-    return encodeURIComponent(`Hola! Quisiera saber la dirección y cómo llegar a *${t.nombre}* en ${t.ciudad}.`);
+    return encodeURIComponent(`Hola! Quisiera saber la dirección y cómo llegar a *${t.nombre}* en ${t.ciudad}, ${t.pais}.`);
   }
 
   togglePlay(video: HTMLVideoElement): void {
