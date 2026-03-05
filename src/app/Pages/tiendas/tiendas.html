@@ -93,88 +93,165 @@
   </div>
 </section>
 
-<!-- ══ LAYOUT ══ -->
-<div class="tiendas-layout">
+<!-- ══ TIENDAS SIN MAPA ══ -->
+<div class="tiendas-section">
+  <div class="tiendas-grid">
 
-  <div class="tiendas-list">
-    <p class="list-count"><strong>{{ tiendaFiltradas().length }}</strong> tienda{{ tiendaFiltradas().length !== 1 ? 's' : '' }} encontrada{{ tiendaFiltradas().length !== 1 ? 's' : '' }}</p>
+    <!-- COLUMNA IZQUIERDA: card -->
+    <div class="tiendas-col-card">
+      <p class="list-count"><strong>{{ tiendas.length }}</strong> tienda encontrada</p>
 
-    @if (tiendaFiltradas().length === 0) {
-      <div class="empty-list"><span>🔍</span><p>No hay tiendas con esos filtros</p></div>
-    }
-
-    @for (t of tiendaFiltradas(); track t.id) {
-      <div class="tienda-card" [class.active]="tiendaActiva()?.id === t.id" [class.destacada]="t.destacada" (click)="seleccionar(t)">
-        <div class="card-badges">
-          @if (t.destacada) { <span class="badge badge-main">Sede Principal</span> }
-          <span class="badge" [class.badge-propia]="t.tipo==='propia'" [class.badge-dist]="t.tipo==='distribuidor'">
-            {{ t.tipo === 'propia' ? 'Tienda Propia' : 'Distribuidor' }}
-          </span>
-        </div>
-        <h3 class="card-nombre">{{ t.nombre }}</h3>
-        <div class="card-row"><span class="card-icon">📍</span><span class="card-val">{{ t.direccion }}, {{ t.ciudad }}</span></div>
-        <div class="card-row"><span class="card-icon">🕐</span><span class="card-val">{{ t.horario }}</span></div>
-        @if (t.telefono) {
-          <div class="card-row"><span class="card-icon">📞</span><span class="card-val">{{ t.telefono }}</span></div>
-        }
-        <div class="card-actions">
-          <a [href]="mapUrl(t)" target="_blank" rel="noopener" class="btn-map" (click)="$event.stopPropagation()">🗺️ Cómo llegar</a>
-          <a [href]="(waBase + waTexto(t)) | sanitizeUrl" target="_blank" rel="noopener" class="btn-wa-sm" (click)="$event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg> WhatsApp
-          </a>
-        </div>
-      </div>
-    }
-  </div>
-
-  <div class="mapa-panel">
-    @if (tiendaActiva()) {
-      <div class="mapa-wrap">
-        <a [href]="mapUrl(tiendaActiva()!)" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;position:relative;">
-          <img
-            [src]="mapaImagenUrl(tiendaActiva()!)"
-            [alt]="'Mapa de ' + tiendaActiva()!.nombre"
-            style="object-fit:cover;width:100%;height:100%;display:block;"
-          />
-          <div style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.65);color:#fff;padding:8px 18px;border-radius:20px;font-size:13px;white-space:nowrap;pointer-events:none;">
-            🗺️ Clic para abrir en Google Maps
+      @for (t of tiendas; track t.id) {
+        <div class="tienda-card" [class.destacada]="t.destacada">
+          <div class="card-badges">
+            @if (t.destacada) { <span class="badge badge-main">Sede Principal</span> }
+            <span class="badge" [class.badge-propia]="t.tipo==='propia'" [class.badge-dist]="t.tipo==='distribuidor'">
+              {{ t.tipo === 'propia' ? 'Tienda Propia' : 'Distribuidor' }}
+            </span>
           </div>
-        </a>
-
-        <div class="mapa-overlay-card">
-          <div class="moc-left">
-            <span class="moc-dept">{{ tiendaActiva()!.departamento }}</span>
-            <strong class="moc-nombre">{{ tiendaActiva()!.nombre }}</strong>
-            <span class="moc-dir">{{ tiendaActiva()!.direccion }}</span>
-          </div>
-          <a [href]="mapUrl(tiendaActiva()!)" target="_blank" rel="noopener" class="moc-btn">Abrir en Maps ↗</a>
-        </div>
-      </div>
-
-      <div class="detalle-card">
-        <div class="detalle-header" [class.destacada]="tiendaActiva()!.destacada">
-          <div>
-            <span class="detalle-dept">{{ tiendaActiva()!.departamento }}</span>
-            <h2 class="detalle-nombre">{{ tiendaActiva()!.nombre }}</h2>
-          </div>
-          @if (tiendaActiva()!.destacada) { <span class="badge badge-main">⭐ Sede Principal</span> }
-        </div>
-        <div class="detalle-grid">
-          <div class="detalle-item"><span class="di-label">📍 Dirección</span><span class="di-val">{{ tiendaActiva()!.direccion }}, {{ tiendaActiva()!.ciudad }}</span></div>
-          <div class="detalle-item"><span class="di-label">🕐 Horario</span><span class="di-val">{{ tiendaActiva()!.horario }}</span></div>
-          @if (tiendaActiva()!.telefono) {
-            <div class="detalle-item"><span class="di-label">📞 Teléfono</span><span class="di-val">{{ tiendaActiva()!.telefono }}</span></div>
+          <h3 class="card-nombre">{{ t.nombre }}</h3>
+          <div class="card-row"><span class="card-icon">🏙️</span><span class="card-val">{{ t.ciudad }}, {{ t.departamento }}</span></div>
+          <div class="card-row"><span class="card-icon">🕐</span><span class="card-val">{{ t.horario }}</span></div>
+          @if (t.telefono) {
+            <div class="card-row"><span class="card-icon">📞</span><span class="card-val">{{ t.telefono }}</span></div>
           }
-          <div class="detalle-item"><span class="di-label">🏪 Tipo</span><span class="di-val">{{ tiendaActiva()!.tipo === 'propia' ? 'Tienda Propia Piolito' : 'Distribuidor Autorizado' }}</span></div>
+          <div class="card-actions">
+            <a [href]="(waBase + waTexto(t)) | sanitizeUrl" target="_blank" rel="noopener" class="btn-wa-lg">
+              <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
+              Consultar ubicación por WhatsApp
+            </a>
+          </div>
         </div>
-        <div class="detalle-actions">
-          <a [href]="mapUrl(tiendaActiva()!)" target="_blank" rel="noopener" class="btn-map-lg">🗺️ Abrir en Google Maps</a>
-          <a [href]="(waBase + waTexto(tiendaActiva()!)) | sanitizeUrl" target="_blank" rel="noopener" class="btn-wa-lg">
-            <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg> Consultar por WhatsApp
-          </a>
+      }
+    </div>
+
+    <!-- COLUMNA DERECHA: datos de producción -->
+    <div class="fabrica-info">
+
+      <p class="fi-intro">
+        Somos una fábrica familiar con <strong>41 años</strong> produciendo calzado infantil de cuero legítimo en Lima, Perú.
+        Cada día fabricamos hasta <strong>240 pares</strong>, todos revisados a mano antes de salir al mercado.
+        Nuestro proceso abarca <strong>6 etapas artesanales</strong>, desde el corte del cuero hasta el acabado final,
+        cuidando cada detalle para que cada Piolito sea cómodo, duradero y bonito.
+      </p>
+
+      <div class="fi-items">
+
+        <div class="fi-item">
+          <span class="fi-item-icon">
+            <!-- Fábrica / industria -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 20V9l5-3v3l5-3v3l5-4v15H2z"/>
+              <rect x="9" y="14" width="3" height="6"/><rect x="14" y="14" width="3" height="6"/>
+              <line x1="2" y1="20" x2="22" y2="20"/>
+            </svg>
+          </span>
+          <div>
+            <strong>Fábrica propia en Lima</strong>
+            <p>Producción 100% peruana, sin intermediarios.</p>
+          </div>
         </div>
+
+        <div class="fi-item">
+          <span class="fi-item-icon">
+            <!-- Cuero legítimo -->
+            <svg viewBox="0 0 511.673 511.673" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill="currentColor" d="M467.699,149.742l-0.168-0.856c-5.579-27.869-21.23-52.71-43.97-69.764
+                C312.669,119.949,299.975,8.501,299.975,8.501c-28.337-11.335-59.939-11.335-88.276,0
+                c0,0-12.685,111.448-123.586,70.621c-22.74,17.055-38.391,41.896-43.97,69.764l-0.168,0.856
+                c58.65,58.65,58.65,170.867,0,229.517l0.168,0.856c5.579,27.869,21.23,52.71,43.97,69.764
+                c0,0,123.039-43.034,167.724,61.793c44.694-104.828,167.724-61.793,167.724-61.793
+                c22.74-17.055,38.391-41.896,43.97-69.764l0.168-0.856C409.048,320.609,409.048,208.393,467.699,149.742z"/>
+              <g fill="var(--cream, #f0ede0)">
+                <path d="M255.837,457.467c-2.357,0-4.608-0.936-6.268-2.613c-4.846-4.89-10.108-9.41-15.625-13.444
+                  c-3.937-2.878-4.802-8.395-1.924-12.332c2.869-3.937,8.395-4.802,12.332-1.924c3.964,2.895,7.804,6.012,11.485,9.313
+                  c3.681-3.302,7.521-6.418,11.485-9.313c3.937-2.878,9.463-2.013,12.332,1.924c2.878,3.937,2.013,9.454-1.924,12.332
+                  c-5.517,4.034-10.778,8.554-15.625,13.444C260.445,456.531,258.194,457.467,255.837,457.467z"/>
+                <path d="M121.566,249.842c-4.458,0-8.289-3.363-8.775-7.901c-1.324-12.597-3.769-25-7.265-36.855
+                  c-1.377-4.679,1.298-9.587,5.976-10.964c4.67-1.395,9.587,1.289,10.964,5.967c3.796,12.888,6.453,26.342,7.892,39.998
+                  c0.503,4.846-3.01,9.198-7.857,9.71C122.184,249.824,121.875,249.842,121.566,249.842z
+                  M114.009,335.249c-0.83,0-1.668-0.124-2.507-0.371c-4.67-1.368-7.345-6.285-5.967-10.955
+                  c3.496-11.873,5.941-24.267,7.256-36.864c0.512-4.846,4.776-8.342,9.702-7.857c4.855,0.512,8.369,4.855,7.865,9.702
+                  c-1.439,13.656-4.087,27.118-7.883,40.007C121.336,332.759,117.823,335.249,114.009,335.249z"/>
+                <path d="M390.108,249.845c-0.309,0-0.618-0.018-0.927-0.044c-4.855-0.512-8.369-4.855-7.865-9.702
+                  c1.439-13.656,4.087-27.118,7.883-40.007c1.386-4.679,6.321-7.345,10.973-5.967c4.67,1.368,7.345,6.276,5.967,10.955
+                  c-3.496,11.864-5.941,24.267-7.256,36.855C398.397,246.473,394.566,249.845,390.108,249.845z
+                  M397.673,335.243c-3.814,0-7.336-2.489-8.466-6.329c-3.796-12.888-6.453-26.341-7.892-39.998
+                  c-0.503-4.855,3.01-9.198,7.857-9.71c4.882-0.494,9.198,3.01,9.71,7.857c1.324,12.597,3.769,25,7.265,36.855
+                  c1.377,4.679-1.298,9.587-5.976,10.964C399.341,335.129,398.503,335.243,397.673,335.243z"/>
+              </g>
+            </svg>
+          </span>
+          <div>
+            <strong>Cuero legítimo certificado</strong>
+            <p>Materiales naturales, suaves y transpirables para el pie del niño.</p>
+          </div>
+        </div>
+
+        <div class="fi-item">
+          <span class="fi-item-icon">
+            <!-- Manos artesanales -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 11V6a2 2 0 0 0-4 0v5"/>
+              <path d="M14 10V4a2 2 0 0 0-4 0v6"/>
+              <path d="M10 10.5V6a2 2 0 0 0-4 0v8"/>
+              <path d="M6 14v1a6 6 0 0 0 6 6h2a6 6 0 0 0 6-6v-3a2 2 0 0 0-4 0v-1"/>
+            </svg>
+          </span>
+          <div>
+            <strong>Mano de obra artesanal</strong>
+            <p>Cada par pasa por manos expertas en 6 etapas de fabricación.</p>
+          </div>
+        </div>
+
+        <div class="fi-item">
+          <span class="fi-item-icon">
+            <!-- Caja / producción -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+              <path d="m3.3 7 8.7 5 8.7-5"/><line x1="12" y1="22" x2="12" y2="12"/>
+            </svg>
+          </span>
+          <div>
+            <strong>240 pares diarios</strong>
+            <p>Capacidad para abastecer distribuidores en toda Latinoamérica.</p>
+          </div>
+        </div>
+
+        <div class="fi-item">
+          <span class="fi-item-icon">
+            <!-- Zapato / tallas -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 18h1.4A2 2 0 0 0 5 17l1.5-3h9.2a2 2 0 0 1 1.9 1.4L18 17"/>
+              <path d="M5 17H3a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1h-3"/>
+              <path d="M6.5 14V9a3 3 0 0 1 3-3h.5l4 5"/>
+            </svg>
+          </span>
+          <div>
+            <strong>Tallas 18 al 36</strong>
+            <p>Desde los primeros pasos hasta la edad escolar.</p>
+          </div>
+        </div>
+
+        <div class="fi-item">
+          <span class="fi-item-icon">
+            <!-- Globo / exportación -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M2 12h20"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </span>
+          <div>
+            <strong>Exportamos a Latinoamérica</strong>
+            <p>Presencia en Bolivia, Ecuador, Colombia y más países.</p>
+          </div>
+        </div>
+
       </div>
-    }
+
+    </div>
+
   </div>
 </div>
 

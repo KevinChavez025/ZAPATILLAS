@@ -43,7 +43,7 @@ export class Home implements AfterViewInit {
   ];
 
   readonly storeInfo = [
-    { icon: '📍', label: 'Dirección', value: 'Jr. Domingo Elias 752, Surquillo, Lima' },
+    { icon: '📍', label: 'Dirección', value: 'Surquillo, Lima' },
     { icon: '📞', label: 'Teléfono',  value: '+511-445-3495' },
     { icon: '✉️', label: 'Email',     value: 'contacto@piolito.com' },
     { icon: '🕐', label: 'Horario',   value: 'Lun – Sáb: 9:00 am – 6:00 pm' },
