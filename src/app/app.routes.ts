@@ -1,15 +1,11 @@
 import { Routes } from '@angular/router';
-import { Home }       from './Pages/home/home';
-import { Productos }  from './Pages/productos/productos';
-import { Tiendas }    from './Pages/tiendas/tiendas';
-import { GuiaTallas } from './Pages/guia-tallas/guia-tallas';
-import { Nosotros }   from './Pages/nosotros/nosotros';
+import { Home } from './Pages/home/home';
 
 export const routes: Routes = [
-  { path: '',            component: Home },
-  { path: 'productos',   component: Productos },
-  { path: 'tiendas',     component: Tiendas },
-  { path: 'guia-tallas', component: GuiaTallas },
-  { path: 'nosotros',    component: Nosotros },
+  { path: '',            component: Home }, // eager — es la página principal, no lazy
+  { path: 'productos',   loadComponent: () => import('./Pages/productos/productos').then(m => m.Productos) },
+  { path: 'tiendas',     loadComponent: () => import('./Pages/tiendas/tiendas').then(m => m.Tiendas) },
+  { path: 'guia-tallas', loadComponent: () => import('./Pages/guia-tallas/guia-tallas').then(m => m.GuiaTallas) },
+  { path: 'nosotros',    loadComponent: () => import('./Pages/nosotros/nosotros').then(m => m.Nosotros) },
   { path: '**',          redirectTo: '' },
 ];

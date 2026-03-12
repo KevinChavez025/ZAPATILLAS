@@ -46,6 +46,10 @@
         src="/hero.webp"
         alt="Niño con calzado Piolito"
         class="hero-kid-img"
+        width="540"
+        height="600"
+        fetchpriority="high"
+        decoding="async"
       />
     </div>
 
@@ -92,7 +96,7 @@
         <div class="cat-shimmer"></div>
         <div class="cat-dots-overlay"></div>
         <span class="cat-age">{{ cat.edad }}</span>
-        <img [src]="cat.img" [alt]="cat.nombre" class="cat-icon" />
+        <img [src]="cat.img" [alt]="cat.nombre" class="cat-icon" width="120" height="120" loading="lazy" decoding="async" />
         <div class="cat-bottom">
           <span class="cat-name">{{ cat.nombre }}</span>
           <span class="cat-sub">Tallas {{ cat.tallas }}</span>
@@ -118,6 +122,10 @@
       src="patito.webp"
       alt="Piolito - Calzado infantil peruano"
       class="big-chick"
+      width="400"
+      height="400"
+      loading="lazy"
+      decoding="async"
     />
   </div>
   <div class="about-text rise">
@@ -172,7 +180,7 @@
     @for (p of destacados; track p.id; let i = $index) {
       <div class="dest-card" [style.--lc]="lineaColor(p.linea)">
         <div class="dest-img">
-          <img [src]="p.imagen" [alt]="p.codigo" class="dest-image" />
+          <img [src]="p.imagen" [alt]="p.codigo" class="dest-image" width="280" height="280" loading="lazy" decoding="async" />
           <div class="dest-img-inner dest-img-fallback">
             <span class="dest-img-code">{{ p.codigo }}</span>
           </div>
@@ -190,8 +198,9 @@
           <div class="dest-footer">
             <span class="dest-tallas">Tallas {{ p.tallas }}</span>
             <a [href]="(waBase + encodeWA(p)) | sanitizeUrl"
-              class="dest-wa" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
+              class="dest-wa" target="_blank" rel="noopener"
+              [attr.aria-label]="'Consultar por WhatsApp: ' + p.codigo">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path [attr.d]="waIcon"/></svg>
             </a>
           </div>
         </div>
@@ -201,7 +210,7 @@
     @for (p of destacados; track p.id) {
       <div class="dest-card" [style.--lc]="lineaColor(p.linea)">
         <div class="dest-img">
-          <img [src]="p.imagen" [alt]="p.codigo" class="dest-image" />
+          <img [src]="p.imagen" [alt]="p.codigo" class="dest-image" width="280" height="280" loading="lazy" decoding="async" />
           <div class="dest-img-inner dest-img-fallback">
             <span class="dest-img-code">{{ p.codigo }}</span>
           </div>
@@ -219,8 +228,9 @@
           <div class="dest-footer">
             <span class="dest-tallas">Tallas {{ p.tallas }}</span>
             <a [href]="(waBase + encodeWA(p)) | sanitizeUrl"
-              class="dest-wa" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
+              class="dest-wa" target="_blank" rel="noopener"
+              [attr.aria-label]="'Consultar por WhatsApp: ' + p.codigo">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path [attr.d]="waIcon"/></svg>
             </a>
           </div>
         </div>

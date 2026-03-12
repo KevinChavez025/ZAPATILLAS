@@ -6,10 +6,11 @@
 
 <!-- NAV -->
 <nav [class.scrolled]="isScrolled">
-  <a routerLink="/" class="nav-logo">
+  <a routerLink="/" class="nav-logo" aria-label="Ir al inicio — Piolito">
     <img
       src="favicon.ico"
-      alt="Piolito - Calzado infantil"
+      alt=""
+      role="presentation"
       class="piolito-logo"
     />
   </a>
@@ -30,7 +31,7 @@
       target="_blank"
       rel="noopener"
     >
-      <svg viewBox="0 0 24 24"><path [attr.d]="waIcon"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path [attr.d]="waIcon"/></svg>
       Solicitar cotización
     </a>
 

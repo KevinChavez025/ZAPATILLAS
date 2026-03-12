@@ -8,8 +8,11 @@ import { SeoService } from './seo.service';
   selector: 'app-root',
   imports: [RouterOutlet, Navbar, Footer],
   template: `
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
     <app-navbar></app-navbar>
-    <router-outlet></router-outlet>
+    <main id="main-content">
+      <router-outlet></router-outlet>
+    </main>
     <app-footer></app-footer>
   `,
   styles: [`:host { display: block; }`]

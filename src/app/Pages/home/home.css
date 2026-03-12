@@ -187,6 +187,7 @@
   object-position: center top;
   filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.45));
   animation: none;
+  will-change: transform;
 }
 
 @keyframes floatKid {
@@ -473,6 +474,7 @@
   z-index: 2;
   animation: chickWiggle 5s ease-in-out infinite;
   transform-origin: bottom center;
+  will-change: transform;
 }
 .big-chick:hover {
   animation-play-state: paused;
@@ -642,6 +644,7 @@
   margin-top: 8px;
   overflow: hidden;
   position: relative;
+  min-height: 380px; /* reserva espacio para evitar CLS mientras carga el JS */
 }
 
 /* Track que se mueve */

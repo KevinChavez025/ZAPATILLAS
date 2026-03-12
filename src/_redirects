@@ -1,1 +1,6 @@
-/* /index.html 200
+# Archivos estáticos — NO redirigir al index
+/robots.txt    /robots.txt    200
+/sitemap.xml   /sitemap.xml   200
+
+# Todo lo demás → Angular SPA
+/*    /index.html    200
